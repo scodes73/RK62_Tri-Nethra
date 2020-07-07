@@ -10,13 +10,13 @@ class ShadowContainer extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(20.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black,
         borderRadius: BorderRadius.circular(20.0),
         boxShadow: [
           BoxShadow(
             color: Colors.white,
-            blurRadius: 10.0,
-            spreadRadius: 1.0,
+            blurRadius: 0.0,
+            spreadRadius: 2.0,
             offset: Offset(
               0.0,
               0.0,

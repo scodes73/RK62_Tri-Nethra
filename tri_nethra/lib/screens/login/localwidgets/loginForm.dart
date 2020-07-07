@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/signup/signup.dart';
 import 'package:tri_nethra/widgets/shadowContainer.dart';
+import 'package:tri_nethra/widgets/whitepop.dart';
 
 class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ShadowContainer(
+    return whitepop(
       child: Column(
         children: <Widget>[
           Padding(
@@ -13,7 +14,7 @@ class LoginForm extends StatelessWidget {
             child: Text(
               "Log In",
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 25.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -22,9 +23,10 @@ class LoginForm extends StatelessWidget {
           TextFormField(
             //controller: _emailController,
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.alternate_email),
-              hintText: "Email",
-            ),
+                prefixIcon: Icon(Icons.alternate_email),
+                hintText: "Email",
+                hintStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.pink)),
           ),
           SizedBox(
             height: 20.0,
@@ -48,7 +50,7 @@ class LoginForm extends StatelessWidget {
               child: Text(
                 "Log In",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                 ),
