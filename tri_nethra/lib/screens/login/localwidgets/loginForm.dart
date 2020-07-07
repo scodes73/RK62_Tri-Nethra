@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/screens/signup/signup.dart';
 import 'package:tri_nethra/widgets/shadowContainer.dart';
 
-class SignUp extends StatelessWidget {
+class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadowContainer(
