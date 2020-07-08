@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/login.dart';
+import 'package:tri_nethra/screens/signup/signup.dart';
 import 'package:tri_nethra/utils/ourTheme.dart';
 
 void main() {

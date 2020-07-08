@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class whitepop extends StatelessWidget {
+// ignore: camel_case_types
+class WhitePop extends StatelessWidget {
   final Widget child;
 
-  const whitepop({Key key, this.child}) : super(key: key);
+  const WhitePop({Key key, this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
