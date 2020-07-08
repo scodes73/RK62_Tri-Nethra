@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: OurTheme().buildTheme(),
-      home: OurLogin(),
+      home: SignUp(),
     );
   }
 }
