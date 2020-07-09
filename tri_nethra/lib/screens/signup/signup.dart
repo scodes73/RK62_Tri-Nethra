@@ -36,10 +36,20 @@ class _SignUpState extends State<SignUp> {
   List<DropdownMenuItem<Doc>> _ddMenuItems;
   Doc _selectedDoc;
 
-  void _signUpUser(String email, String password, BuildContext context) async {
+  void _signUpUser(
+      String email,
+      String password,
+      BuildContext context,
+      String docType,
+      String docNumber,
+      String mobile,
+      String pass,
+      String lname) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
-      if (await _currentUser.signUpUser(email, password)) {
+      if (await _currentUser.signUpUser(
+              email, password, docType, docNumber, mobile, pass, lname) ==
+          "success") {
         Navigator.pop(context);
       }
     } catch (e) {
@@ -285,8 +295,15 @@ class _SignUpState extends State<SignUp> {
                                 onTap: () {
                                   if (_passwordController.text ==
                                       _confirmPasswordController.text) {
-                                    _signUpUser(_emailController.text,
-                                        _passwordController.text, context);
+                                    _signUpUser(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                        context,
+                                        _selectedDoc.docName,
+                                        _docNoController.text,
+                                        _mobileController.text,
+                                        _passwordController.text,
+                                        _legalNameController.text);
                                   } else {
                                     Scaffold.of(context).showSnackBar(
                                       SnackBar(
