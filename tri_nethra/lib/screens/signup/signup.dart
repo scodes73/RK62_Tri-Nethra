@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class SignUp extends StatefulWidget {
@@ -23,10 +25,27 @@ class Doc {
 }
 
 class _SignUpState extends State<SignUp> {
+  TextEditingController _legalNameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController _mobileController = TextEditingController();
+  TextEditingController _docNoController = TextEditingController();
   String ddv;
   List<Doc> _docs = Doc.getDocs();
   List<DropdownMenuItem<Doc>> _ddMenuItems;
   Doc _selectedDoc;
+
+  void _signUpUser(String email, String password, BuildContext context) async {
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+    try {
+      if (await _currentUser.signUpUser(email, password)) {
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   void initState() {
@@ -79,7 +98,7 @@ class _SignUpState extends State<SignUp> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(
-                    height: 80,
+                    height: 20,
                   ),
                   Padding(
                     padding: EdgeInsets.all(20),
@@ -113,14 +132,15 @@ class _SignUpState extends State<SignUp> {
                     child: Container(
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+                          padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
                           child: Column(
                             children: <Widget>[
                               OrPop(
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
-                                  child: TextField(
+                                  child: TextFormField(
+                                    controller: _legalNameController,
                                     decoration: InputDecoration(
                                         hintText: "Legal Name",
                                         hintStyle:
@@ -134,7 +154,8 @@ class _SignUpState extends State<SignUp> {
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
-                                  child: TextField(
+                                  child: TextFormField(
+                                    controller: _emailController,
                                     decoration: InputDecoration(
                                         hintText: "Email Address",
                                         hintStyle:
@@ -148,9 +169,40 @@ class _SignUpState extends State<SignUp> {
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
-                                  child: TextField(
+                                  child: TextFormField(
+                                    controller: _mobileController,
                                     decoration: InputDecoration(
                                         hintText: "Phone Number",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                        border: InputBorder.none),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              OrPop(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(),
+                                  child: TextFormField(
+                                    controller: _passwordController,
+                                    decoration: InputDecoration(
+                                        hintText: "Password",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                        border: InputBorder.none),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              OrPop(
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(),
+                                  child: TextFormField(
+                                    controller: _confirmPasswordController,
+                                    decoration: InputDecoration(
+                                        hintText: "Confirm Password",
                                         hintStyle:
                                             TextStyle(color: Colors.grey),
                                         border: InputBorder.none),
@@ -170,22 +222,14 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                               ),
-                              // Container(
-                              //   padding: EdgeInsets.all(10),
-                              //   decoration: BoxDecoration(
-                              //     border: Border(
-                              //       bottom: BorderSide(
-                              //         color: Colors.grey[200],
-                              //       ),
-                              //     ),
-                              //   ),
                               SizedBox(
                                 height: 20,
                               ),
                               OrPop(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: TextField(
+                                  child: TextFormField(
+                                    controller: _docNoController,
                                     decoration: InputDecoration(
                                         hintText: "Enter " +
                                             _selectedDoc.docName +
@@ -198,28 +242,6 @@ class _SignUpState extends State<SignUp> {
                               ),
                               SizedBox(
                                 height: 40,
-                              ),
-                              Container(
-                                height: 50,
-                                margin: EdgeInsets.symmetric(horizontal: 50),
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(colors: [
-                                      Colors.orange[800],
-                                      Colors.orange[800]
-                                    ]),
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.orange[900]),
-                                child: Center(
-                                  child: Text(
-                                    "Login",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 50,
                               ),
                               RichText(
                                 text: TextSpan(
@@ -251,6 +273,45 @@ class _SignUpState extends State<SignUp> {
                                             print('Privacy Policy');
                                           }),
                                   ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  if (_passwordController.text ==
+                                      _confirmPasswordController.text) {
+                                    _signUpUser(_emailController.text,
+                                        _passwordController.text, context);
+                                  } else {
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(
+                                        content:
+                                            Text("Passwords does'nt match"),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  height: 50,
+                                  margin: EdgeInsets.symmetric(horizontal: 50),
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(colors: [
+                                        Colors.orange[800],
+                                        Colors.orange[800]
+                                      ]),
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.orange[900]),
+                                  child: Center(
+                                    child: Text(
+                                      "Register",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],

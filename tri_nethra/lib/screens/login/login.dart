@@ -1,11 +1,37 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tri_nethra/models/currentUser.dart';
+import 'package:tri_nethra/screens/home/home.dart';
 //import 'package:tri_nethra/screens/login/localwidgets/fadeanimation.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/screens/signup/signup.dart';
 
 //import 'localwidgets/loginForm.dart';
 
-class OurLogin extends StatelessWidget {
+class OurLogin extends StatefulWidget {
+  @override
+  _OurLoginState createState() => _OurLoginState();
+}
+
+class _OurLoginState extends State<OurLogin> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  void _loginUser(String email, String password, BuildContext context) async {
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+    try {
+      if (await _currentUser.loginUser(email, password)) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ),
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,9 +97,10 @@ class OurLogin extends StatelessWidget {
                                     border: Border(
                                         bottom: BorderSide(
                                             color: Colors.grey[200]))),
-                                child: TextField(
+                                child: TextFormField(
+                                  controller: _emailController,
                                   decoration: InputDecoration(
-                                      hintText: "Email or Phone number",
+                                      hintText: "Email ",
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none),
                                 ),
@@ -84,7 +111,8 @@ class OurLogin extends StatelessWidget {
                                     border: Border(
                                         bottom: BorderSide(
                                             color: Colors.grey[200]))),
-                                child: TextField(
+                                child: TextFormField(
+                                  controller: _passwordController,
                                   decoration: InputDecoration(
                                       hintText: "Password",
                                       hintStyle: TextStyle(color: Colors.grey),
@@ -107,24 +135,28 @@ class OurLogin extends StatelessWidget {
                         SizedBox(
                           height: 40,
                         ),
-                        //FadeAnimation(
-                        //  1.6,
-                        Container(
-                          height: 50,
-                          margin: EdgeInsets.symmetric(horizontal: 50),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Colors.orange[800],
-                                Colors.orange[200]
-                              ]),
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.orange[900]),
-                          child: Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                        GestureDetector(
+                          onTap: () {
+                            _loginUser(_emailController.text,
+                                _passwordController.text, context);
+                          },
+                          child: Container(
+                            height: 50,
+                            margin: EdgeInsets.symmetric(horizontal: 50),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                                  Colors.orange[800],
+                                  Colors.orange[200]
+                                ]),
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.orange[900]),
+                            child: Center(
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ), //),
@@ -165,6 +197,9 @@ class OurLogin extends StatelessWidget {
                                       color: Colors.orange[900]),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
+                                      MaterialPageRoute(
+                                        builder: (context) => SignUp(),
+                                      );
                                       print('Sign Up page');
                                     },
                                 ),
@@ -218,48 +253,48 @@ class OurLogin extends StatelessWidget {
                           height: 30,
                         ),
                         /*Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: FadeAnimation(
-                                  1.8,
-                                  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
-                                        color: Colors.blue),
-                                    child: Center(
-                                      child: Text(
-                                        "Facebook",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  )),
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            /*Expanded(
-                              child: //FadeAnimation(
-                                  //1.9,
-                                  Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.black),
-                                child: Center(
-                                  child: Text(
-                                    "Github",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ), //),
-                            )*/
-                          ],
-                        ) */
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                        child: FadeAnimation(
+                                                            1.8,
+                                                            Container(
+                                                              height: 50,
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius: BorderRadius.circular(50),
+                                                                  color: Colors.blue),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  "Facebook",
+                                                                  style: TextStyle(
+                                                                      color: Colors.white,
+                                                                      fontWeight: FontWeight.bold),
+                                                                ),
+                                                              ),
+                                                            )),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 30,
+                                                      ),
+                                                      /*Expanded(
+                                                        child: //FadeAnimation(
+                                                            //1.9,
+                                                            Container(
+                                                          height: 50,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(50),
+                                                              color: Colors.black),
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Github",
+                                                              style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontWeight: FontWeight.bold),
+                                                            ),
+                                                          ),
+                                                        ), //),
+                                                      )*/
+                                                    ],
+                                                  ) */
                       ],
                     ),
                   ),
