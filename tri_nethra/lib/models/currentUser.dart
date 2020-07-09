@@ -21,6 +21,32 @@ class CurrentUser extends ChangeNotifier {
     return retVal;
   }
 
+  Future<String> signOut() async {
+    String retVal = "error";
+    try {
+      await _auth.signOut();
+      _uid = null;
+      _email = null;
+      retVal = "success";
+    } catch (e) {
+      print(e);
+    }
+    return retVal;
+  }
+
+  Future<String> onStartUp() async {
+    String retVal = "error";
+    try {
+      FirebaseUser _firebaseUser = await _auth.currentUser();
+      _uid = _firebaseUser.uid;
+      _email = _firebaseUser.email;
+      retVal = "Success";
+    } catch (e) {
+      print(e);
+    }
+    return retVal;
+  }
+
   Future<bool> loginUser(String email, String password) async {
     bool retVal = false;
     try {

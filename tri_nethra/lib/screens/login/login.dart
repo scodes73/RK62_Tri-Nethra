@@ -21,10 +21,11 @@ class _OurLoginState extends State<OurLogin> {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
       if (await _currentUser.loginUser(email, password)) {
-        Navigator.of(context).push(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => HomeScreen(),
           ),
+          (route) => false,
         );
       }
     } catch (e) {
