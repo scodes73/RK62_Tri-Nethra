@@ -197,10 +197,11 @@ class _OurLoginState extends State<OurLogin> {
                                       color: Colors.orange[900]),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      MaterialPageRoute(
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
                                         builder: (context) => SignUp(),
-                                      );
-                                      print('Sign Up page');
+                                      ));
+                                      print('Sending to Sign Up page');
                                     },
                                 ),
                               ],

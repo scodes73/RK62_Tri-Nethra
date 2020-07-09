@@ -117,7 +117,10 @@ class _SignUpState extends State<SignUp> {
                               iconSize: 50,
                               icon: Icon(Icons.keyboard_arrow_left),
                               color: Colors.white,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                print("Popping out from SignUp page");
+                              },
                             ),
                           ],
                         ),
