@@ -20,12 +20,20 @@ class _OurLoginState extends State<OurLogin> {
   void _loginUser(String email, String password, BuildContext context) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
-      if (await _currentUser.loginUser(email, password)) {
+      String _returnString = await _currentUser.loginUser(email, password);
+      if (_returnString == "success") {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => HomeScreen(),
           ),
           (route) => false,
+        );
+      } else {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_returnString),
+            duration: Duration(seconds: 2),
+          ),
         );
       }
     } catch (e) {

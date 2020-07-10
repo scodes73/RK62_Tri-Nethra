@@ -47,10 +47,15 @@ class _SignUpState extends State<SignUp> {
       String lname) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
-      if (await _currentUser.signUpUser(
-              email, password, docType, docNumber, mobile, pass, lname) ==
-          "success") {
+      String _returnString = await _currentUser.signUpUser(
+          email, password, docType, docNumber, mobile, pass, lname);
+      if (_returnString == "success") {
         Navigator.pop(context);
+      } else {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(_returnString),
+          duration: Duration(seconds: 2),
+        ));
       }
     } catch (e) {
       print(e);
