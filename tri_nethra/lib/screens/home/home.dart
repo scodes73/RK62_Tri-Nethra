@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/services/modalTrigger.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _data = MediaQuery.of(context);
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -113,30 +115,40 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       height: _data.size.height / 50,
                     ),
+                    Theme(
+                        data: Theme.of(context)
+                            .copyWith(canvasColor: Colors.transparent),
+                        child: ModalTrigger()),
                     //search
-                    Container(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: OrPop(
-                          popcolor: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(30),
-                                child: Text(
-                                  'Search a Reference number',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Icon(Icons.search),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     _onSearchPressed(context);
+                    //   },
+                    //   child: Container(
+                    //     width: double.infinity,
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.all(12.0),
+                    //       child: OrPop(
+                    //         popcolor: Colors.white,
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //           children: <Widget>[
+                    //             Padding(
+                    //               padding: EdgeInsets.all(30),
+                    //               child: Text(
+                    //                 'Search a Reference number',
+                    //                 textAlign: TextAlign.start,
+                    //                 style:
+                    //                     TextStyle(fontWeight: FontWeight.bold),
+                    //               ),
+                    //             ),
+                    //             Icon(Icons.search),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: _data.size.height / 4,
                     ),
@@ -160,6 +172,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 // body: Column(
 //   children: <Widget>[
 //     Center(
