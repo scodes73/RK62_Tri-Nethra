@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class OrPop extends StatelessWidget {
   final Widget child;
+  final Color popcolor;
 
-  const OrPop({Key key, this.child}) : super(key: key);
+  const OrPop({Key key, this.child, this.popcolor}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: popcolor,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(

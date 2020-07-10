@@ -2,8 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
-import 'package:tri_nethra/screens/home/home.dart';
-//import 'package:tri_nethra/screens/login/localwidgets/fadeanimation.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/screens/signup/signup.dart';
@@ -99,6 +97,7 @@ class _OurLoginState extends State<OurLogin> {
                         //FadeAnimation(
                         //  1.4,
                         OrPop(
+                          popcolor: Colors.white,
                           child: Column(
                             children: <Widget>[
                               Container(
