@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   children: <Widget>[
                     IconButton(
                       iconSize: 30,
-                      icon: Icon(Icons.person_pin),
+                      icon: Icon(Icons.account_circle),
                       color: Colors.white,
                       onPressed: () {
                         print(_data.size.height);
@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.all(30),
                                 child: Text(
-                                  'Search',
+                                  'Search a Reference number',
                                   textAlign: TextAlign.start,
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
