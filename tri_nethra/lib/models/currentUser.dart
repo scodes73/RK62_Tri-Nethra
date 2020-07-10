@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tri_nethra/models/user.dart';
 import 'package:tri_nethra/services/database.dart';
 
@@ -12,9 +13,19 @@ class CurrentUser extends ChangeNotifier {
     String retVal = "error";
     try {
       FirebaseUser _firebaseUser = await _auth.currentUser();
-      _currentUser.uid = _firebaseUser.uid;
-      _currentUser.email = _firebaseUser.email;
-      retVal = "success";
+      //_currentUser.uid = _firebaseUser.uid;
+      //_currentUser.email = _firebaseUser.email;
+      //retVal = "success";
+      print(_firebaseUser);
+      print('object');
+      if (_firebaseUser != null) {
+        _currentUser = await OurDatabase().getUserInfo(_firebaseUser.uid);
+        if (_currentUser != null) {
+          retVal = "success";
+        }
+      }
+    } on PlatformException catch (e) {
+      retVal = e.message;
     } catch (e) {
       print(e);
     }
@@ -29,7 +40,7 @@ class CurrentUser extends ChangeNotifier {
       retVal = "success";
     } catch (e) {
       print(e);
-      //retVal = e.message;
+      retVal = e.message;
     }
     return retVal;
   }
@@ -57,6 +68,7 @@ class CurrentUser extends ChangeNotifier {
       // }
     } catch (e) {
       print(e);
+      retVal = e.message;
     }
     return retVal;
   }

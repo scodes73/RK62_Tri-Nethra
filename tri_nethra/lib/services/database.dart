@@ -22,17 +22,22 @@ class OurDatabase {
     return retVal;
   }
 
-  // Future<OurUser> getUserInfo(String uid) async {
-  //   OurUser retVal = OurUser();
-  //   try {
-  //     DocumentSnapshot _docSnapshot =
-  //         await _firestore.collection("users").document(uid).get();
-  //     retVal.uid = uid;
-  //     retVal.docNumber = _docSnapshot["Doc Number"];
-  //     retVal.docType = _docSnapshot[""];
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  //   return retVal;
-  // }
+  Future<OurUser> getUserInfo(String uid) async {
+    OurUser retVal = OurUser();
+    try {
+      DocumentSnapshot _docSnapshot =
+          await _firestore.collection("users").document(uid).get();
+      retVal.uid = uid;
+      retVal.docNumber = _docSnapshot["Doc Number"];
+      retVal.docType = _docSnapshot["Doc type"];
+      retVal.accountCreated = _docSnapshot["Account created"];
+      retVal.legalname = _docSnapshot["Legal Name"];
+      retVal.email = _docSnapshot["Email"];
+      retVal.password = _docSnapshot["password"];
+      retVal.mobile = _docSnapshot["Mobile"];
+    } catch (e) {
+      print(e);
+    }
+    return retVal;
+  }
 }

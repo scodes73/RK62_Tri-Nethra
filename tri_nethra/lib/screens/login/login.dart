@@ -5,6 +5,7 @@ import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/home/home.dart';
 //import 'package:tri_nethra/screens/login/localwidgets/fadeanimation.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/screens/signup/signup.dart';
 
 //import 'localwidgets/loginForm.dart';
@@ -24,7 +25,7 @@ class _OurLoginState extends State<OurLogin> {
       if (_returnString == "success") {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => OurRoot(),
           ),
           (route) => false,
         );
