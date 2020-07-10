@@ -7,6 +7,33 @@ class CurrentUser extends ChangeNotifier {
   OurUser _currentUser = OurUser();
   OurUser get getCurrentUser => _currentUser;
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<String> onStartUp() async {
+    String retVal = "error";
+    try {
+      FirebaseUser _firebaseUser = await _auth.currentUser();
+      _currentUser.uid = _firebaseUser.uid;
+      _currentUser.email = _firebaseUser.email;
+      retVal = "success";
+    } catch (e) {
+      print(e);
+    }
+    return retVal;
+  }
+
+  Future<String> signOut() async {
+    String retVal = "error";
+    try {
+      await _auth.signOut();
+      _currentUser = OurUser();
+      retVal = "success";
+    } catch (e) {
+      print(e);
+      //retVal = e.message;
+    }
+    return retVal;
+  }
+
   Future<String> signUpUser(String email, String password, String docType,
       String docNumber, String mobile, String pass, String lname) async {
     String retVal = "error";
@@ -28,32 +55,6 @@ class CurrentUser extends ChangeNotifier {
       // if (_authResult != null) {
       //   retVal = true;
       // }
-    } catch (e) {
-      print(e);
-    }
-    return retVal;
-  }
-
-  Future<String> signOut() async {
-    String retVal = "error";
-    try {
-      await _auth.signOut();
-      _currentUser = OurUser();
-      retVal = "success";
-    } catch (e) {
-      print(e);
-      retVal = e.message;
-    }
-    return retVal;
-  }
-
-  Future<String> onStartUp() async {
-    String retVal = "error";
-    try {
-      FirebaseUser _firebaseUser = await _auth.currentUser();
-      _currentUser.uid = _firebaseUser.uid;
-      _currentUser.email = _firebaseUser.email;
-      retVal = "Success";
     } catch (e) {
       print(e);
     }

@@ -17,31 +17,6 @@ class _OurRootState extends State<OurRoot> {
   //final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   @override
-  void initState() {
-    super.initState();
-
-    // if (Platform.isIOS) {
-    //   _firebaseMessaging
-    //       .requestNotificationPermissions(IosNotificationSettings());
-    //   _firebaseMessaging.onIosSettingsRegistered.listen((event) {
-    //     print("IOS Registered");
-    //   });
-    // }
-
-    // _firebaseMessaging.configure(
-    //   onMessage: (Map<String, dynamic> message) async {
-    //     print("onMessage: $message");
-    //   },
-    //   onLaunch: (Map<String, dynamic> message) async {
-    //     print("onLaunch: $message");
-    //   },
-    //   onResume: (Map<String, dynamic> message) async {
-    //     print("onResume: $message");
-    //   },
-    // );
-  }
-
-  @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
 
