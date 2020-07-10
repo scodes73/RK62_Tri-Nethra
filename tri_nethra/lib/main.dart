@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
-import 'package:tri_nethra/screens/home/home.dart';
+import 'package:tri_nethra/screens/root.dart';
+
 // import 'package:tri_nethra/screens/login/login.dart';
 // import 'package:tri_nethra/screens/signup/signup.dart';
 import 'package:tri_nethra/utils/ourTheme.dart';
@@ -19,8 +20,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: OurTheme().buildTheme(),
-        home: HomeScreen(),
+        home: OurRoot(),
       ),
     );
   }
 }
+// import 'package:flutter/material.dart';
+// import 'package:tri_nethra/utils/wrapper.dart';
+
+// class Home extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Wrapper();
+//   }
+// }
