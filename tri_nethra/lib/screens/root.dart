@@ -3,8 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/home/home.dart';
 import 'package:tri_nethra/screens/login/login.dart';
+import 'package:tri_nethra/screens/splashscreen/splashscreen.dart';
 
-enum AuthStatus { notLoggedIn, loggedIn }
+enum AuthStatus { notLoggedIn, loggedIn, unknown }
 
 class OurRoot extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class OurRoot extends StatefulWidget {
 }
 
 class _OurRootState extends State<OurRoot> {
-  AuthStatus _authStatus = AuthStatus.notLoggedIn;
+  AuthStatus _authStatus = AuthStatus.unknown;
   String currentUid;
   //final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -27,6 +28,10 @@ class _OurRootState extends State<OurRoot> {
       setState(() {
         _authStatus = AuthStatus.loggedIn;
       });
+    } else {
+      setState(() {
+        _authStatus = AuthStatus.notLoggedIn;
+      });
     }
   }
 
@@ -35,6 +40,9 @@ class _OurRootState extends State<OurRoot> {
     Widget retVal;
 
     switch (_authStatus) {
+      case AuthStatus.unknown:
+        retVal = OurSplashScreen();
+        break;
       case AuthStatus.notLoggedIn:
         retVal = OurLogin();
         break;
