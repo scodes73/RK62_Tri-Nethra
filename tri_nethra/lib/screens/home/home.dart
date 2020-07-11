@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/services/modalTrigger.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,9 +37,20 @@ class HomeScreen extends StatelessWidget {
                       iconSize: 30,
                       icon: Icon(Icons.account_circle),
                       color: Colors.white,
-                      onPressed: () {
-                        print(_data.size.height);
-                        print(_data.size.width);
+                      onPressed: () async {
+                        CurrentUser _currentUser =
+                            Provider.of<CurrentUser>(context, listen: false);
+                        String _returnString = await _currentUser.signOut();
+                        if (_returnString == "success") {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OurRoot(),
+                            ),
+                            (route) => false,
+                          );
+                        }
+
                         print("Sending to Profile page");
                       },
                     ),

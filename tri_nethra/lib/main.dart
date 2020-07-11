@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
+import 'package:tri_nethra/screens/ChatInterface/chatinterface.dart';
 import 'package:tri_nethra/screens/root.dart';
 
 // import 'package:tri_nethra/screens/login/login.dart';
