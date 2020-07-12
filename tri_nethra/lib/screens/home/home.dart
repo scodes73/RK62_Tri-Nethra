@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/screens/profile_page/profileui.dart';
 import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/services/modalTrigger.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String val = 'Not yet Selected';
   @override
   Widget build(BuildContext context) {
     final _data = MediaQuery.of(context);
@@ -34,26 +41,16 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     IconButton(
-                      iconSize: 30,
-                      icon: Icon(Icons.account_circle),
-                      color: Colors.white,
-                      onPressed: () async {
-                        CurrentUser _currentUser =
-                            Provider.of<CurrentUser>(context, listen: false);
-                        String _returnString = await _currentUser.signOut();
-                        if (_returnString == "success") {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OurRoot(),
-                            ),
-                            (route) => false,
-                          );
-                        }
-
-                        print("Sending to Profile page");
-                      },
-                    ),
+                        iconSize: 30,
+                        icon: Icon(Icons.account_circle),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OurProfileScreen()));
+                          print("Send to Profile Page");
+                        }),
                   ],
                 ),
                 //TriNethra Text
@@ -130,39 +127,45 @@ class HomeScreen extends StatelessWidget {
                       height: _data.size.height / 50,
                     ),
                     Theme(
-                        data: Theme.of(context)
-                            .copyWith(canvasColor: Colors.transparent),
-                        child: ModalTrigger()),
-                    //search
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     _onSearchPressed(context);
-                    //   },
-                    //   child: Container(
-                    //     width: double.infinity,
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(12.0),
-                    //       child: OrPop(
-                    //         popcolor: Colors.white,
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //           children: <Widget>[
-                    //             Padding(
-                    //               padding: EdgeInsets.all(30),
-                    //               child: Text(
-                    //                 'Search a Reference number',
-                    //                 textAlign: TextAlign.start,
-                    //                 style:
-                    //                     TextStyle(fontWeight: FontWeight.bold),
-                    //               ),
-                    //             ),
-                    //             Icon(Icons.search),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                      data: Theme.of(context)
+                          .copyWith(canvasColor: Colors.transparent),
+                      child: Column(
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              _showModalBottomSheet(context);
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: OrPop(
+                                  popcolor: Colors.white,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.all(30),
+                                        child: Text(
+                                          'Search a Reference number',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Icon(Icons.search),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Text(val),
                     SizedBox(
                       height: _data.size.height / 4,
                     ),
@@ -185,40 +188,44 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _showModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 270,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                  leading: Icon(Icons.ac_unit),
+                  title: Text('Search'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      val = 'Search';
+                    });
+                  }),
+              ListTile(
+                  leading: Icon(Icons.ac_unit),
+                  title: Text('Prev'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      val = 'prev';
+                    });
+                  })
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
-
-// body: Column(
-//   children: <Widget>[
-//     Center(
-//       child: RaisedButton(onPressed: () async {
-//         // has to be async func, and add to profile screen
-//         CurrentUser _currentUser =
-//             Provider.of<CurrentUser>(context, listen: false);
-//         String _returnString = await _currentUser.signOut();
-//         if (_returnString == "success") {
-//           Navigator.pushAndRemoveUntil(
-//             context,
-//             MaterialPageRoute(
-//               builder: (context) => OurRoot(),
-//             ),
-//             (route) => false,
-//           );
-//         }
-//       }),
-//     ),
-//   ],
-
-//appBar: AppBar(title: Text(_uid)),
-//             ));
-//   }
-// }
-// import 'package:flutter/material.dart';
-
-// class Home extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Text('Home'),
-//     );
-//   }
-// }

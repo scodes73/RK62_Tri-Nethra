@@ -7,6 +7,7 @@ class ModalTrigger extends StatefulWidget {
 }
 
 class _ModalTriggerState extends State<ModalTrigger> {
+  String val = 'Not yet Selected';
   _showModalBottomSheet(context) {
     showModalBottomSheet(
       context: context,
