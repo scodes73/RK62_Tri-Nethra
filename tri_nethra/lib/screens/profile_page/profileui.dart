@@ -122,7 +122,7 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
                                 padding:
                                     EdgeInsets.fromLTRB(25.0, 40.0, 5.0, 25.0),
                                 child: Text(
-                                  '206',
+                                  '793',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: 'Quicksand',
