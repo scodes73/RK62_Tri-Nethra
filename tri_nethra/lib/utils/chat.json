@@ -1,0 +1,32 @@
+[
+  {
+    "Type of crime": {
+      "Street Crime": {
+        "Burglary": "Location Block",
+        "Auto Theft": " Theft Location Block",
+        "Rape": "Location Block",
+        "Robbery": "Location Block",
+        "Other": "Default Block"
+      },
+      "Death": {
+        "Homicide": "Location Block",
+        "Suicide": "Location Block",
+        "Other": "Default Block"
+      },
+      "Drug Crime": "Default Block",
+      "Cyber Crime": {
+        "Phishing": "Default Block",
+        "Identity Theft": "Default Block",
+        "Spread of Fake content/Hatred": "Default Block",
+        "Pornography": "Default Block",
+        "Other": "Default Block"
+      },
+      "White-Collar Crime": {
+        "Bribe": "Location Block",
+        "Price Fixing": "Location Block",
+        "Other": "Default Block"
+      },
+      "Report an Accident": "Location Block"
+    }
+  }
+]
