@@ -6,12 +6,12 @@
         "Auto Theft": " Theft Location Block",
         "Rape": "Location Block",
         "Robbery": "Location Block",
-        "Other": "Default Block"
+        "Other": "Location Block"
       },
       "Death": {
         "Homicide": "Location Block",
         "Suicide": "Location Block",
-        "Other": "Default Block"
+        "Other": "Location Block"
       },
       "Drug Crime": "Default Block",
       "Cyber Crime": {
@@ -24,7 +24,7 @@
       "White-Collar Crime": {
         "Bribe": "Location Block",
         "Price Fixing": "Location Block",
-        "Other": "Default Block"
+        "Other": "Location Block"
       },
       "Report an Accident": "Location Block"
     }

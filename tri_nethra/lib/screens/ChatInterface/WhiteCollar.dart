@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
+import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class WCC extends StatefulWidget {
+  List<String> al;
+  WCC({this.al});
   @override
-  _WCCState createState() => _WCCState();
+  _WCCState createState() => _WCCState(al: al);
 }
 
 class _WCCState extends State<WCC> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye;
+  List<String> al;
+  String sel;
+  _WCCState({this.al});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +50,8 @@ class _WCCState extends State<WCC> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      al.removeLast();
+                      print(al);
                       print("Popping from WCC page");
                     },
                   ),
@@ -105,6 +113,7 @@ class _WCCState extends State<WCC> {
                     i1 = Icons.check_circle;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.panorama_fish_eye;
+                    sel = 'Bribing';
                   });
                 },
                 child: but('Bribing', i1)),
@@ -114,6 +123,7 @@ class _WCCState extends State<WCC> {
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.check_circle;
                     i3 = Icons.panorama_fish_eye;
+                    sel = 'Price Fixing';
                   });
                 },
                 child: but('Price Fixing', i2)),
@@ -123,6 +133,7 @@ class _WCCState extends State<WCC> {
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.check_circle;
+                    sel = 'Other';
                   });
                 },
                 child: but('Other', i3)),
@@ -131,8 +142,12 @@ class _WCCState extends State<WCC> {
             ),
             InkWell(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SecondPage()));
+                  al.add(sel);
+                  print(al);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return LB(al: al);
+                  }));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0),

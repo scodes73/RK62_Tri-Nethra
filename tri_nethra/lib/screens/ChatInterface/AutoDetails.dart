@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
-class LB extends StatefulWidget {
+class Auto extends StatefulWidget {
   List<String> al;
-  LB({this.al});
+  Auto({this.al});
   @override
-  _LBState createState() => _LBState(al: al);
+  _AutoState createState() => _AutoState(al: al);
 }
 
-class _LBState extends State<LB> {
+class _AutoState extends State<Auto> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye;
   List<String> al;
-  _LBState({this.al});
+  _AutoState({this.al});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +49,7 @@ class _LBState extends State<LB> {
                       Navigator.pop(context);
                       al.removeLast();
                       print(al);
-                      print("Popping from LB page");
+                      print("Popping from Auto page");
                     },
                   ),
                 ),
@@ -70,7 +70,7 @@ class _LBState extends State<LB> {
                     Wrap(
                       children: [
                         Text(
-                          'Location BLOCK'.toUpperCase(),
+                          'Auto BLOCK'.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.orange,

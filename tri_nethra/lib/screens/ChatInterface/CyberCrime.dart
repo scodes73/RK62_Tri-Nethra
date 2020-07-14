@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
+import 'package:tri_nethra/screens/ChatInterface/DefaultBlock.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class CC extends StatefulWidget {
+  List<String> al;
+  CC({this.al});
   @override
-  _CCState createState() => _CCState();
+  _CCState createState() => _CCState(al: al);
 }
 
 class _CCState extends State<CC> {
@@ -13,6 +16,9 @@ class _CCState extends State<CC> {
       i3 = Icons.panorama_fish_eye,
       i4 = Icons.panorama_fish_eye,
       i5 = Icons.panorama_fish_eye;
+  List<String> al;
+  String sel;
+  _CCState({this.al});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +52,8 @@ class _CCState extends State<CC> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      al.removeLast();
+                      print(al);
                       print("Popping from CC page");
                     },
                   ),
@@ -120,12 +128,14 @@ class _CCState extends State<CC> {
                     i3 = Icons.panorama_fish_eye;
                     i4 = Icons.panorama_fish_eye;
                     i5 = Icons.panorama_fish_eye;
+                    sel = 'Identity Theft';
                   });
                 },
                 child: but('Identity Theft', i2)),
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = 'Spread of Wrong Context';
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.check_circle;
@@ -137,6 +147,7 @@ class _CCState extends State<CC> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = 'Pornography';
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.panorama_fish_eye;
@@ -148,6 +159,7 @@ class _CCState extends State<CC> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = 'Other';
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.panorama_fish_eye;
@@ -161,8 +173,14 @@ class _CCState extends State<CC> {
             ),
             InkWell(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SecondPage()));
+                  al.add(sel);
+                  print(al);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return DB(
+                      al: al,
+                    );
+                  }));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0),

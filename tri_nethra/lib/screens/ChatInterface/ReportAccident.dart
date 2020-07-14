@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class RAA extends StatefulWidget {
+  List<String> al;
+  RAA({this.al});
   @override
-  _RAAState createState() => _RAAState();
+  _RAAState createState() => _RAAState(al: al);
 }
 
 class _RAAState extends State<RAA> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye;
+  List<String> al;
+  _RAAState({this.al});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +47,8 @@ class _RAAState extends State<RAA> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      al.removeLast();
+                      print(al);
                       print("Popping from RAA page");
                     },
                   ),

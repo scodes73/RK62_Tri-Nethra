@@ -206,17 +206,29 @@ class _ToCState extends State<ToC> {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     if (sel == 'SC') {
-                      return SC();
+                      return SC(
+                        al: al,
+                      );
                     } else if (sel == 'Death') {
-                      return Death();
+                      return Death(
+                        al: al,
+                      );
                     } else if (sel == 'WCC') {
-                      return WCC();
+                      return WCC(
+                        al: al,
+                      );
                     } else if (sel == 'RAA') {
-                      return RAA();
+                      return RAA(
+                        al: al,
+                      );
                     } else if (sel == 'CC') {
-                      return CC();
+                      return CC(
+                        al: al,
+                      );
                     } else if (sel == 'DC') {
-                      return DB();
+                      return DB(
+                        al: al,
+                      );
                     }
                     return SecondPage();
                   }));

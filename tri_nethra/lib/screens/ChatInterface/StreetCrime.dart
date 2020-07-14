@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/screens/ChatInterface/AutoDetails.dart';
 import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
+import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class SC extends StatefulWidget {
+  List<String> al;
+  SC({this.al});
   @override
-  _SCState createState() => _SCState();
+  _SCState createState() => _SCState(al: al);
 }
 
 class _SCState extends State<SC> {
+  List<String> al;
+  String sel;
+  _SCState({this.al});
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye,
@@ -46,6 +53,8 @@ class _SCState extends State<SC> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      al.removeLast();
+                      print(al);
                       print("Popping from SC page");
                     },
                   ),
@@ -104,6 +113,7 @@ class _SCState extends State<SC> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = "Burglary";
                     i1 = Icons.check_circle;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.panorama_fish_eye;
@@ -115,6 +125,7 @@ class _SCState extends State<SC> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = "Auto Theft";
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.check_circle;
                     i3 = Icons.panorama_fish_eye;
@@ -126,6 +137,7 @@ class _SCState extends State<SC> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = "Rape";
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.check_circle;
@@ -137,6 +149,7 @@ class _SCState extends State<SC> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = "Robbery";
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.panorama_fish_eye;
@@ -148,6 +161,7 @@ class _SCState extends State<SC> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = "Other";
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.panorama_fish_eye;
@@ -161,8 +175,19 @@ class _SCState extends State<SC> {
             ),
             InkWell(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SecondPage()));
+                  al.add(sel);
+                  print(al);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    if (sel == 'Auto Theft') {
+                      return Auto(
+                        al: al,
+                      );
+                    }
+                    return LB(
+                      al: al,
+                    );
+                  }));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0),

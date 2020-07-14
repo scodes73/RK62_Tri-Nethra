@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
+import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class Death extends StatefulWidget {
+  List<String> al;
+  Death({this.al});
   @override
-  _DeathState createState() => _DeathState();
+  _DeathState createState() => _DeathState(al: al);
 }
 
 class _DeathState extends State<Death> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye;
+  List<String> al;
+  String sel;
+  _DeathState({this.al});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +50,8 @@ class _DeathState extends State<Death> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      al.removeLast();
+                      print(al);
                       print("Popping from Death page");
                     },
                   ),
@@ -102,6 +110,7 @@ class _DeathState extends State<Death> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = 'Homicide';
                     i1 = Icons.check_circle;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.panorama_fish_eye;
@@ -111,6 +120,7 @@ class _DeathState extends State<Death> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = 'Suicide';
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.check_circle;
                     i3 = Icons.panorama_fish_eye;
@@ -120,6 +130,7 @@ class _DeathState extends State<Death> {
             InkWell(
                 onTap: () {
                   setState(() {
+                    sel = 'Not Sure';
                     i1 = Icons.panorama_fish_eye;
                     i2 = Icons.panorama_fish_eye;
                     i3 = Icons.check_circle;
@@ -131,8 +142,12 @@ class _DeathState extends State<Death> {
             ),
             InkWell(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SecondPage()));
+                  al.add(sel);
+                  print(al);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return LB(al: al);
+                  }));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0),

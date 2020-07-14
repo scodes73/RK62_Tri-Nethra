@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class DB extends StatefulWidget {
+  List<String> al;
+  DB({this.al});
   @override
-  _DBState createState() => _DBState();
+  _DBState createState() => _DBState(al: al);
 }
 
 class _DBState extends State<DB> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye;
+  List<String> al;
+  _DBState({this.al});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +47,8 @@ class _DBState extends State<DB> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      al.removeLast();
+                      print(al);
                       print("Popping from DB page");
                     },
                   ),
