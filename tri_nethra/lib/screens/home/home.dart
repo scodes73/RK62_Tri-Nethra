@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tri_nethra/models/currentUser.dart';
-import 'package:tri_nethra/screens/ChatInterface/ChatScreen1.dart';
-import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
+import 'package:tri_nethra/screens/ChatInterface/ToC.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/profile_page/profileui.dart';
-import 'package:tri_nethra/screens/root.dart';
-import 'package:tri_nethra/services/modalTrigger.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

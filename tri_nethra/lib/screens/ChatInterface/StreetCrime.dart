@@ -1,21 +1,18 @@
-//test Screen
-
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
-class ToC extends StatefulWidget {
+class SC extends StatefulWidget {
   @override
-  _ToCState createState() => _ToCState();
+  _SCState createState() => _SCState();
 }
 
-class _ToCState extends State<ToC> {
+class _SCState extends State<SC> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye,
       i4 = Icons.panorama_fish_eye,
-      i5 = Icons.panorama_fish_eye,
-      i6 = Icons.panorama_fish_eye;
+      i5 = Icons.panorama_fish_eye;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +46,7 @@ class _ToCState extends State<ToC> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
-                      print("Popping from Profile page");
+                      print("Popping from SC page");
                     },
                   ),
                 ),
@@ -70,8 +67,7 @@ class _ToCState extends State<ToC> {
                     Wrap(
                       children: [
                         Text(
-                          'Note that Your Data will be held Confidential'
-                              .toUpperCase(),
+                          'Street Crime'.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.orange,
@@ -95,7 +91,7 @@ class _ToCState extends State<ToC> {
               child: Wrap(
                 children: [
                   Text(
-                    'Select the Type of Issue, you want to report:',
+                    'Select one among the following cases in regard:',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         color: Colors.white,
@@ -113,10 +109,9 @@ class _ToCState extends State<ToC> {
                     i3 = Icons.panorama_fish_eye;
                     i4 = Icons.panorama_fish_eye;
                     i5 = Icons.panorama_fish_eye;
-                    i6 = Icons.panorama_fish_eye;
                   });
                 },
-                child: but('Street Crime', i1)),
+                child: but('Burglary', i1)),
             InkWell(
                 onTap: () {
                   setState(() {
@@ -125,10 +120,9 @@ class _ToCState extends State<ToC> {
                     i3 = Icons.panorama_fish_eye;
                     i4 = Icons.panorama_fish_eye;
                     i5 = Icons.panorama_fish_eye;
-                    i6 = Icons.panorama_fish_eye;
                   });
                 },
-                child: but('Death', i2)),
+                child: but('Auto Theft', i2)),
             InkWell(
                 onTap: () {
                   setState(() {
@@ -137,10 +131,9 @@ class _ToCState extends State<ToC> {
                     i3 = Icons.check_circle;
                     i4 = Icons.panorama_fish_eye;
                     i5 = Icons.panorama_fish_eye;
-                    i6 = Icons.panorama_fish_eye;
                   });
                 },
-                child: but('Drug Crime', i3)),
+                child: but('Rape', i3)),
             InkWell(
                 onTap: () {
                   setState(() {
@@ -149,10 +142,9 @@ class _ToCState extends State<ToC> {
                     i3 = Icons.panorama_fish_eye;
                     i4 = Icons.check_circle;
                     i5 = Icons.panorama_fish_eye;
-                    i6 = Icons.panorama_fish_eye;
                   });
                 },
-                child: but('Cyber Crime', i4)),
+                child: but('Robbery', i4)),
             InkWell(
                 onTap: () {
                   setState(() {
@@ -161,22 +153,9 @@ class _ToCState extends State<ToC> {
                     i3 = Icons.panorama_fish_eye;
                     i4 = Icons.panorama_fish_eye;
                     i5 = Icons.check_circle;
-                    i6 = Icons.panorama_fish_eye;
                   });
                 },
-                child: but('White-Collar Crime', i5)),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    i1 = Icons.panorama_fish_eye;
-                    i2 = Icons.panorama_fish_eye;
-                    i3 = Icons.panorama_fish_eye;
-                    i4 = Icons.panorama_fish_eye;
-                    i5 = Icons.panorama_fish_eye;
-                    i6 = Icons.check_circle;
-                  });
-                },
-                child: but('Report an Accident', i6)),
+                child: but('Other', i5)),
             SizedBox(
               height: AppBar().preferredSize.height,
             ),
