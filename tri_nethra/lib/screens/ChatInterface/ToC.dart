@@ -11,12 +11,16 @@ import 'package:tri_nethra/screens/ChatInterface/WhiteCollar.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class ToC extends StatefulWidget {
+  List<String> al;
+  ToC({this.al});
   @override
-  _ToCState createState() => _ToCState();
+  _ToCState createState() => _ToCState(al: al);
 }
 
 class _ToCState extends State<ToC> {
   String sel;
+  List<String> al;
+  _ToCState({this.al});
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye,
@@ -56,6 +60,8 @@ class _ToCState extends State<ToC> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      al.removeLast();
+                      print(al);
                       print("Popping from ToC page");
                     },
                   ),
@@ -195,6 +201,8 @@ class _ToCState extends State<ToC> {
             ),
             InkWell(
                 onTap: () {
+                  al.add(sel);
+                  print(al);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     if (sel == 'SC') {

@@ -9,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> al = ['ToC'];
   String val = 'Not yet Selected';
   @override
   Widget build(BuildContext context) {
@@ -99,8 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ), //crime aware
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => ToC()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ToC(
+                                  al: al,
+                                )));
                       },
                       child: Container(
                         width: double.infinity,
