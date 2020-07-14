@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
+import 'package:tri_nethra/screens/ChatInterface/ChatScreen1.dart';
+import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/profile_page/profileui.dart';
 import 'package:tri_nethra/screens/root.dart';
@@ -100,25 +102,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: _data.size.height / 50,
                     ), //crime aware
-                    Container(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: OrPop(
-                          popcolor: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(30),
-                                child: Text(
-                                  'Register a New Crime',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => ToC()));
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: OrPop(
+                            popcolor: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(30),
+                                  child: Text(
+                                    'Register a New Crime',
+                                    textAlign: TextAlign.start,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
-                              Icon(Icons.add),
-                            ],
+                                Icon(Icons.add),
+                              ],
+                            ),
                           ),
                         ),
                       ),
