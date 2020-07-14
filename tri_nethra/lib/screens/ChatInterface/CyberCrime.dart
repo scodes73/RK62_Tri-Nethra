@@ -21,186 +21,193 @@ class _CCState extends State<CC> {
   _CCState({this.al});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomRight,
-                colors: [
-              Colors.orange[900],
-              Colors.orange[300],
-              Colors.orange[200]
-            ])),
-        child: ListView(
-          children: <Widget>[
-            SizedBox(
-              height: AppBar().preferredSize.height / 1.5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.keyboard_arrow_left,
-                      size: 30,
-                      color: Colors.white,
+    return WillPopScope(
+      onWillPop: () {
+        al.removeLast();
+        print(al);
+        Navigator.of(context).pop();
+      },
+      child: Scaffold(
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomRight,
+                  colors: [
+                Colors.orange[900],
+                Colors.orange[300],
+                Colors.orange[200]
+              ])),
+          child: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: AppBar().preferredSize.height / 1.5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.keyboard_arrow_left,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        al.removeLast();
+                        print(al);
+                        print("Popping from CC page");
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      al.removeLast();
-                      print(al);
-                      print("Popping from CC page");
-                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 30, right: 30),
+                child: OrPop(
+                  popcolor: Colors.white,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                        children: [
+                          Text(
+                            'Cyber Crime'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.orange,
+                                fontFamily: 'Quicksand',
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 30, right: 30),
-              child: OrPop(
-                popcolor: Colors.white,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Wrap(
-                      children: [
-                        Text(
-                          'Cyber Crime'.toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.orange,
-                              fontFamily: 'Quicksand',
-                              fontSize: 20),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 30, right: 20),
+                child: Wrap(
+                  children: [
+                    Text(
+                      'Select one among the following cases in regard:',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Quicksand',
+                          fontSize: 30),
                     ),
                   ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 30, right: 20),
-              child: Wrap(
-                children: [
-                  Text(
-                    'Select one among the following cases in regard:',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Quicksand',
-                        fontSize: 30),
-                  ),
-                ],
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      i1 = Icons.check_circle;
+                      i2 = Icons.panorama_fish_eye;
+                      i3 = Icons.panorama_fish_eye;
+                      i4 = Icons.panorama_fish_eye;
+                      i5 = Icons.panorama_fish_eye;
+                    });
+                  },
+                  child: but('Phishing', i1)),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      i1 = Icons.panorama_fish_eye;
+                      i2 = Icons.check_circle;
+                      i3 = Icons.panorama_fish_eye;
+                      i4 = Icons.panorama_fish_eye;
+                      i5 = Icons.panorama_fish_eye;
+                      sel = 'Identity Theft';
+                    });
+                  },
+                  child: but('Identity Theft', i2)),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      sel = 'Spread of Wrong Context';
+                      i1 = Icons.panorama_fish_eye;
+                      i2 = Icons.panorama_fish_eye;
+                      i3 = Icons.check_circle;
+                      i4 = Icons.panorama_fish_eye;
+                      i5 = Icons.panorama_fish_eye;
+                    });
+                  },
+                  child: but('Spread of Wrong Context', i3)),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      sel = 'Pornography';
+                      i1 = Icons.panorama_fish_eye;
+                      i2 = Icons.panorama_fish_eye;
+                      i3 = Icons.panorama_fish_eye;
+                      i4 = Icons.check_circle;
+                      i5 = Icons.panorama_fish_eye;
+                    });
+                  },
+                  child: but('Pornography', i4)),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      sel = 'Other';
+                      i1 = Icons.panorama_fish_eye;
+                      i2 = Icons.panorama_fish_eye;
+                      i3 = Icons.panorama_fish_eye;
+                      i4 = Icons.panorama_fish_eye;
+                      i5 = Icons.check_circle;
+                    });
+                  },
+                  child: but('Other', i5)),
+              SizedBox(
+                height: AppBar().preferredSize.height,
               ),
-            ),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    i1 = Icons.check_circle;
-                    i2 = Icons.panorama_fish_eye;
-                    i3 = Icons.panorama_fish_eye;
-                    i4 = Icons.panorama_fish_eye;
-                    i5 = Icons.panorama_fish_eye;
-                  });
-                },
-                child: but('Phishing', i1)),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    i1 = Icons.panorama_fish_eye;
-                    i2 = Icons.check_circle;
-                    i3 = Icons.panorama_fish_eye;
-                    i4 = Icons.panorama_fish_eye;
-                    i5 = Icons.panorama_fish_eye;
-                    sel = 'Identity Theft';
-                  });
-                },
-                child: but('Identity Theft', i2)),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    sel = 'Spread of Wrong Context';
-                    i1 = Icons.panorama_fish_eye;
-                    i2 = Icons.panorama_fish_eye;
-                    i3 = Icons.check_circle;
-                    i4 = Icons.panorama_fish_eye;
-                    i5 = Icons.panorama_fish_eye;
-                  });
-                },
-                child: but('Spread of Wrong Context', i3)),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    sel = 'Pornography';
-                    i1 = Icons.panorama_fish_eye;
-                    i2 = Icons.panorama_fish_eye;
-                    i3 = Icons.panorama_fish_eye;
-                    i4 = Icons.check_circle;
-                    i5 = Icons.panorama_fish_eye;
-                  });
-                },
-                child: but('Pornography', i4)),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    sel = 'Other';
-                    i1 = Icons.panorama_fish_eye;
-                    i2 = Icons.panorama_fish_eye;
-                    i3 = Icons.panorama_fish_eye;
-                    i4 = Icons.panorama_fish_eye;
-                    i5 = Icons.check_circle;
-                  });
-                },
-                child: but('Other', i5)),
-            SizedBox(
-              height: AppBar().preferredSize.height,
-            ),
-            InkWell(
-                onTap: () {
-                  al.add(sel);
-                  print(al);
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return DB(
-                      al: al,
-                    );
-                  }));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 30.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text('Next',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)),
-                      Icon(
-                        Icons.keyboard_arrow_right,
-                        size: 30,
-                        color: Colors.black,
-                      )
-                    ],
-                  ),
-                ))
-          ],
+              InkWell(
+                  onTap: () {
+                    al.add(sel);
+                    print(al);
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return DB(
+                        al: al,
+                      );
+                    }));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text('Next',
+                            style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          size: 30,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                  ))
+            ],
+          ),
         ),
       ),
     );
