@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class DB extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   DB({this.al});
   @override
   _DBState createState() => _DBState(al: al);

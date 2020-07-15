@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class Auto extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   Auto({this.al});
   @override
   _AutoState createState() => _AutoState(al: al);

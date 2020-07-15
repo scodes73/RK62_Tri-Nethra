@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
+
 import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class WCC extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   WCC({this.al});
   @override
   _WCCState createState() => _WCCState(al: al);

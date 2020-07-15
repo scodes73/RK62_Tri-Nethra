@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class LB extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   LB({this.al});
   @override
   _LBState createState() => _LBState(al: al);

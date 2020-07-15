@@ -38,7 +38,7 @@ class OurDatabase {
       retVal.email = _docSnapshot["Email"];
       retVal.password = _docSnapshot["password"];
       retVal.mobile = _docSnapshot["Mobile"];
-      retVal.RefId = _docSnapshot["RefId"];
+      retVal.refId = _docSnapshot["RefId"];
     } catch (e) {
       print(e);
     }

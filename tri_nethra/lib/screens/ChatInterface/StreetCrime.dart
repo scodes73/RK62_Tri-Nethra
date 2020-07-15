@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/AutoDetails.dart';
-import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
 import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class SC extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   SC({this.al});
   @override
   _SCState createState() => _SCState(al: al);

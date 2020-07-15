@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
+
 import 'package:tri_nethra/screens/ChatInterface/DefaultBlock.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class CC extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   CC({this.al});
   @override
   _CCState createState() => _CCState(al: al);

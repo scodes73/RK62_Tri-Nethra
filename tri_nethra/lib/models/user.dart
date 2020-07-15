@@ -9,7 +9,7 @@ class OurUser {
   String docType;
   String docNumber;
   Timestamp accountCreated;
-  List<String> RefId;
+  List<String> refId;
 
   OurUser(
       {this.uid,
@@ -20,5 +20,5 @@ class OurUser {
       this.legalname,
       this.mobile,
       this.password,
-      this.RefId});
+      this.refId});
 }

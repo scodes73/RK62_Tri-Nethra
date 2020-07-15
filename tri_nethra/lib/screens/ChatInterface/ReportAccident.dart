@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class RAA extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   RAA({this.al});
   @override
   _RAAState createState() => _RAAState(al: al);

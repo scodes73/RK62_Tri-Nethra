@@ -11,7 +11,7 @@ import 'package:tri_nethra/screens/ChatInterface/WhiteCollar.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class ToC extends StatefulWidget {
-  List<String> al;
+  final List<String> al;
   ToC({this.al});
   @override
   _ToCState createState() => _ToCState(al: al);
