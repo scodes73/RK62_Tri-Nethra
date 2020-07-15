@@ -154,6 +154,7 @@ class _SignUpState extends State<SignUp> {
                           child: Column(
                             children: <Widget>[
                               OrPop(
+                                popcolor: Colors.white,
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
@@ -169,6 +170,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                               SizedBox(height: 10),
                               OrPop(
+                                popcolor: Colors.white,
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
@@ -184,6 +186,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                               SizedBox(height: 10),
                               OrPop(
+                                popcolor: Colors.white,
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
@@ -199,6 +202,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                               SizedBox(height: 10),
                               OrPop(
+                                popcolor: Colors.white,
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
@@ -214,6 +218,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                               SizedBox(height: 10),
                               OrPop(
+                                popcolor: Colors.white,
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(),
@@ -229,6 +234,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                               SizedBox(height: 20),
                               OrPop(
+                                popcolor: Colors.white,
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   child: DropdownButton(
@@ -244,6 +250,7 @@ class _SignUpState extends State<SignUp> {
                                 height: 20,
                               ),
                               OrPop(
+                                popcolor: Colors.white,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
