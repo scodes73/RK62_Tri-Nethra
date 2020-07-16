@@ -32,6 +32,10 @@ dependencies:
   cloud_firestore: #^0.13.7
   provider: #^4.3.0
   firebase_core:
+  firebase_storage:
+  image_cropper:
+  image_picker:
+  file_picker:
 
 
 dev_dependencies:
