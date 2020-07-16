@@ -36,6 +36,7 @@ dependencies:
   image_cropper:
   image_picker:
   file_picker:
+  geolocator:
 
 
 dev_dependencies:
