@@ -17,6 +17,7 @@ class _MultiFilePickState extends State<MultiFilePick> {
   FileType _pickType = FileType.any;
   bool _multiPick = true;
   List<StorageUploadTask> _tasks = <StorageUploadTask>[];
+
   void openFileExplorer() async {
     try {
       _path = null;
