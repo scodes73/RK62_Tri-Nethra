@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tri_nethra/screens/TestScreens/uploader.dart';
 
 /// Widget to capture and crop the image
 class ImgCapScr extends StatefulWidget {
@@ -16,22 +17,22 @@ class _ImgCapScrState extends State<ImgCapScr> {
   File _imageFile;
 
   /// Cropper plugin
-  Future<void> _cropImage() async {
-    File cropped = await ImageCropper.cropImage(
-      sourcePath: _imageFile.path,
-      // ratioX: 1.0,
-      // ratioY: 1.0,
-      // maxWidth: 512,
-      // maxHeight: 512,
-      // toolbarColor: Colors.purple,
-      // toolbarWidgetColor: Colors.white,
-      // toolbarTitle: 'Crop It'
-    );
+  // Future<void> _cropImage() async {
+  //   File cropped = await ImageCropper.cropImage(
+  //     sourcePath: _imageFile.path,
+  //     // ratioX: 1.0,
+  //     // ratioY: 1.0,
+  //     // maxWidth: 512,
+  //     // maxHeight: 512,
+  //     // toolbarColor: Colors.purple,
+  //     // toolbarWidgetColor: Colors.white,
+  //     // toolbarTitle: 'Crop It'
+  //   );
 
-    setState(() {
-      _imageFile = cropped ?? _imageFile;
-    });
-  }
+  //   setState(() {
+  //     _imageFile = cropped ?? _imageFile;
+  //   });
+  // }
 
   /// Select an image via gallery or camera
   Future<void> _pickImage(ImageSource source) async {
@@ -43,9 +44,9 @@ class _ImgCapScrState extends State<ImgCapScr> {
   }
 
   /// Remove image
-  void _clear() {
-    setState(() => _imageFile = null);
-  }
+  // void _clear() {
+  //   setState(() => _imageFile = null);
+  // }
 
   upload(File file) {
     String filePath = 'images/${DateTime.now()}.png';
@@ -82,23 +83,24 @@ class _ImgCapScrState extends State<ImgCapScr> {
         children: <Widget>[
           if (_imageFile != null) ...[
             Image.file(_imageFile),
-            Row(
-              children: <Widget>[
-                FlatButton(
-                  child: Icon(Icons.crop),
-                  onPressed: _cropImage,
-                ),
-                FlatButton(
-                  child: Icon(Icons.refresh),
-                  onPressed: _clear,
-                ),
-              ],
-            ),
-            RaisedButton(
-                onPressed: () {
-                  upload(_imageFile);
-                },
-                child: Text('uf'))
+            // Row(
+            //   children: <Widget>[
+            //     FlatButton(
+            //       child: Icon(Icons.crop),
+            //       onPressed: _cropImage,
+            //     ),
+            //     FlatButton(
+            //       child: Icon(Icons.refresh),
+            //       onPressed: _clear,
+            //     ),
+            //   ],
+            // ),
+            Uploader(file: _imageFile)
+            // RaisedButton(
+            //     onPressed: () {
+            //       upload(_imageFile);
+            //     },
+            //     child: Text('uf'))
           ]
         ],
       ),

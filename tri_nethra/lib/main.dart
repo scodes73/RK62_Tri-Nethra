@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: OurTheme().buildTheme(),
-        home: LocCurr(),
+        home: ImgCapScr(),
       ),
     );
   }
