@@ -22,7 +22,7 @@ class _SearchBoxState extends State<SearchBox> {
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
-            hintText: 'Tìm kiếm',
+            hintText: 'Enter a Location',
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
               borderRadius: BorderRadius.circular(25.7),

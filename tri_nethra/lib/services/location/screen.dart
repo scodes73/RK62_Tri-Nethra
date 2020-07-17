@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:tri_nethra/services/location/location.dart';
 import 'package:tri_nethra/services/location/picker_page.dart';
 

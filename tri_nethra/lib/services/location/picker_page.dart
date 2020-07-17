@@ -10,6 +10,7 @@ class MapPickerPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Map Picker'),
+        backgroundColor: Colors.orange,
       ),
       body: ChangeNotifierProvider<PickerBloc>(
         create: (context) => PickerBloc.getInstance(),
@@ -47,21 +48,21 @@ class Footer extends StatelessWidget {
     return Container(
       height: 90,
       width: double.infinity,
-      color: Colors.blue[50],
+      color: Colors.blue,
       child: FractionallySizedBox(
         widthFactor: 0.7,
         heightFactor: 0.5,
         child: RaisedButton(
-          color: Colors.blue,
+          color: Colors.white,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           onPressed: () {
             Navigator.pop(context, pickerBloc.currentLocation);
           },
           child: Text(
-            "Chọn",
+            "Select the pin",
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 17,
             ),
           ),

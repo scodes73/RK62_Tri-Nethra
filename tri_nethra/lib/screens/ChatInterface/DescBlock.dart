@@ -10,7 +10,7 @@ class Describe extends StatefulWidget {
 }
 
 class _DescribeState extends State<Describe> {
-  TextEditingController _DesController = TextEditingController();
+  TextEditingController _desController = TextEditingController();
   // List<String> al;
   // List<String> ll;
   // _DescribeState({this.al, this.ll});
@@ -106,7 +106,7 @@ class _DescribeState extends State<Describe> {
                     child: TextFormField(
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      controller: _DesController,
+                      controller: _desController,
                       decoration: InputDecoration(
                           hintText: "Write your Description Here",
                           hintStyle: TextStyle(

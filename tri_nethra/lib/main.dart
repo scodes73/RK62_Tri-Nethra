@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
-import 'package:tri_nethra/screens/ChatInterface/DescBlock.dart';
-import 'package:tri_nethra/screens/TestScreens/testscreen.dart';
-import 'package:tri_nethra/screens/locationScreen.dart';
-import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/services/location/screen.dart';
-import 'package:tri_nethra/services/multifilepick.dart';
 import 'package:tri_nethra/utils/ourTheme.dart';
 
 void main() {
@@ -14,8 +9,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // Question a = Question();
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
