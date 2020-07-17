@@ -13,6 +13,8 @@
         android:label="tri_nethra"
         android:icon="@mipmap/ic_launcher">
         android:requestLegacyExternalStorage="true"
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCbdb6-K7kjFMWCHEf29UzYqrWXuxJKJ5I"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
