@@ -58,6 +58,7 @@ class OurDatabase {
         'attachment list': fl,
         'location coordinates': ll,
         'issueCreate': Timestamp.now(),
+        'status': 'Pending'
       });
       issuesList.add(_docRef.documentID);
 

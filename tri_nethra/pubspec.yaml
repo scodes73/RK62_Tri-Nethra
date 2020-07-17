@@ -40,7 +40,6 @@ dependencies:
   google_maps_flutter:
   dio:
   flutter_typeahead:
-  google_maps_place_picker:
 dev_dependencies:
   flutter_test:
     sdk: flutter

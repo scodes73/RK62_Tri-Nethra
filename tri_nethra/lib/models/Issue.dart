@@ -7,6 +7,7 @@ class OurIssue {
   List<String> contents;
   List<String> loc;
   Timestamp issueCreated;
+  String status;
 
   OurIssue(
       {this.refNo,
@@ -14,5 +15,6 @@ class OurIssue {
       this.contents,
       this.doneBy,
       this.issueCreated,
-      this.loc});
+      this.loc,
+      this.status});
 }

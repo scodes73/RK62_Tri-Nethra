@@ -48,7 +48,7 @@ class Footer extends StatelessWidget {
     return Container(
       height: 90,
       width: double.infinity,
-      color: Colors.blue,
+      color: Colors.orange,
       child: FractionallySizedBox(
         widthFactor: 0.7,
         heightFactor: 0.5,

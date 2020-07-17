@@ -1,28 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:tri_nethra/screens/ChatInterface/DescBlock.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
-import 'package:tri_nethra/services/location/locationScreen.dart';
+import 'package:tri_nethra/services/location/typadd.dart';
+import 'package:tri_nethra/services/location/location.dart';
+import 'package:tri_nethra/services/location/picker_page.dart';
 
-class Death extends StatefulWidget {
+class LocScreen extends StatefulWidget {
   final List<String> al;
-  Death({this.al});
+  LocScreen({this.al});
   @override
-  _DeathState createState() => _DeathState(al: al);
+  _LocScreenState createState() => _LocScreenState(al: al);
 }
 
-class _DeathState extends State<Death> {
-  IconData i1 = Icons.panorama_fish_eye,
-      i2 = Icons.panorama_fish_eye,
-      i3 = Icons.panorama_fish_eye;
+class _LocScreenState extends State<LocScreen> {
+  List<String> ll = ['/'];
   List<String> al;
-  String sel;
-  _DeathState({this.al});
+  _LocScreenState({this.al});
+  int c = 0;
+  void _getCurrentLocation() async {
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
+
+    setState(() {
+      //print(position.latitude);
+      ll.add(position.latitude.toString());
+      ll.add(position.longitude.toString());
+      ll.add('/');
+      // c += 1;
+      c = (ll.where((e) => e == '/')).length - 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        al.removeLast();
-        print(al);
+        // al.removeLast();
+        // print(al);
         Navigator.of(context).pop();
       },
       child: Scaffold(
@@ -56,9 +72,9 @@ class _DeathState extends State<Death> {
                       ),
                       onPressed: () {
                         Navigator.pop(context);
-                        al.removeLast();
-                        print(al);
-                        print("Popping from Death page");
+                        // al.removeLast();
+                        // print(al);
+                        // print("Popping from Death page");
                       },
                     ),
                   ),
@@ -79,7 +95,7 @@ class _DeathState extends State<Death> {
                       Wrap(
                         children: [
                           Text(
-                            'DEATH'.toUpperCase(),
+                            'Location Details'.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.orange,
@@ -103,7 +119,7 @@ class _DeathState extends State<Death> {
                 child: Wrap(
                   children: [
                     Text(
-                      'Select one among the following cases in regard:',
+                      'Choose a operation:',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           color: Colors.white,
@@ -116,43 +132,71 @@ class _DeathState extends State<Death> {
               InkWell(
                   onTap: () {
                     setState(() {
-                      sel = 'Homicide';
-                      i1 = Icons.check_circle;
-                      i2 = Icons.panorama_fish_eye;
-                      i3 = Icons.panorama_fish_eye;
+                      _getCurrentLocation();
                     });
                   },
-                  child: but('Homicide', i1)),
+                  child: but('Current Location', Icons.location_city)),
+              InkWell(
+                  onTap: () {
+                    setState(
+                      () async {
+                        Location location = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MapPickerPage()),
+                        );
+                        if (location != null) {
+                          setState(() {
+                            ll.add(location.lat.toString());
+                            ll.add(location.lng.toString());
+                            ll.add('/');
+                            // c += 1;
+                            c = (ll.where((e) => e == '/')).length - 1;
+                          });
+                        }
+                      },
+                    );
+                  },
+                  child: but('Choose Location On Map', Icons.map)),
               InkWell(
                   onTap: () {
                     setState(() {
-                      sel = 'Suicide';
-                      i1 = Icons.panorama_fish_eye;
-                      i2 = Icons.check_circle;
-                      i3 = Icons.panorama_fish_eye;
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LDescribe(
+                                ll: ll,
+                              )));
+                      c = (ll.where((e) => e == '/')).length;
                     });
+                    // c += 1;
                   },
-                  child: but('Suicide', i2)),
-              InkWell(
-                  onTap: () {
-                    setState(() {
-                      sel = 'Not Sure';
-                      i1 = Icons.panorama_fish_eye;
-                      i2 = Icons.panorama_fish_eye;
-                      i3 = Icons.check_circle;
-                    });
-                  },
-                  child: but('Not Sure', i3)),
+                  child: but('Type the Addresses', Icons.keyboard)),
               SizedBox(
                 height: AppBar().preferredSize.height,
               ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.all(10),
+                //Has to Add additional info on ease of use and well description
+                child: Text(
+                  "${c} Information You provide will help, The text field automantically increases in size as you type on.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
               InkWell(
                   onTap: () {
-                    al.add(sel);
+                    print(ll);
                     print(al);
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return LocScreen(al: al);
+                      return Describe(
+                        al: al,
+                        ll: ll,
+                      );
                     }));
                   },
                   child: Padding(

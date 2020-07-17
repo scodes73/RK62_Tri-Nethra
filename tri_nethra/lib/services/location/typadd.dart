@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
-import 'package:tri_nethra/services/multifilepick.dart';
 
-class Describe extends StatefulWidget {
-  final List<String> al;
+class LDescribe extends StatefulWidget {
+  // final List<String> al;
   final List<String> ll;
-  Describe({this.al, this.ll});
+  LDescribe(
+      {
+      // this.al,
+      this.ll});
   @override
-  _DescribeState createState() => _DescribeState(al: al, ll: ll);
+  _LDescribeState createState() => _LDescribeState(
+      //al: al,
+      ll: ll);
 }
 
-class _DescribeState extends State<Describe> {
+class _LDescribeState extends State<LDescribe> {
   TextEditingController _desController = TextEditingController();
-  List<String> al;
+  // List<String> al;
   List<String> ll;
-  _DescribeState({this.al, this.ll});
+  _LDescribeState(
+      {
+      //this.al,
+      this.ll});
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
         // al.removeLast();
-        Navigator.of(context).pop();
+        // Navigator.of(context).pop();
       },
       child: Scaffold(
         body: Container(
@@ -76,8 +83,7 @@ class _DescribeState extends State<Describe> {
                       Wrap(
                         children: [
                           Text(
-                            'Please Describe the situation in your own Words'
-                                .toUpperCase(),
+                            'Please type the relevant addresses'.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -109,7 +115,7 @@ class _DescribeState extends State<Describe> {
                       maxLines: null,
                       controller: _desController,
                       decoration: InputDecoration(
-                          hintText: "Write your Description Here",
+                          hintText: "Write your Address Here",
                           hintStyle: TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                           border: InputBorder.none),
@@ -133,24 +139,36 @@ class _DescribeState extends State<Describe> {
               ),
               InkWell(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => MultiFilePick(
-                              al: al,
-                              ll: ll,
-                            )));
+                    setState(() {
+                      ll.add(_desController.text);
+                      ll.add('/');
+                      Navigator.of(context).pop();
+                    });
+                    // al.add(sel);
+                    // print(al);
+                    // Navigator.of(context)
+                    //     .push(MaterialPageRoute(builder: (context) {
+                    //   if (sel == 'Auto Theft') {
+                    //     return Auto(
+                    //       al: al,
+                    //     );
+                    //   }
+                    //   return LB(
+                    //     al: al,
+                    // );
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        Text('Next',
+                        Text('Done',
                             style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black)),
                         Icon(
-                          Icons.keyboard_arrow_right,
+                          Icons.turned_in,
                           size: 30,
                           color: Colors.black,
                         )
