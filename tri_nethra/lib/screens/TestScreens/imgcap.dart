@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -36,10 +35,10 @@ class _ImgCapScrState extends State<ImgCapScr> {
 
   /// Select an image via gallery or camera
   Future<void> _pickImage(ImageSource source) async {
-    File selected = await ImagePicker.pickImage(source: source);
+    //File selected = await ImagePicker.getImage(source: source);
 
     setState(() {
-      _imageFile = selected;
+      // _imageFile = selected;
     });
   }
 

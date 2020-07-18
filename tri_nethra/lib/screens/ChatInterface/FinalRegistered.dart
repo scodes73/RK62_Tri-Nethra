@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/root.dart';
 
 class IssueFinal extends StatelessWidget {
-  final ;
+  final String refno;
   IssueFinal({this.refno});
   @override
   Widget build(BuildContext context) {

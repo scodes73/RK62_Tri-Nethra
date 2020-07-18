@@ -53,7 +53,7 @@ class _MultiFilePickState extends State<MultiFilePick> {
     }
   }
 
-  upload(fileName, filePath) {
+  upload(fileName, filePath) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     print(_currentUser.getCurrentUser.uid);
     _extension = fileName.toString().split('.').last;
@@ -66,12 +66,18 @@ class _MultiFilePickState extends State<MultiFilePick> {
         contentType: '$_pickType/$_extension',
       ),
     );
-    setState(() async {
-      final String url = await uploadTask.lastSnapshot.ref.getDownloadURL();
-      atl.add(url);
-      _tasks.add(uploadTask);
-    });
+    StorageTaskSnapshot _ts = await uploadTask.onComplete;
+    // print(storageRef.getDownloadURL().toString()));
+    // setState(() async {
+
+    String url = await storageRef.getDownloadURL();
+    print("url is $url");
+    // final String url = await uploadTask.lastSnapshot.ref.getDownloadURL();
+    atl.add(url.toString());
+    print(atl);
+    _tasks.add(uploadTask);
   }
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +108,9 @@ class _MultiFilePickState extends State<MultiFilePick> {
                   ll,
                 );
                 if (_returnString == "success") {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => IssueFinal()));
+                  print('suc');
+                  // Navigator.of(context).push(
+                  //     MaterialPageRoute(builder: (context) => ()));
                 } else {
                   print(_returnString);
                 }
