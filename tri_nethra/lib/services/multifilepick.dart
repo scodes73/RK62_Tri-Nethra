@@ -101,6 +101,7 @@ class _MultiFilePickState extends State<MultiFilePick> {
                 CurrentUser _currentUser =
                     Provider.of<CurrentUser>(context, listen: false);
                 print(_currentUser.getCurrentUser.uid);
+                print(_currentUser.getCurrentUser.refId);
                 String _returnString = await OurDatabase().createIssue(
                   _currentUser.getCurrentUser.uid,
                   al,
@@ -109,8 +110,8 @@ class _MultiFilePickState extends State<MultiFilePick> {
                 );
                 if (_returnString == "success") {
                   print('suc');
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(builder: (context) => ()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => (IssueFinal())));
                 } else {
                   print(_returnString);
                 }

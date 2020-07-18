@@ -6,7 +6,7 @@ class OurDatabase {
   Future<String> createUser(OurUser user) async {
     String retVal = "error";
     try {
-      List<String> s = List();
+      List<String> s = ['/'];
 
       await _firestore.collection("users").document(user.uid).setData({
         'Legal Name': user.legalname,
@@ -38,7 +38,10 @@ class OurDatabase {
       retVal.email = _docSnapshot["Email"];
       retVal.password = _docSnapshot["password"];
       retVal.mobile = _docSnapshot["Mobile"];
-      retVal.refId = _docSnapshot["RefId"];
+      retVal.refId = List<String>.from(_docSnapshot["RefId"]);
+      print(retVal.refId);
+      // dlist.Cast<string>().ToList();
+      // var strings = dlist.Select(item => item?.ToString()).ToList();
     } catch (e) {
       print(e);
     }
