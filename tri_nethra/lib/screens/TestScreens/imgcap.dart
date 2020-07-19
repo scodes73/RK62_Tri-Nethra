@@ -18,15 +18,14 @@ class _ImgCapScrState extends State<ImgCapScr> {
   //Cropper plugin
   Future<void> _cropImage() async {
     File cropped = await ImageCropper.cropImage(
-      sourcePath: _imageFile.path,
-      // ratioX: 1.0,
-      // ratioY: 1.0,
-      // maxWidth: 512,
-      // maxHeight: 512,
-      // toolbarColor: Colors.purple,
-      // toolbarWidgetColor: Colors.white,
-      // toolbarTitle: 'Crop It'
-    );
+        sourcePath: _imageFile.path,
+        // ratioX: 1.0,
+        // ratioY: 1.0,
+        // maxWidth: 512,
+        // maxHeight: 512,
+        toolbarColor: Colors.purple,
+        toolbarWidgetColor: Colors.white,
+        toolbarTitle: 'Crop It');
 
     setState(() {
       _imageFile = cropped ?? _imageFile;
@@ -35,27 +34,16 @@ class _ImgCapScrState extends State<ImgCapScr> {
 
   /// Select an image via gallery or camera
   Future<void> _pickImage(ImageSource source) async {
-    //File selected = await ImagePicker.getImage(source: source);
+    File selected = await ImagePicker.pickImage(source: source);
 
     setState(() {
-      // _imageFile = selected;
+      _imageFile = selected;
     });
   }
 
   /// Remove image
-  // void _clear() {
-  //   setState(() => _imageFile = null);
-  // }
-
-  upload(File file) {
-    String filePath = 'images/${DateTime.now()}.png';
-    // _extension = fileName.toString().split('.').last;
-    StorageReference storageRef =
-        FirebaseStorage.instance.ref().child(filePath);
-    final StorageUploadTask uploadTask = storageRef.putFile(file);
-    // setState(() {
-    //   _tasks.add(uploadTask);
-    // }
+  void _clear() {
+    setState(() => _imageFile = null);
   }
 
   @override

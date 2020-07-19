@@ -33,8 +33,8 @@ dependencies:
   provider: #^4.3.0
   firebase_core:
   firebase_storage:
-  image_cropper:
-  image_picker:
+  image_cropper: 1.0.2
+  image_picker: 0.6.0+17
   file_picker:
   geolocator:
   google_maps_flutter:

@@ -20,7 +20,7 @@ class MultiFilePick extends StatefulWidget {
 
 class _MultiFilePickState extends State<MultiFilePick> {
   List<String> atl = ['/'];
-  List<String> ll, al;
+  List<String> ll, al, fn = [];
 
   _MultiFilePickState({this.al, this.ll});
   String _path;
@@ -45,11 +45,15 @@ class _MultiFilePickState extends State<MultiFilePick> {
 
   uploadToFirebase() {
     if (_multiPick) {
-      _paths.forEach((fileName, filePath) => {upload(fileName, filePath)});
+      _paths.forEach((fileName, filePath) {
+        fn.add(fileName);
+        upload(fileName, filePath);
+      });
     } else {
       String fileName = _path.split('/').last;
       String filePath = _path;
       upload(fileName, filePath);
+      fn.add(fileName);
     }
   }
 
@@ -92,8 +96,13 @@ class _MultiFilePickState extends State<MultiFilePick> {
           RaisedButton(
             onPressed: () {
               openFileExplorer();
+              print(fn);
             },
             child: Text('data ${_tasks.length}'),
+          ),
+          Text(
+            fn.length == 0 ? 'not selected' : '$fn',
+            style: TextStyle(color: Colors.amber),
           ),
           RaisedButton(
             onPressed: () async {
