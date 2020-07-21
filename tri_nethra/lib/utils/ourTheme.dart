@@ -2,6 +2,6 @@ import 'package:flutter/material.dart';
 
 class OurTheme {
   ThemeData buildTheme() {
-    return ThemeData(canvasColor: Colors.transparent);
+    return ThemeData(canvasColor: Colors.white);
   }
 }

@@ -33,13 +33,13 @@ dependencies:
   provider: #^4.3.0
   firebase_core:
   firebase_storage:
-  image_cropper: 1.0.2
-  image_picker: 0.6.0+17
   file_picker:
   geolocator:
   google_maps_flutter:
   dio:
   flutter_typeahead:
+  carousel_slider: ^1.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -57,9 +57,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/t.png
-  #   - assets/s.png
+  assets:
+    - assets/1.jpg
+    # - assets/s.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
