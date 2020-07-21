@@ -7,11 +7,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/ChatInterface/FinalRegistered.dart';
-import 'package:tri_nethra/screens/root.dart';
+import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/database.dart';
 
 class MultiFilePick extends StatefulWidget {
-  List<String> ll, al;
+  final List<String> ll, al;
   MultiFilePick({this.al, this.ll});
 
   @override
@@ -46,7 +46,9 @@ class _MultiFilePickState extends State<MultiFilePick> {
   uploadToFirebase() {
     if (_multiPick) {
       _paths.forEach((fileName, filePath) {
-        fn.add(fileName);
+        setState(() {
+          fn.add(fileName);
+        });
         upload(fileName, filePath);
       });
     } else {
@@ -85,53 +87,283 @@ class _MultiFilePickState extends State<MultiFilePick> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // has to return only the widget next while applying
-        body: Center(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 50,
+    return WillPopScope(
+      onWillPop: () {
+        al.removeLast();
+        print(al);
+        Navigator.of(context).pop();
+      },
+      child: Scaffold(
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomRight,
+                  colors: [
+                Colors.orange[900],
+                Colors.orange[300],
+                Colors.orange[200]
+              ])),
+          child: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: AppBar().preferredSize.height / 1.5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.keyboard_arrow_left,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        al.removeLast();
+                        print(al);
+                        print("Popping from FilePick page");
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 30, right: 30),
+                child: OrPop(
+                  popcolor: Colors.white,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                        children: [
+                          Text(
+                            'Attach files'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orange,
+                                fontFamily: 'Quicksand',
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Text(
+              //   fn.length == 0 ? 'not selected' : '$fn',
+              //   style: TextStyle(color: Colors.amber),
+              // ),
+              Container(
+                padding: EdgeInsets.all(15),
+                child: OrPop(
+                  popcolor: Colors.white,
+                  child: Container(
+                    child: Center(
+                      child: fn.length > 0
+                          ? Text(
+                              'You have attached\n ${fn.length} files\n You can still add files or proceed further.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            )
+                          : Text(
+                              'You Have not select any Attachments, kindly attach any files if needed \n \n You can select multiple files across the device',
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 15),
+                            ),
+                    ),
+                    height: MediaQuery.of(context).size.height / 3,
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  try {
+                    CurrentUser _currentUser =
+                        Provider.of<CurrentUser>(context, listen: false);
+                    print(_currentUser.getCurrentUser.uid);
+                    print(_currentUser.getCurrentUser.refId);
+                    String _returnString = await OurDatabase().createIssue(
+                      _currentUser.getCurrentUser.uid,
+                      al,
+                      atl,
+                      ll,
+                    );
+                    if (_returnString == "success") {
+                      print('suc');
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => (IssueFinal())));
+                    } else {
+                      print(_returnString);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                  print(al);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text('Next',
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        size: 30,
+                        color: Colors.black,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
-          RaisedButton(
-            onPressed: () {
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          hoverColor: Colors.orange,
+          onPressed: () {
+            setState(() {
               openFileExplorer();
               print(fn);
-            },
-            child: Text('data ${_tasks.length}'),
-          ),
-          Text(
-            fn.length == 0 ? 'not selected' : '$fn',
-            style: TextStyle(color: Colors.amber),
-          ),
-          RaisedButton(
-            onPressed: () async {
-              try {
-                CurrentUser _currentUser =
-                    Provider.of<CurrentUser>(context, listen: false);
-                print(_currentUser.getCurrentUser.uid);
-                print(_currentUser.getCurrentUser.refId);
-                String _returnString = await OurDatabase().createIssue(
-                  _currentUser.getCurrentUser.uid,
-                  al,
-                  atl,
-                  ll,
-                );
-                if (_returnString == "success") {
-                  print('suc');
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => (IssueFinal())));
-                } else {
-                  print(_returnString);
-                }
-              } catch (e) {
-                print(e);
-              }
-            },
-            child: Text('next'),
-          ),
-        ],
+            });
+          },
+          child: Icon(Icons.folder, color: Colors.orange),
+        ),
       ),
-    ));
+    );
   }
 }
+/*            Container(
+                padding: EdgeInsets.only(left: 30, right: 30),
+                child: OrPop(
+                  popcolor: Colors.white,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                        children: [
+                          Text(
+                            'DEATH'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.orange,
+                                fontFamily: 'Quicksand',
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 30, right: 20),
+                child: Wrap(
+                  children: [
+                    Text(
+                      'Select one among the following cases in regard:',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Quicksand',
+                          fontSize: 30),
+                    ),
+                  ],
+                ),
+              ),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      sel = 'Homicide';
+                      i1 = Icons.check_circle;
+                      i2 = Icons.panorama_fish_eye;
+                      i3 = Icons.panorama_fish_eye;
+                    });
+                  },
+                  child: but('Homicide', i1)),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      sel = 'Suicide';
+                      i1 = Icons.panorama_fish_eye;
+                      i2 = Icons.check_circle;
+                      i3 = Icons.panorama_fish_eye;
+                    });
+                  },
+                  child: but('Suicide', i2)),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      sel = 'Not Sure';
+                      i1 = Icons.panorama_fish_eye;
+                      i2 = Icons.panorama_fish_eye;
+                      i3 = Icons.check_circle;
+                    });
+                  },
+                  child: but('Not Sure', i3)),
+              SizedBox(
+                height: AppBar().preferredSize.height,
+              ),
+              InkWell(
+                  onTap: () {
+                    al.add(sel);
+                    print(al);
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return LocScreen(al: al);
+                    }));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text('Next',
+                            style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          size: 30,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                  ))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+*/

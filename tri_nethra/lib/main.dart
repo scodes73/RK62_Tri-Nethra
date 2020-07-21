@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
-import 'package:tri_nethra/screens/ChatInterface/FinalRegistered.dart';
+import 'package:tri_nethra/screens/ChatInterface/AutoDetails.dart';
 import 'package:tri_nethra/screens/root.dart';
-import 'package:tri_nethra/services/multifilepick.dart';
 import 'package:tri_nethra/utils/ourTheme.dart';
 
 void main() {

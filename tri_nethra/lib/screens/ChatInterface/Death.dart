@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 

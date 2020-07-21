@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/services/location/locationScreen.dart';
 
 class WCC extends StatefulWidget {
   final List<String> al;
@@ -152,7 +151,7 @@ class _WCCState extends State<WCC> {
                     print(al);
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return LB(al: al);
+                      return LocScreen(al: al);
                     }));
                   },
                   child: Padding(

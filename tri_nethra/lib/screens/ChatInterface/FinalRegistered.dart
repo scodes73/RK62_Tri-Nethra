@@ -1,70 +1,204 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/models/user.dart';
+import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/services/database.dart';
 
 class IssueFinal extends StatefulWidget {
-  // final String refno='';
-  // IssueFinal({this.refno});
   @override
   _IssueFinalState createState() => _IssueFinalState();
 }
 
 class _IssueFinalState extends State<IssueFinal> {
   OurUser a = OurUser();
-  Widget te(context) {
+  String ref;
+  void refid() async {
     try {
-      CurrentUser _currentUser =
-          Provider.of<CurrentUser>(context, listen: false);
-      print(_currentUser.getCurrentUser.refId);
-      return Text(
-        _currentUser.getCurrentUser.refId.last,
-        style: TextStyle(color: Colors.white),
-      );
+      FirebaseUser _firebaseUser = await FirebaseAuth.instance.currentUser();
+      if (_firebaseUser != null) {
+        a = await OurDatabase().getUserInfo(_firebaseUser.uid);
+        print(a.refId.last);
+        setState(() {
+          ref = a.refId.last;
+        });
+      }
     } catch (e) {
       print(e);
     }
   }
 
+  @mustCallSuper
+  void initState() {
+    refid();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 50,
-            ),
-            RaisedButton(
-              child: Text('data'),
-              onPressed: () async {
-                try {
-                  FirebaseUser _firebaseUser =
-                      await FirebaseAuth.instance.currentUser();
-                  if (_firebaseUser != null) {
-                    a = await OurDatabase().getUserInfo(_firebaseUser.uid);
-                    print(a.refId.last);
-                  }
-                } catch (e) {
-                  print(e);
-                }
-                // CurrentUser _currentUser =
-                //     Provider.of<CurrentUser>(context, listen: false);
-                // print(_currentUser.getCurrentUser.refId);
-
-                // Navigator.of(context).pushReplacement(
-                //   MaterialPageRoute(
-                //     builder: (context) => OurRoot(),
-                //   ),
-                // );
-              },
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () {
+        // al.removeLast();
+        // print(al);
+        // Navigator.of(context).pop();
+      },
+      child: Scaffold(
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomRight,
+                  colors: [
+                Colors.orange[900],
+                Colors.orange[300],
+                Colors.orange[200]
+              ])),
+          child: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: AppBar().preferredSize.height / 1.5,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 30, right: 30),
+                child: OrPop(
+                  popcolor: Colors.white,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                        children: [
+                          Text(
+                            'Registration Successful'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orange,
+                                fontFamily: 'Quicksand',
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.all(15),
+                child: OrPop(
+                  popcolor: Colors.white,
+                  child: Container(
+                    child: Center(
+                        child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 12,
+                        ),
+                        Text(
+                          'Your registration is Successful\n\n Please use this Reference no. for any further queries\n',
+                          style: TextStyle(),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          ref != null ? ref : 'Loading',
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 27,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Text(
+                          ' This data is also present in your \n Previous Searches page ',
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    )),
+                    height: MediaQuery.of(context).size.height / 3,
+                  ),
+                ),
+              ),
+              SizedBox(height: 80),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => OurRoot()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text('Home',
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        size: 30,
+                        color: Colors.black,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
+//     return Material(
+//       child: Container(
+//         child: Column(
+//           children: <Widget>[
+//             SizedBox(
+//               height: 50,
+//             ),
+//             RaisedButton(
+//               child: Text('data'),
+//               onPressed: () async {
+//                 try {
+//                   FirebaseUser _firebaseUser =
+//                       await FirebaseAuth.instance.currentUser();
+//                   if (_firebaseUser != null) {
+//                     a = await OurDatabase().getUserInfo(_firebaseUser.uid);
+//                     print(a.refId.last);
+//                   }
+//                 } catch (e) {
+//                   print(e);
+//                 }
+//                 // CurrentUser _currentUser =
+//                 //     Provider.of<CurrentUser>(context, listen: false);
+//                 // print(_currentUser.getCurrentUser.refId);
+
+//                 // Navigator.of(context).pushReplacement(
+//                 //   MaterialPageRoute(
+//                 //     builder: (context) => OurRoot(),
+//                 //   ),
+//                 // );
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

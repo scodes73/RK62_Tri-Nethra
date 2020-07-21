@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:tri_nethra/screens/ChatInterface/DefaultBlock.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/services/location/locationScreen.dart';
 
 class CC extends StatefulWidget {
   final List<String> al;
@@ -183,7 +182,7 @@ class _CCState extends State<CC> {
                     print(al);
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return DB(
+                      return LocScreen(
                         al: al,
                       );
                     }));

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ChatScreen2.dart';
 import 'package:tri_nethra/screens/ChatInterface/CyberCrime.dart';
 import 'package:tri_nethra/screens/ChatInterface/Death.dart';
-import 'package:tri_nethra/screens/ChatInterface/DefaultBlock.dart';
 import 'package:tri_nethra/screens/ChatInterface/ReportAccident.dart';
 import 'package:tri_nethra/screens/ChatInterface/StreetCrime.dart';
 import 'package:tri_nethra/screens/ChatInterface/WhiteCollar.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/services/location/locationScreen.dart';
 
 class ToC extends StatefulWidget {
   final List<String> al;
@@ -232,7 +232,7 @@ class _ToCState extends State<ToC> {
                           al: al,
                         );
                       } else if (sel == 'DC') {
-                        return DB(
+                        return LocScreen(
                           al: al,
                         );
                       }

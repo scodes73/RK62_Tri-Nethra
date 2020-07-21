@@ -178,7 +178,7 @@ class _LocScreenState extends State<LocScreen> {
                 padding: EdgeInsets.all(10),
                 //Has to Add additional info on ease of use and well description
                 child: Text(
-                  "${c} Information You provide will help, The text field automantically increases in size as you type on.",
+                  "$c Information You provide will help, The text field automantically increases in size as you type on.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),

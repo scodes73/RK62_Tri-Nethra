@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/AutoDetails.dart';
-import 'package:tri_nethra/screens/ChatInterface/LocationModule.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/services/location/locationScreen.dart';
 
 class SC extends StatefulWidget {
   final List<String> al;
@@ -188,7 +188,7 @@ class _SCState extends State<SC> {
                           al: al,
                         );
                       }
-                      return LB(
+                      return LocScreen(
                         al: al,
                       );
                     }));
