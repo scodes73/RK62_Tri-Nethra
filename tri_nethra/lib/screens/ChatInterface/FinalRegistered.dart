@@ -38,6 +38,29 @@ class _IssueFinalState extends State<IssueFinal> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                      'You Issue is Registered, would you like to go to home?'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text('Stay Here')),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .popUntil((route) => route.isFirst);
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => OurRoot()));
+                        },
+                        child: Text('Take to Home')),
+                  ],
+                ));
+
         // al.removeLast();
         // print(al);
         // Navigator.of(context).pop();

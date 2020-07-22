@@ -37,9 +37,30 @@ class _LocScreenState extends State<LocScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                      'You sure about going back,(all the Location data from this screen will be discarded)?'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text('No')),
+                    FlatButton(
+                        onPressed: () {
+                          ll = ['/'];
+                          Navigator.pop(context, true);
+                          print(al);
+                          print(ll);
+                        },
+                        child: Text('Yes')),
+                  ],
+                ));
         // al.removeLast();
         // print(al);
-        Navigator.of(context).pop();
+        // Navigator.of(context).pop();
       },
       child: Scaffold(body: Builder(
         builder: (context) {
@@ -72,10 +93,8 @@ class _LocScreenState extends State<LocScreen> {
                           color: Colors.white,
                         ),
                         onPressed: () {
+                          ll = ['/'];
                           Navigator.pop(context);
-                          // al.removeLast();
-                          // print(al);
-                          // print("Popping from Death page");
                         },
                       ),
                     ),

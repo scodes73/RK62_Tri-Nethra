@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
 import 'package:tri_nethra/screens/root.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class News {
   String url;

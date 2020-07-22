@@ -229,44 +229,44 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }));
   }
-
-  void _showModalBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 270,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                  leading: Icon(Icons.search),
-                  title: Text('Search'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    setState(() {
-                      val = 'Search';
-                    });
-                  }),
-              ListTile(
-                  leading: Icon(Icons.history),
-                  title: Text('Prev'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    setState(() {
-                      val = 'prev';
-                    });
-                  })
-            ],
-          ),
-        );
-      },
-    );
-  }
 }
+// void _showModalBottomSheet(BuildContext context) {
+//   showModalBottomSheet(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return Container(
+//         height: 270,
+//         decoration: BoxDecoration(
+//           color: Colors.white,
+//           borderRadius: BorderRadius.only(
+//             topLeft: Radius.circular(20),
+//             topRight: Radius.circular(20),
+//           ),
+//         ),
+//         child: Column(
+//           children: <Widget>[
+//             ListTile(
+//                 leading: Icon(Icons.search),
+//                 title: Text('Search'),
+//                 onTap: () {
+//                   Navigator.pop(context);
+//                   setState(() {
+//                     val = 'Search';
+//                   });
+//                 }),
+//             ListTile(
+//                 leading: Icon(Icons.history),
+//                 title: Text('Prev'),
+//                 onTap: () {
+//                   Navigator.pop(context);
+//                   setState(() {
+//                     val = 'prev';
+//                   });
+//                 })
+//           ],
+//         ),
+//       );
+//     },
+//   );
+// }
+// }

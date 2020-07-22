@@ -20,9 +20,26 @@ class _DeathState extends State<Death> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        al.removeLast();
-        print(al);
-        Navigator.of(context).pop();
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                      'You sure about going back,(all the data from this screen is discarded)?'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text('No')),
+                    FlatButton(
+                        onPressed: () {
+                          al.removeLast();
+                          Navigator.pop(context, true);
+                          print(al);
+                        },
+                        child: Text('Yes')),
+                  ],
+                ));
       },
       child: Scaffold(
         body: Builder(

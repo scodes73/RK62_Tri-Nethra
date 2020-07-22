@@ -5,6 +5,7 @@ import 'package:tri_nethra/screens/ChatInterface/ReportAccident.dart';
 import 'package:tri_nethra/screens/ChatInterface/StreetCrime.dart';
 import 'package:tri_nethra/screens/ChatInterface/WhiteCollar.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
 class ToC extends StatefulWidget {
@@ -28,9 +29,25 @@ class _ToCState extends State<ToC> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        al.removeLast();
-        print(al);
-        Navigator.of(context).pop();
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                      'Would you like to discard this issue?(Your Data will be held CONFIDENTIAL)'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text('No')),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                          print(al);
+                        },
+                        child: Text('Yes')),
+                  ],
+                ));
       },
       child: Scaffold(
         body: Builder(
@@ -241,6 +258,7 @@ class _ToCState extends State<ToC> {
                                 al: al,
                               );
                             }
+                            return OurRoot();
                           }));
                         }
                       },

@@ -75,7 +75,7 @@ class _MultiFilePickState extends State<MultiFilePick> {
     StorageTaskSnapshot _ts = await uploadTask.onComplete;
     // print(storageRef.getDownloadURL().toString()));
     // setState(() async {
-
+    print(_ts);
     String url = await storageRef.getDownloadURL();
     print("url is $url");
     // final String url = await uploadTask.lastSnapshot.ref.getDownloadURL();
@@ -89,9 +89,26 @@ class _MultiFilePickState extends State<MultiFilePick> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        al.removeLast();
-        print(al);
-        Navigator.of(context).pop();
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                      'You sure about going back,(all the Attachments from this screen will be discarded)?'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text('No')),
+                    FlatButton(
+                        onPressed: () {
+                          al.removeLast();
+                          Navigator.pop(context, true);
+                          print(al);
+                        },
+                        child: Text('Yes')),
+                  ],
+                ));
       },
       child: Scaffold(
         body: Container(

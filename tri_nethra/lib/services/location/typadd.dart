@@ -28,6 +28,24 @@ class _LDescribeState extends State<LDescribe> {
       onWillPop: () {
         // al.removeLast();
         // Navigator.of(context).pop();
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                      'You sure about going back,(all the data from this screen will be discarded)?'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text('No')),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                        child: Text('Yes')),
+                  ],
+                ));
       },
       child: Scaffold(
         body: Container(

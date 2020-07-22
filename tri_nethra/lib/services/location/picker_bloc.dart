@@ -34,6 +34,7 @@ class PickerBloc with ChangeNotifier {
     currentLocation = location;
   }
 
+  // ignore: must_call_super
   void dispose() {
     print('close');
     _instance = null;
