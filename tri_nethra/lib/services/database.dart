@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tri_nethra/models/Issue.dart';
 import 'package:tri_nethra/models/user.dart';
 
 class OurDatabase {
@@ -74,6 +75,21 @@ class OurDatabase {
       print(e);
     }
 
+    return retVal;
+  }
+
+  Future<OurIssue> getIssueInfo(String rid) async {
+    OurIssue retVal = OurIssue();
+    try {
+      DocumentSnapshot _docSnapshot =
+          await _firestore.collection("users").document(rid).get();
+      retVal.refNo = rid;
+      retVal.status = _docSnapshot["status"];
+      retVal.issueCreated = _docSnapshot["issueCreate"];
+      retVal.loc = _docSnapshot["location coordinates"];
+    } catch (e) {
+      print(e);
+    }
     return retVal;
   }
 }

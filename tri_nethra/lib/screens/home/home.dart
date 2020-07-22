@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ToC.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/profile_page/profileui.dart';
+import 'package:tri_nethra/services/modalTrigger.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,8 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final _data = MediaQuery.of(context);
 
-    return Scaffold(
-      body: Container(
+    return Scaffold(body: Builder(builder: (context1) {
+      return Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
@@ -134,42 +135,43 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: _data.size.height / 50,
                     ),
                     Theme(
-                      data: Theme.of(context)
+                      data: Theme.of(context1)
                           .copyWith(canvasColor: Colors.transparent),
-                      child: Column(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              _showModalBottomSheet(context);
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: OrPop(
-                                  popcolor: Colors.white,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: EdgeInsets.all(30),
-                                        child: Text(
-                                          'Search a Reference number',
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Icon(Icons.search),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: ModalTrigger(),
+                      // child: Column(
+                      //   children: <Widget>[
+                      //     GestureDetector(
+                      //       onTap: () {
+                      //         _showModalBottomSheet(context);
+                      //       },
+                      //       child: Container(
+                      //         width: double.infinity,
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(12.0),
+                      //           child: OrPop(
+                      //             popcolor: Colors.white,
+                      //             child: Row(
+                      //               mainAxisAlignment:
+                      //                   MainAxisAlignment.spaceEvenly,
+                      //               children: <Widget>[
+                      //                 Padding(
+                      //                   padding: EdgeInsets.all(30),
+                      //                   child: Text(
+                      //                     'Search a Reference number',
+                      //                     textAlign: TextAlign.start,
+                      //                     style: TextStyle(
+                      //                         fontWeight: FontWeight.bold),
+                      //                   ),
+                      //                 ),
+                      //                 Icon(Icons.search),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ),
 
                     // Text(val),
@@ -224,8 +226,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-      ),
-    );
+      );
+    }));
   }
 
   void _showModalBottomSheet(BuildContext context) {
@@ -244,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: <Widget>[
               ListTile(
-                  leading: Icon(Icons.ac_unit),
+                  leading: Icon(Icons.search),
                   title: Text('Search'),
                   onTap: () {
                     Navigator.pop(context);
@@ -253,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                   }),
               ListTile(
-                  leading: Icon(Icons.ac_unit),
+                  leading: Icon(Icons.history),
                   title: Text('Prev'),
                   onTap: () {
                     Navigator.pop(context);
