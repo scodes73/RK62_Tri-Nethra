@@ -7,8 +7,6 @@ import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/screens/signup/signup.dart';
 
-//import 'localwidgets/loginForm.dart';
-
 class OurLogin extends StatefulWidget {
   @override
   _OurLoginState createState() => _OurLoginState();
@@ -67,7 +65,10 @@ class _OurLoginState extends State<OurLogin> {
                     children: <Widget>[
                       Text(
                         "Login",
-                        style: TextStyle(color: Colors.white, fontSize: 40),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
@@ -76,7 +77,10 @@ class _OurLoginState extends State<OurLogin> {
                       //1.3,
                       Text(
                         "Welcome Back",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ), //),
                     ],
                   ),
