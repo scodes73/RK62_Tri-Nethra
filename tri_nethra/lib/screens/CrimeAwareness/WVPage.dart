@@ -20,7 +20,7 @@ class WVP extends StatelessWidget {
       ),
       body: WebView(
         initialUrl: url,
-        javascriptMode: JavascriptMode.disabled,
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

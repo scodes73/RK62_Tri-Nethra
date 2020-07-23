@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
+import 'package:tri_nethra/models/user.dart';
+import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
+import 'package:tri_nethra/screens/SearchRef/prevRef.dart';
 import 'package:tri_nethra/screens/root.dart';
 
 class OurProfileScreen extends StatefulWidget {
@@ -9,6 +12,28 @@ class OurProfileScreen extends StatefulWidget {
 }
 
 class _OurProfileScreenState extends State<OurProfileScreen> {
+  String n, t, q, m;
+
+  // @overrider
+  getname() async {
+    try {
+      CurrentUser _currentUser =
+          Provider.of<CurrentUser>(context, listen: false);
+      t = (_currentUser.getCurrentUser.legalname);
+      q = _currentUser.getCurrentUser.refId.length.toString();
+    } catch (e) {}
+  }
+
+  void initState() {
+    getname();
+    setState(() {
+      n = t;
+      m = q;
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -78,7 +103,7 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
               child: Wrap(
                 children: [
                   Text(
-                    'My Profile Name',
+                    n,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                         color: Colors.white,
@@ -91,68 +116,74 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
             ListView(
               shrinkWrap: true,
               children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.fromLTRB(25.0, 50.0, 25, 0.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.0),
-                          boxShadow: [
-                            BoxShadow(blurRadius: 2.0, color: Colors.grey)
-                          ]),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Stack(
-                            children: <Widget>[
-                              Container(
-                                padding:
-                                    EdgeInsets.fromLTRB(25.0, 25.0, 5.0, 5.0),
-                                child: Text(
-                                  'YOU HAVE',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: 'Quicksand',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14.0),
-                                ),
-                              ),
-                              Container(
-                                padding:
-                                    EdgeInsets.fromLTRB(25.0, 40.0, 5.0, 25.0),
-                                child: Text(
-                                  '793',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'Quicksand',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 40.0),
-                                ),
-                              )
-                            ],
-                          ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(5.0, 25.0, 5.0, 5.0),
-                            child: Row(
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => PrevRef()));
+                  },
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.fromLTRB(25.0, 50.0, 25, 0.0),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(blurRadius: 2.0, color: Colors.grey)
+                            ]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Stack(
                               children: <Widget>[
-                                Text(
-                                  'Registered Issues',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: 'Quicksand',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14.0),
+                                Container(
+                                  padding:
+                                      EdgeInsets.fromLTRB(25.0, 25.0, 5.0, 5.0),
+                                  child: Text(
+                                    'YOU HAVE',
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontFamily: 'Quicksand',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14.0),
+                                  ),
                                 ),
-                                Icon(Icons.keyboard_arrow_right)
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(
+                                      25.0, 40.0, 5.0, 25.0),
+                                  child: Text(
+                                    q,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'Quicksand',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 40.0),
+                                  ),
+                                )
                               ],
                             ),
-                          ),
-                        ],
+                            Container(
+                              padding: EdgeInsets.fromLTRB(5.0, 25.0, 5.0, 5.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Registered Issues',
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontFamily: 'Quicksand',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14.0),
+                                  ),
+                                  Icon(Icons.keyboard_arrow_right)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 60.0),
-                  ],
+                      SizedBox(width: 60.0),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 40.0),
                 SizedBox(height: 10.0),
@@ -163,14 +194,46 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
                   mainAxisSpacing: 4.0,
                   shrinkWrap: true,
                   children: <Widget>[
-                    _buildCard('Website', 'Takes you to the Official Website',
-                        1, Icons.dashboard),
-                    _buildCard('Password', 'Change the Account\'s Password', 2,
-                        Icons.vpn_key),
-                    _buildCard('Q&A', 'Most Frequently asked Questions', 3,
-                        Icons.account_balance),
-                    _buildCard('Language', 'Select Language for App', 4,
-                        Icons.translate),
+                    _buildCard(
+                      'Website',
+                      'Takes you to the Official Website',
+                      1,
+                      Icons.dashboard,
+                      WVP(
+                        url:
+                            'https://www.tspolice.gov.in/jsp/homePage?method=getHomePageElements',
+                      ),
+                    ),
+                    _buildCard(
+                      'Password',
+                      'Change the Account\'s Password',
+                      2,
+                      Icons.vpn_key,
+                      WVP(
+                        url:
+                            'https://www.transport.telangana.gov.in/html/faqs.php',
+                      ),
+                    ),
+                    _buildCard(
+                      'Q&A',
+                      'Most Frequently asked Questions',
+                      3,
+                      Icons.account_balance,
+                      WVP(
+                        url:
+                            'https://www.transport.telangana.gov.in/html/faqs.php',
+                      ),
+                    ),
+                    _buildCard(
+                      'Language',
+                      'Select Language for App',
+                      4,
+                      Icons.translate,
+                      WVP(
+                        url:
+                            'https://www.transport.telangana.gov.in/html/faqs.php',
+                      ),
+                    ),
                     // _buildCard('Tom', 'Away', 5),
                     // _buildCard('Tom', 'Available', 6),
                   ],
@@ -183,53 +246,61 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
     );
   }
 
-  Widget _buildCard(String name, String title, int cardIndex, IconData i) {
-    return Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        elevation: 0.0,
-        child: Column(
-          children: [
-            SizedBox(height: 20.0),
-            Stack(alignment: Alignment.center, children: <Widget>[
-              Container(
-                height: 60.0,
-                width: 60.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  color: Colors.orange,
+  Widget _buildCard(
+      String name, String title, int cardIndex, IconData i, var u) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => u),
+        );
+      },
+      child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          elevation: 0.0,
+          child: Column(
+            children: [
+              SizedBox(height: 20.0),
+              Stack(alignment: Alignment.center, children: <Widget>[
+                Container(
+                  height: 60.0,
+                  width: 60.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: Colors.orange,
+                  ),
                 ),
-              ),
-              Icon(i)
-            ]),
-            SizedBox(height: 8.0),
-            Text(
-              name,
-              style: TextStyle(
-                fontFamily: 'Quicksand',
-                fontWeight: FontWeight.bold,
-                fontSize: 15.0,
-              ),
-            ),
-            SizedBox(height: 5.0),
-            Container(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: Wrap(children: [
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'Quicksand',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.0,
-                      color: Colors.grey),
-                ),
+                Icon(i)
               ]),
-            ),
-          ],
-        ),
-        margin: cardIndex.isEven
-            ? EdgeInsets.fromLTRB(10.0, 0.0, 25.0, 10.0)
-            : EdgeInsets.fromLTRB(25.0, 0.0, 5.0, 10.0));
+              SizedBox(height: 8.0),
+              Text(
+                name,
+                style: TextStyle(
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15.0,
+                ),
+              ),
+              SizedBox(height: 5.0),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Wrap(children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.0,
+                        color: Colors.grey),
+                  ),
+                ]),
+              ),
+            ],
+          ),
+          margin: cardIndex.isEven
+              ? EdgeInsets.fromLTRB(10.0, 0.0, 25.0, 10.0)
+              : EdgeInsets.fromLTRB(25.0, 0.0, 5.0, 10.0)),
+    );
   }
 }
