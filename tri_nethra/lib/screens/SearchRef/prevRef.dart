@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/models/user.dart';
-import 'package:tri_nethra/screens/TestScreens/testscreen.dart';
+import 'package:tri_nethra/screens/SearchRef/refsearchscreen.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/database.dart';
 
@@ -54,7 +54,7 @@ class _PrevRefState extends State<PrevRef> {
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: AppBar().preferredSize.height,
+                  height: AppBar().preferredSize.height / 1.5,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,6 +103,11 @@ class _PrevRefState extends State<PrevRef> {
                         child: OrPop(
                           popcolor: Colors.white,
                           child: ListTile(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      RefSearch(a: ref[index])));
+                            },
                             title: Text(
                               '${ref[index]}',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -189,8 +194,8 @@ class _PrevRefState extends State<PrevRef> {
                                     print(refController.text);
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                Te(a: refController.text)));
+                                            builder: (context) => RefSearch(
+                                                a: refController.text)));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
@@ -237,7 +242,7 @@ class _PrevRefState extends State<PrevRef> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.all(30),
+                              padding: EdgeInsets.all(20),
                               child: Text(
                                 'Search a Custom Reference number',
                                 textAlign: TextAlign.start,

@@ -216,6 +216,8 @@ class _MultiFilePickState extends State<MultiFilePick> {
                         Provider.of<CurrentUser>(context, listen: false);
                     print(_currentUser.getCurrentUser.uid);
                     print(_currentUser.getCurrentUser.refId);
+                    print('this is');
+                    print(atl);
                     String _returnString = await OurDatabase().createIssue(
                       _currentUser.getCurrentUser.uid,
                       al,

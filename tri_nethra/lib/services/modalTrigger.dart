@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/SearchRef/prevRef.dart';
-import 'package:tri_nethra/screens/TestScreens/testscreen.dart';
+import 'package:tri_nethra/screens/SearchRef/refsearchscreen.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class ModalTrigger extends StatefulWidget {
@@ -63,7 +63,8 @@ class _ModalTriggerState extends State<ModalTrigger> {
                   onTap: () {
                     print(refController.text);
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Te(a: refController.text)));
+                        builder: (context) =>
+                            RefSearch(a: refController.text)));
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20.0, top: 20),

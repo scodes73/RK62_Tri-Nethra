@@ -81,15 +81,21 @@ class OurDatabase {
   Future<OurIssue> getIssueInfo(String rid) async {
     OurIssue retVal = OurIssue();
     try {
+      print(rid);
       DocumentSnapshot _docSnapshot =
-          await _firestore.collection("users").document(rid).get();
+          await _firestore.collection("issues").document(rid).get();
+      if (_docSnapshot == null) {
+        print('nulldox');
+      }
       retVal.refNo = rid;
       retVal.status = _docSnapshot["status"];
       retVal.issueCreated = _docSnapshot["issueCreate"];
-      retVal.loc = _docSnapshot["location coordinates"];
+      retVal.doneBy = _docSnapshot["done by"];
     } catch (e) {
+      print('d');
       print(e);
     }
+
     return retVal;
   }
 }
