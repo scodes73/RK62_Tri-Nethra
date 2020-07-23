@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:tri_nethra/models/Issue.dart';
 import 'package:tri_nethra/models/user.dart';
 
@@ -93,11 +94,31 @@ class OurDatabase {
       retVal.issueCreated = _docSnapshot["issueCreate"];
       retVal.doneBy = _docSnapshot["done by"];
       retVal.remarks = _docSnapshot["remarks"];
+    } on PlatformException catch (e) {
+      print(e);
+      retVal.refNo = 'bad';
     } catch (e) {
       print('d');
+      retVal.refNo = 'bad';
       print(e);
     }
 
     return retVal;
   }
+
+  // Future<String> checkIssue(String rid) async {
+  //   String retVal = "error";
+  //   try {
+  //     print(rid);
+  //     DocumentSnapshot _docSnapshot =
+  //         await _firestore.collection("issues").document(rid).get();
+
+  //     retVal = "success";
+  //   } on PlatformException catch (e) {
+  //     retVal = "Make sure you have the right group ID!";
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   return retVal;
+  // }
 }

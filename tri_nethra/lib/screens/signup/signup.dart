@@ -15,7 +15,7 @@ class Doc {
   Doc(this.id, this.docName);
   static List<Doc> getDocs() {
     return <Doc>[
-      Doc(1, 'Aadhar/ UDAI '),
+      Doc(1, 'Aadhar/ UIDAI '),
       Doc(2, 'Voter ID '),
       Doc(3, 'Passport '),
       Doc(4, 'PAN Card '),
@@ -53,7 +53,7 @@ class _SignUpState extends State<SignUp> {
         Navigator.pop(context);
       } else {
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(_returnString),
+          content: Text(_returnString + ' fill all the fields appropriatley'),
           duration: Duration(seconds: 2),
         ));
       }
@@ -308,22 +308,107 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      if (_passwordController.text ==
-                                          _confirmPasswordController.text) {
-                                        _signUpUser(
-                                            _emailController.text,
-                                            _passwordController.text,
-                                            context,
-                                            _selectedDoc.docName,
-                                            _docNoController.text,
-                                            _mobileController.text,
-                                            _passwordController.text,
-                                            _legalNameController.text);
+                                      if (_legalNameController.text != '') {
+                                        if (_emailController.text != '') {
+                                          if (_mobileController.text.length ==
+                                              10) {
+                                            if (_passwordController.text !=
+                                                    '' &&
+                                                _passwordController
+                                                        .text.length >=
+                                                    6) {
+                                              if (_passwordController.text ==
+                                                  _confirmPasswordController
+                                                      .text) {
+                                                if ((_selectedDoc
+                                                                .docName ==
+                                                            'Passport ' &&
+                                                        _docNoController
+                                                                .text.length ==
+                                                            8) ||
+                                                    (_selectedDoc.docName ==
+                                                            'Driving License ' &&
+                                                        _docNoController
+                                                                .text.length ==
+                                                            13) ||
+                                                    (_selectedDoc
+                                                                .docName ==
+                                                            'Aadhar/ UIDAI ' &&
+                                                        _docNoController
+                                                                .text.length ==
+                                                            12) ||
+                                                    (_selectedDoc.docName ==
+                                                            'PAN Card  ' &&
+                                                        _docNoController
+                                                                .text.length ==
+                                                            10) ||
+                                                    (_selectedDoc.docName ==
+                                                            'Voter ID ' &&
+                                                        _docNoController
+                                                                .text.length ==
+                                                            10)) {
+                                                  _signUpUser(
+                                                      _emailController.text,
+                                                      _passwordController.text,
+                                                      context,
+                                                      _selectedDoc.docName,
+                                                      _docNoController.text,
+                                                      _mobileController.text,
+                                                      _passwordController.text,
+                                                      _legalNameController
+                                                          .text);
+                                                } else {
+                                                  Scaffold.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Enter correct ${_selectedDoc.docName} details"),
+                                                    duration:
+                                                        Duration(seconds: 2),
+                                                  ));
+                                                }
+                                              } else {
+                                                Scaffold.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                        "Passwords does'nt match"),
+                                                    duration:
+                                                        Duration(seconds: 2),
+                                                  ),
+                                                );
+                                              }
+                                            } else {
+                                              Scaffold.of(context).showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                      "Enter Password and password should be atleast 6 characters "),
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                ),
+                                              );
+                                            }
+                                          } else {
+                                            Scaffold.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    "Enter mobile only digits and without country code"),
+                                                duration: Duration(seconds: 2),
+                                              ),
+                                            );
+                                          }
+                                        } else {
+                                          Scaffold.of(context).showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text("Enter Email Address"),
+                                              duration: Duration(seconds: 2),
+                                            ),
+                                          );
+                                        }
                                       } else {
                                         Scaffold.of(context).showSnackBar(
                                           SnackBar(
-                                            content:
-                                                Text("Passwords does'nt match"),
+                                            content: Text("Enter Legal name"),
                                             duration: Duration(seconds: 2),
                                           ),
                                         );
