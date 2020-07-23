@@ -14,8 +14,9 @@ class LocScreen extends StatefulWidget {
 }
 
 class _LocScreenState extends State<LocScreen> {
+  bool ch;
   List<String> ll = ['/'];
-  List<String> al, check = ['no'];
+  List<String> al;
   _LocScreenState({this.al});
   int c = 0;
   void _getCurrentLocation() async {
@@ -28,7 +29,6 @@ class _LocScreenState extends State<LocScreen> {
       ll.add(position.latitude.toString());
       ll.add(position.longitude.toString());
       ll.add('/');
-      // c += 1;
       c = (ll.where((e) => e == '/')).length - 1;
     });
   }
@@ -58,9 +58,6 @@ class _LocScreenState extends State<LocScreen> {
                         child: Text('Yes')),
                   ],
                 ));
-        // al.removeLast();
-        // print(al);
-        // Navigator.of(context).pop();
       },
       child: Scaffold(body: Builder(
         builder: (context) {
@@ -179,19 +176,13 @@ class _LocScreenState extends State<LocScreen> {
                     },
                     child: but('Choose Location On Map', Icons.map)),
                 InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      ch = await Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LDescribe(
+                                ll: ll,
+                              )));
                       setState(() {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LDescribe(
-                                  ll: ll,
-                                  // check: check
-                                )));
-
-                        // if (check[0] == 'yes') {
-                        c = (ll.where((e) => e == '/')).length;
-                        // } else {
-                        //   c = (ll.where((e) => e == '/')).length - 1;
-                        // }
+                        c = (ll.where((e) => e == '/')).length - 1;
                       });
                       // c += 1;
                     },
@@ -218,7 +209,7 @@ class _LocScreenState extends State<LocScreen> {
                   padding: EdgeInsets.all(10),
                   //Has to Add additional info on ease of use and well description
                   child: Text(
-                    "You can add multiple locations, each one by one through maps or through writing in words. Please consider including all the relevant locations",
+                    "You can add multiple locations, each one by one through maps or through writing in words.\n Please consider including all the relevant locations",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),

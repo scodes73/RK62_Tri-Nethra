@@ -46,7 +46,6 @@ class _LDescribeState extends State<LDescribe> {
                     FlatButton(
                         onPressed: () {
                           Navigator.pop(context, true);
-                          // check = ['no'];
                         },
                         child: Text('Yes')),
                   ],
@@ -96,7 +95,6 @@ class _LDescribeState extends State<LDescribe> {
                                         child: Text('No')),
                                     FlatButton(
                                         onPressed: () {
-                                          ll = ['/'];
                                           Navigator.pop(context, true);
                                           // check = ['no'];
                                           print(ll);
@@ -169,7 +167,6 @@ class _LDescribeState extends State<LDescribe> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 20),
                 padding: EdgeInsets.all(10),
-                //Has to Add additional info on ease of use and well description
                 child: Text(
                   "The Information You provide will help, The text field automantically increases in size as you type on.",
                   textAlign: TextAlign.center,
@@ -187,34 +184,35 @@ class _LDescribeState extends State<LDescribe> {
                         if (_desController.text != '') {
                           ll.add(_desController.text);
                           ll.add('/');
-                          // check = ['yes'];
                           Navigator.of(context).pop();
                         } else {
                           showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: Text(
-                                        'You sure about going back,(You have\'nt entered any data)?'),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                          onPressed: () {
-                                            Navigator.pop(context, false);
-                                          },
-                                          child: Text('No')),
-                                      FlatButton(
-                                          onPressed: () {
-                                            ll = ['/'];
-                                            // check = ['no'];
-                                            print(ll);
-                                            Navigator.pop(context, true);
-                                            Navigator.pop(context, true);
-                                          },
-                                          child: Text('Yes')),
-                                    ],
-                                  ));
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                  'You sure about going back,(You have\'nt entered any data)?'),
+                              actions: <Widget>[
+                                FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, false);
+                                    },
+                                    child: Text('No')),
+                                FlatButton(
+                                    onPressed: () {
+                                      // ll = ['/'];
+                                      // check = ['no'];
+                                      print(ll);
+                                      Navigator.pop(context, true);
+                                      Navigator.pop(context, true);
+                                    },
+                                    child: Text('Yes')),
+                              ],
+                            ),
+                          );
                         }
                       },
                     );
+                    return true;
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 30.0),

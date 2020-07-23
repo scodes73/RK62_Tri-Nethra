@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ToC.dart';
+import 'package:tri_nethra/screens/Helpline.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/profile_page/profileui.dart';
 import 'package:tri_nethra/services/modalTrigger.dart';
@@ -12,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<String> al = ['ToC'];
   String val = 'Not yet Selected';
+
   @override
   Widget build(BuildContext context) {
     final _data = MediaQuery.of(context);
@@ -101,10 +103,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ), //crime aware
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
                             builder: (context) => ToC(
-                                  al: al,
-                                )));
+                              al: al,
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
                         width: double.infinity,
@@ -138,87 +143,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       data: Theme.of(context1)
                           .copyWith(canvasColor: Colors.transparent),
                       child: ModalTrigger(),
-                      // child: Column(
-                      //   children: <Widget>[
-                      //     GestureDetector(
-                      //       onTap: () {
-                      //         _showModalBottomSheet(context);
-                      //       },
-                      //       child: Container(
-                      //         width: double.infinity,
-                      //         child: Padding(
-                      //           padding: const EdgeInsets.all(12.0),
-                      //           child: OrPop(
-                      //             popcolor: Colors.white,
-                      //             child: Row(
-                      //               mainAxisAlignment:
-                      //                   MainAxisAlignment.spaceEvenly,
-                      //               children: <Widget>[
-                      //                 Padding(
-                      //                   padding: EdgeInsets.all(30),
-                      //                   child: Text(
-                      //                     'Search a Reference number',
-                      //                     textAlign: TextAlign.start,
-                      //                     style: TextStyle(
-                      //                         fontWeight: FontWeight.bold),
-                      //                   ),
-                      //                 ),
-                      //                 Icon(Icons.search),
-                      //               ],
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                     ),
-
-                    // Text(val),
-                    // Material(
-                    //   child: Container(
-                    //       child: Center(
-                    //           child: InkWell(
-                    //     child: Text(
-                    //       'data',
-                    //       style: TextStyle(color: Colors.white),
-                    //     ),
-                    //     onTap: () async {
-                    //       try {
-                    //         CurrentUser _currentUser = Provider.of<CurrentUser>(
-                    //             context,
-                    //             listen: false);
-                    //         // print(_currentUser.getCurrentUser.uid);
-                    //         String _returnString = await OurDatabase()
-                    //             .createIssue(
-                    //                 _currentUser.getCurrentUser.uid,
-                    //                 ['al1', 'al2', 'al3'],
-                    //                 ['fl1', 'fl2', 'fl3'],
-                    //                 ['ll1', 'll2']);
-                    //         if (_returnString == "success") {
-                    //           Navigator.of(context).push(MaterialPageRoute(
-                    //               builder: (context) => SecondPage()));
-                    //         } else {
-                    //           print(_returnString);
-                    //         }
-                    //       } catch (e) {
-                    //         print(e);
-                    //       }
-                    //     },
-                    //   ))),
-                    // ),
                     SizedBox(
                       height: _data.size.height / 4,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Helpline Number ',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Icon(Icons.call)
-                      ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => HelpLine()));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Helpline Number ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Icon(Icons.call)
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -230,43 +173,3 @@ class _HomeScreenState extends State<HomeScreen> {
     }));
   }
 }
-// void _showModalBottomSheet(BuildContext context) {
-//   showModalBottomSheet(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return Container(
-//         height: 270,
-//         decoration: BoxDecoration(
-//           color: Colors.white,
-//           borderRadius: BorderRadius.only(
-//             topLeft: Radius.circular(20),
-//             topRight: Radius.circular(20),
-//           ),
-//         ),
-//         child: Column(
-//           children: <Widget>[
-//             ListTile(
-//                 leading: Icon(Icons.search),
-//                 title: Text('Search'),
-//                 onTap: () {
-//                   Navigator.pop(context);
-//                   setState(() {
-//                     val = 'Search';
-//                   });
-//                 }),
-//             ListTile(
-//                 leading: Icon(Icons.history),
-//                 title: Text('Prev'),
-//                 onTap: () {
-//                   Navigator.pop(context);
-//                   setState(() {
-//                     val = 'prev';
-//                   });
-//                 })
-//           ],
-//         ),
-//       );
-//     },
-//   );
-// }
-// }
