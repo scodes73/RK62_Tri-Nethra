@@ -4,13 +4,16 @@ import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 class LDescribe extends StatefulWidget {
   // final List<String> al;
   final List<String> ll;
-  LDescribe(
-      {
-      // this.al,
-      this.ll});
+  // final List<String> check;
+  LDescribe({
+    // this.al,
+    this.ll,
+    // this.check
+  });
   @override
   _LDescribeState createState() => _LDescribeState(
       //al: al,
+      // check: check,
       ll: ll);
 }
 
@@ -18,9 +21,10 @@ class _LDescribeState extends State<LDescribe> {
   TextEditingController _desController = TextEditingController();
   // List<String> al;
   List<String> ll;
+  // List<String> check;
   _LDescribeState(
       {
-      //this.al,
+      // this.check,
       this.ll});
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,7 @@ class _LDescribeState extends State<LDescribe> {
                     FlatButton(
                         onPressed: () {
                           Navigator.pop(context, true);
+                          // check = ['no'];
                         },
                         child: Text('Yes')),
                   ],
@@ -77,10 +82,30 @@ class _LDescribeState extends State<LDescribe> {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        print("Popping from typeadd page");
+                        return showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text(
+                                      'You sure about going back,(all the Location data from this screen will be discarded)?'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, false);
+                                        },
+                                        child: Text('No')),
+                                    FlatButton(
+                                        onPressed: () {
+                                          ll = ['/'];
+                                          Navigator.pop(context, true);
+                                          // check = ['no'];
+                                          print(ll);
+                                        },
+                                        child: Text('Yes')),
+                                  ],
+                                ));
                         // al.removeLast();
                         // print(al);
-                        print("Popping from DefB page");
                       },
                     ),
                   ),
@@ -157,23 +182,39 @@ class _LDescribeState extends State<LDescribe> {
               ),
               InkWell(
                   onTap: () {
-                    setState(() {
-                      ll.add(_desController.text);
-                      ll.add('/');
-                      Navigator.of(context).pop();
-                    });
-                    // al.add(sel);
-                    // print(al);
-                    // Navigator.of(context)
-                    //     .push(MaterialPageRoute(builder: (context) {
-                    //   if (sel == 'Auto Theft') {
-                    //     return Auto(
-                    //       al: al,
-                    //     );
-                    //   }
-                    //   return LB(
-                    //     al: al,
-                    // );
+                    setState(
+                      () {
+                        if (_desController.text != '') {
+                          ll.add(_desController.text);
+                          ll.add('/');
+                          // check = ['yes'];
+                          Navigator.of(context).pop();
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(
+                                        'You sure about going back,(You have\'nt entered any data)?'),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, false);
+                                          },
+                                          child: Text('No')),
+                                      FlatButton(
+                                          onPressed: () {
+                                            ll = ['/'];
+                                            // check = ['no'];
+                                            print(ll);
+                                            Navigator.pop(context, true);
+                                            Navigator.pop(context, true);
+                                          },
+                                          child: Text('Yes')),
+                                    ],
+                                  ));
+                        }
+                      },
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 30.0),

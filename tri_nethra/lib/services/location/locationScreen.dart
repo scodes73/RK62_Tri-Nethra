@@ -15,7 +15,7 @@ class LocScreen extends StatefulWidget {
 
 class _LocScreenState extends State<LocScreen> {
   List<String> ll = ['/'];
-  List<String> al;
+  List<String> al, check = ['no'];
   _LocScreenState({this.al});
   int c = 0;
   void _getCurrentLocation() async {
@@ -184,8 +184,14 @@ class _LocScreenState extends State<LocScreen> {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => LDescribe(
                                   ll: ll,
+                                  // check: check
                                 )));
+
+                        // if (check[0] == 'yes') {
                         c = (ll.where((e) => e == '/')).length;
+                        // } else {
+                        //   c = (ll.where((e) => e == '/')).length - 1;
+                        // }
                       });
                       // c += 1;
                     },
@@ -198,7 +204,21 @@ class _LocScreenState extends State<LocScreen> {
                   padding: EdgeInsets.all(10),
                   //Has to Add additional info on ease of use and well description
                   child: Text(
-                    "$c Information You provide will help, The text field automantically increases in size as you type on.",
+                    "Total of $c address(es) are noted",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.all(10),
+                  //Has to Add additional info on ease of use and well description
+                  child: Text(
+                    "You can add multiple locations, each one by one through maps or through writing in words. Please consider including all the relevant locations",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),

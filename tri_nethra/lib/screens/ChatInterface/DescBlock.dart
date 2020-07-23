@@ -139,7 +139,7 @@ class _DescribeState extends State<Describe> {
                 padding: EdgeInsets.all(10),
                 //Has to Add additional info on ease of use and well description
                 child: Text(
-                  "The Information You provide will help, The text field automantically increases in size as you type on.",
+                  "The Information You provide will help, The text field automantically increases in size as you type on. \n Ideal Description would be the context at which this is happening, and the people or objects invovled in it, or any suspicions.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold),
