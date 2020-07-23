@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
 import 'package:tri_nethra/screens/SearchRef/prevRef.dart';
+import 'package:tri_nethra/screens/profile_page/lang.dart';
 import 'package:tri_nethra/screens/root.dart';
+import 'package:tri_nethra/screens/splashscreen/splashscreen.dart';
 
 class OurProfileScreen extends StatefulWidget {
   @override
@@ -203,16 +205,8 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
                             'https://www.tspolice.gov.in/jsp/homePage?method=getHomePageElements',
                       ),
                     ),
-                    _buildCard(
-                      'Password',
-                      'Change the Account\'s Password',
-                      2,
-                      Icons.vpn_key,
-                      WVP(
-                        url:
-                            'https://www.transport.telangana.gov.in/html/faqs.php',
-                      ),
-                    ),
+                    _buildCard('Password', 'Change the Account\'s Password', 2,
+                        Icons.vpn_key, OurSplashScreen()),
                     _buildCard(
                       'Q&A',
                       'Most Frequently asked Questions',
@@ -228,10 +222,7 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
                       'Select Language for App',
                       4,
                       Icons.translate,
-                      WVP(
-                        url:
-                            'https://www.transport.telangana.gov.in/html/faqs.php',
-                      ),
+                      Lang(),
                     ),
                     // _buildCard('Tom', 'Away', 5),
                     // _buildCard('Tom', 'Available', 6),
