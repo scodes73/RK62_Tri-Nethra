@@ -29,6 +29,7 @@ class _LocScreenState extends State<LocScreen> {
       ll.add(position.latitude.toString());
       ll.add(position.longitude.toString());
       ll.add('/');
+      print(ll);
       c = (ll.where((e) => e == '/')).length - 1;
     });
   }
