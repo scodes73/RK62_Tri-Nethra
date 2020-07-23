@@ -62,7 +62,8 @@ class OurDatabase {
         'attachment list': fl,
         'location coordinates': ll,
         'issueCreate': Timestamp.now(),
-        'status': 'Pending'
+        'status': 'Pending',
+        'remarks': 'None'
       });
       issuesList.add(_docRef.documentID);
 
@@ -91,6 +92,7 @@ class OurDatabase {
       retVal.status = _docSnapshot["status"];
       retVal.issueCreated = _docSnapshot["issueCreate"];
       retVal.doneBy = _docSnapshot["done by"];
+      retVal.remarks = _docSnapshot["remarks"];
     } catch (e) {
       print('d');
       print(e);

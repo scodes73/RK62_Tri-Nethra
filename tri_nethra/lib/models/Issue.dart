@@ -8,7 +8,7 @@ class OurIssue {
   List<String> loc;
   Timestamp issueCreated;
   String status;
-  int na, nl;
+  String remarks;
   OurIssue(
       {this.refNo,
       this.attachments,
@@ -16,5 +16,6 @@ class OurIssue {
       this.doneBy,
       this.issueCreated,
       this.loc,
-      this.status});
+      this.status,
+      this.remarks});
 }
