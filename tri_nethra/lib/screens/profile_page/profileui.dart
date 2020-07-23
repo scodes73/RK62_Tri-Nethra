@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
-import 'package:tri_nethra/models/user.dart';
 import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
 import 'package:tri_nethra/screens/SearchRef/prevRef.dart';
 import 'package:tri_nethra/screens/root.dart';
