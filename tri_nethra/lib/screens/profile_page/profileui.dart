@@ -47,8 +47,8 @@ class _OurProfileScreenState extends State<OurProfileScreen> {
                 end: Alignment.bottomRight,
                 colors: [
               Colors.orange[900],
-              Colors.orange[300],
-              Colors.orange[200]
+              Colors.orange[500],
+              Colors.orange[400]
             ])),
         child: ListView(
           children: <Widget>[

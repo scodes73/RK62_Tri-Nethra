@@ -51,7 +51,7 @@ class _RefSearchState extends State<RefSearch> {
         ? AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
-            content: Text('Make sure this is a valid Reference No',
+            content: Text('Make sure this is a valid Reference Number',
                 style: TextStyle(fontWeight: FontWeight.bold)),
             contentPadding: EdgeInsets.all(20),
             actions: [
@@ -79,8 +79,8 @@ class _RefSearchState extends State<RefSearch> {
                             end: Alignment.bottomRight,
                             colors: [
                           Colors.orange[900],
-                          Colors.orange[300],
-                          Colors.orange[200]
+                          Colors.orange[500],
+                          Colors.orange[400]
                         ])),
                     child: ListView(
                       children: <Widget>[

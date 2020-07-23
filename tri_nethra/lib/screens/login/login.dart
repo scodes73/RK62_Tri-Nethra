@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
+import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/screens/signup/signup.dart';
@@ -50,8 +51,8 @@ class _OurLoginState extends State<OurLogin> {
             decoration: BoxDecoration(
                 gradient: LinearGradient(begin: Alignment.topCenter, colors: [
               Colors.orange[900],
-              Colors.orange[300],
-              Colors.orange[200]
+              Colors.orange[500],
+              Colors.orange[400]
             ])),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,6 +125,7 @@ class _OurLoginState extends State<OurLogin> {
                                             bottom: BorderSide(
                                                 color: Colors.grey[200]))),
                                     child: TextFormField(
+                                      obscureText: true,
                                       controller: _passwordController,
                                       decoration: InputDecoration(
                                           hintText: "Password",
@@ -159,7 +161,7 @@ class _OurLoginState extends State<OurLogin> {
                                 decoration: BoxDecoration(
                                     gradient: LinearGradient(colors: [
                                       Colors.orange[800],
-                                      Colors.orange[200]
+                                      Colors.orange[400]
                                     ]),
                                     borderRadius: BorderRadius.circular(50),
                                     color: Colors.orange[900]),
@@ -239,6 +241,12 @@ class _OurLoginState extends State<OurLogin> {
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
                                           print('Terms of Service');
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                                  builder: (context) => WVP(
+                                                        url:
+                                                            'https://www.policinglaw.info/country/india',
+                                                      )));
                                         }),
                                   TextSpan(
                                     text: ' and that you have read our ',
@@ -252,6 +260,12 @@ class _OurLoginState extends State<OurLogin> {
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
                                           print('Privacy Policy');
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                                  builder: (context) => WVP(
+                                                        url:
+                                                            'https://bprd.nic.in/content/68_2_PrivacyPolicy.aspx',
+                                                      )));
                                         }),
                                 ],
                               ),

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
+import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class SignUp extends StatefulWidget {
@@ -106,8 +107,8 @@ class _SignUpState extends State<SignUp> {
                       begin: Alignment.topCenter,
                       colors: [
                         Colors.orange[900],
-                        Colors.orange[300],
-                        Colors.orange[200]
+                        Colors.orange[500],
+                        Colors.orange[400]
                       ],
                     ),
                   ),
@@ -209,6 +210,7 @@ class _SignUpState extends State<SignUp> {
                                       padding: EdgeInsets.all(10),
                                       decoration: BoxDecoration(),
                                       child: TextFormField(
+                                        obscureText: true,
                                         controller: _passwordController,
                                         decoration: InputDecoration(
                                             hintText: "Password",
@@ -225,6 +227,7 @@ class _SignUpState extends State<SignUp> {
                                       padding: EdgeInsets.all(10),
                                       decoration: BoxDecoration(),
                                       child: TextFormField(
+                                        obscureText: true,
                                         controller: _confirmPasswordController,
                                         decoration: InputDecoration(
                                             hintText: "Confirm Password",
@@ -278,27 +281,43 @@ class _SignUpState extends State<SignUp> {
                                             text:
                                                 'By clicking Sign Up, you agree to our ',
                                             style:
-                                                TextStyle(color: Colors.grey)),
+                                                TextStyle(color: Colors.white)),
                                         TextSpan(
                                             text: 'Terms of Service',
                                             style: TextStyle(
-                                                color: Colors.orange[900]),
+                                                color: Colors.orange[900],
+                                                fontWeight: FontWeight.bold),
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () {
                                                 print('Terms of Service');
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WVP(
+                                                              url:
+                                                                  'https://www.policinglaw.info/country/india',
+                                                            )));
                                               }),
                                         TextSpan(
                                           text: ' and that you have read our ',
-                                          style: TextStyle(color: Colors.grey),
+                                          style: TextStyle(color: Colors.white),
                                         ),
                                         TextSpan(
                                             text: 'Privacy Policy',
                                             style: TextStyle(
                                                 fontStyle: FontStyle.italic,
-                                                color: Colors.orange[900]),
+                                                color: Colors.orange[900],
+                                                fontWeight: FontWeight.bold),
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () {
                                                 print('Privacy Policy');
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WVP(
+                                                              url:
+                                                                  'https://bprd.nic.in/content/68_2_PrivacyPolicy.aspx',
+                                                            )));
                                               }),
                                       ],
                                     ),
