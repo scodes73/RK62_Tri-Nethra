@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/models/user.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/login/login.dart';
@@ -153,12 +154,12 @@ class _IssueFinalState extends State<IssueFinal> {
                         SizedBox(
                           height: 25,
                         ),
-                        anon
-                            ? Text(
-                                ' This data is also present in your \n Previous Searches page ',
-                                textAlign: TextAlign.center,
-                              )
-                            : Container()
+                        Text(
+                          anon
+                              ? 'If you log in this data would be saved to your account automatically'
+                              : ' This data is also present in your \n Previous Searches page ',
+                          textAlign: TextAlign.center,
+                        )
                       ],
                     )),
                     height: MediaQuery.of(context).size.height / 3,
@@ -172,6 +173,7 @@ class _IssueFinalState extends State<IssueFinal> {
 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => anon ? OurLogin() : OurRoot()));
+                  CurrentUser().signOut();
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0),

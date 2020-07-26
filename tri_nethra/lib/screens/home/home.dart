@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/ChatInterface/ToC.dart';
 import 'package:tri_nethra/screens/Helpline.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
@@ -21,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   String val = 'Not yet Selected';
   @override
   void initState() {
-    // TODO: implement initState
     al = (anon == true) ? ['Anonymous', 'TOC'] : ['ToC'];
     super.initState();
   }
@@ -55,14 +55,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     IconButton(
                         iconSize: 30,
-                        icon: Icon(Icons.account_circle),
+                        icon: Icon(anon == true
+                            ? Icons.done_outline
+                            : Icons.account_circle),
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OurProfileScreen()));
-                          print("Send to Profile Page");
+                          if (anon == true) {
+                            CurrentUser().signOut();
+                            print('signing out');
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OurProfileScreen()));
+                            print("Send to Profile Page");
+                          }
                         }),
                   ],
                 ),
@@ -154,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Theme(
                       data: Theme.of(context1)
                           .copyWith(canvasColor: Colors.transparent),
-                      child: ModalTrigger(),
+                      child: ModalTrigger(anon = anon),
                     ),
                     SizedBox(
                       height: _data.size.height / 4,

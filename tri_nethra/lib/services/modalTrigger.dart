@@ -4,12 +4,16 @@ import 'package:tri_nethra/screens/SearchRef/refsearchscreen.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class ModalTrigger extends StatefulWidget {
+  final bool anon;
+  ModalTrigger(this.anon);
   @override
-  _ModalTriggerState createState() => _ModalTriggerState();
+  _ModalTriggerState createState() => _ModalTriggerState(anon: anon);
 }
 
 class _ModalTriggerState extends State<ModalTrigger> {
   // String val = 'Not yet Selected';
+  bool anon;
+  _ModalTriggerState({this.anon});
   TextEditingController refController = TextEditingController();
   _showSearchFieldSheet(context) {
     showModalBottomSheet(
@@ -136,41 +140,44 @@ class _ModalTriggerState extends State<ModalTrigger> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => PrevRef()));
-                },
-                child: Container(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(30),
-                            child: Text(
-                              'Previous Reference numbers',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+              anon == true
+                  ? Container()
+                  : GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => PrevRef()));
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 1),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(30),
+                                  child: Text(
+                                    'Previous Reference numbers',
+                                    textAlign: TextAlign.start,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.history,
+                                )
+                              ],
                             ),
                           ),
-                          Icon(
-                            Icons.history,
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    )
             ],
           ),
           decoration: BoxDecoration(
