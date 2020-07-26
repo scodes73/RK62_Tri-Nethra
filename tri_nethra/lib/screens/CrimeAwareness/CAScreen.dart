@@ -1,59 +1,96 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
-import 'package:tri_nethra/screens/root.dart';
+import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
-class News {
-  String url;
-  String imgurl;
-  String text;
-  News({this.url, this.imgurl, this.text});
+class Qt {
+  String q;
+  String a;
+  Qt({this.q, this.a});
 }
 
-class CarouselDemo extends StatefulWidget {
-  CarouselDemo() : super();
+class CAScreen extends StatefulWidget {
+  CAScreen() : super();
 
   final String title = "Carousel Demo";
 
   @override
-  CarouselDemoState createState() => CarouselDemoState();
+  CAScreenState createState() => CAScreenState();
 }
 
-class CarouselDemoState extends State<CarouselDemo> {
-  //
-  CarouselSlider carouselSlider;
-  int _current = 0;
-  List<News> nlist = [
-    News(
-        text: 'All Police Stations In Hyderabad To Get Cyber Crime Wing',
-        url:
-            'https://www.ndtv.com/hyderabad-News/police-stations-in-hyderabad-to-get-cyber-crime-wing-2155065',
-        imgurl:
-            'https://img.freepik.com/free-vector/colored-hacker-code-realistic-composition-with-person-creates-codes-hacking-stealing-information-vector-illustration_1284-18005.jpg?size=626&ext=jpg'),
-    News(
-        text: 'Take inspiration from Hyd Police: Mayawati to UP Police',
-        url:
-            'https://www.deccanherald.com/national/national-politics/take-inspiration-from-hyd-police-mayawati-to-up-police-783145.html',
-        imgurl:
-            'https://www.deccanherald.com/sites/dh/files/article_images/2019/12/06/file76uvaov25ck1aik7wh00-1575613361.jpg'),
-    News(
-      text:
-          'Telangana Police bust international kidney racket, MBA graduate booked',
-      url:
-          'https://www.indiatoday.in/india/story/telangana-police-bust-international-kidney-racket-turkey-sri-lanka-mba-graduate-held-1702372-2020-07-20',
-      imgurl:
-          'https://images.unsplash.com/photo-1560575193-c2c9e886aefe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
-    )
+class CAScreenState extends State<CAScreen> {
+  List<Qt> qtl = [
+    Qt(
+        q: "1.CHILD PORNOGRAPHY/ CHILD SEXUALLY ABUSIVE MATERIAL (CSAM)",
+        a: "Child sexually abusive material (CSAM) refers to material containing sexual image in any form, of a child who is abused or sexually exploited. Section 67 (B) of IT Act states that “it is punishable for publishing or transmitting of material depicting children in sexually explicit act, etc. in electronic form."),
+    Qt(
+        q: "2.CYBER BULLYING",
+        a: "A form of harassment or bullying inflicted through the use of electronic or communication devices such as computer, mobile phone, laptop, etc."),
+    Qt(
+        q: "3.CYBER STALKING",
+        a: "Cyber stalking is the use of electronic communication by a person to follow a person, or attempts to contact a person to foster personal interaction repeatedly despite a clear indication of disinterest by such person; or monitors the internet, email or any other form of electronic communication commits the offence of stalking."),
+    Qt(
+        q: "4.CYBER GROOMING",
+        a: "Cyber Grooming is when a person builds an online relationship with a young person and tricks or pressures him/ her into doing sexual act."),
+    Qt(
+        q: "5.ONLINE JOB FRAU",
+        a: "Online Job Fraud is an attempt to defraud people who are in need of employment by giving them a false hope/ promise of better employment with higher wages."),
+    Qt(
+        q: "6.ONLINE SEXTORTION",
+        a: "Online Sextortion occurs when someone threatens to distribute private and sensitive material using an electronic medium if he/ she doesn’t provide images of a sexual nature, sexual favours, or money."),
+    Qt(
+        q: "7.VISHING",
+        a: "Vishing is an attempt where fraudsters try to seek personal information like Customer ID, Net Banking password, ATM PIN, OTP, Card expiry date, CVV etc. through a phone call."),
+    Qt(
+        q: "8. SEXTING",
+        a: "Sexting is an act of sending sexually explicit digital images, videos, text messages, or emails, usually by cell phone."),
+    Qt(
+        q: "9. SMISHING",
+        a: "Smishing is a type of fraud that uses mobile phone text messages to lure victims into calling back on a fraudulent phone number, visiting fraudulent websites or downloading malicious content via phone or web."),
+    Qt(
+        q: "10. SIM SWAP SCAM",
+        a: "SIM Swap Scam occurs when fraudsters manage to get a new SIM card issued against a registered mobile number fraudulently through the mobile service provider. With the help of this new SIM card, they get One Time Password (OTP) and alerts, required for making financial transactions through victim's bank account. Getting a new SIM card against a registered mobile number fraudulently is known as SIM Swap."),
+    Qt(
+        q: "11. DEBIT/CREDIT CARD FRAUD",
+        a: "Credit card (or debit card) fraud involves an unauthorized use of another's credit or debit card information for the purpose of purchases or withdrawing funds from it."),
+    Qt(
+        q: "12. IMPERSONATION AND IDENTITY THEFT",
+        a: "Impersonation and identity theft is an act of fraudulently or dishonestly making use of the electronic signature, password or any other unique identification feature of any other person."),
+    Qt(
+        q: "13. PHISHING",
+        a: "Phishing is a type of fraud that involves stealing personal information such as Customer ID, IPIN, Credit/Debit Card number, Card expiry date, CVV number, etc. through emails that appear to be from a legitimate source."),
+    Qt(
+        q: "14. SPAMMING",
+        a: "Spamming occurs when someone receives an unsolicited commercial messages sent via email, SMS, MMS and any other similar electronic messaging media. They may try to persuade recepient to buy a product or service, or visit a website where he can make purchases; or they may attempt to trick him/ her into divulging bank account or credit card details."),
+    Qt(
+        q: "15. RANSOMWARE",
+        a: "Ransomware is a type of computer malware that encrypts the files, storage media on communication devices like desktops, Laptops, Mobile phones etc., holding data/information as a hostage. The victim is asked to pay the demanded ransom to get his device decrypts."),
+    Qt(
+        q: "16. VIRUS, WORMS & TROJANS",
+        a: "Computer Virus is a program written to enter to your computer and damage/alter your files/data and replicate themselves.Worms are malicious programs that make copies of themselves again and again on the local drive, network shares, etc.A Trojan horse is not a virus. It is a destructive program that looks as a genuine application. Unlike viruses, Trojan horses do not replicate themselves but they can be just as destructive. Trojans open a backdoor entry to your computer which gives malicious users/programs access to your system, allowing confidential and personal information to be theft."),
+    Qt(
+        q: "17. DATA BREACH",
+        a: "A data breach is an incident in which information is accessed without authorization."),
+    Qt(
+        q: "18. DENIAL OF SERVICES /DISTRIBUTED DOS",
+        a: "Denial of Services (DoS) attack is an attack intended for denying access to computer resource without permission of the owner or any other person who is in-charge of a computer, computer system or computer network.A Distributed Denial of Service (DDoS) attack is an attempt to make an online service unavailable by overwhelming it with traffic from multiple sources."),
+    Qt(
+        q: "19. WEBSITE DEFACEMENT",
+        a: "Website Defacement is an attack intended to change visual appearance of a website and/ or make it dysfunctional. The attacker may post indecent, hostile and obscene images, messages, videos, etc."),
+    Qt(
+        q: "20. CYBER-SQUATTING",
+        a: "Cyber-Squatting is an act of registering, trafficking in, or using a domain name with an intent to profit from the goodwill of a trademark belonging to someone else."),
+    Qt(
+        q: "21. PHARMING",
+        a: "Pharming is cyber-attack aiming to redirect a website's traffic to another, bogus website."),
+    Qt(
+        q: "22. CRYPTOJACKING",
+        a: "Cryptojacking is the unauthorized use of computing resources to mine cryptocurrencies."),
+    Qt(
+        q: "23. ONLINE DRUG TRAFFICKING",
+        a: "Online Drug Trafficking is a crime of selling, transporting, or illegally importing unlawful controlled substances, such as heroin, cocaine, marijuana, or other illegal drugs using electronic means."),
+    Qt(
+        q: "24.ESPIONAGE",
+        a: "Espionage is the act or practice of obtaining data and information without the permission and knowledge of the owner."),
   ];
-
-  List<T> map<T>(List list, Function handler) {
-    List<T> result = [];
-    for (var i = 0; i < list.length; i++) {
-      result.add(handler(i, list[i]));
-    }
-    return result;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,187 +109,98 @@ class CarouselDemoState extends State<CarouselDemo> {
                   Colors.orange[400]
                 ])),
             child: Container(
-              child: ListView(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: AppBar().preferredSize.height,
-                    ),
-                    Stack(
-                      children: <Widget>[
-                        carouselSlider = CarouselSlider(
-                          height: MediaQuery.of(context).size.height / 1.5,
-                          initialPage: 0,
-                          enlargeCenterPage: false, //true,
-                          autoPlay: true,
-                          reverse: false,
-                          enableInfiniteScroll: true,
-                          autoPlayInterval: Duration(seconds: 4),
-                          autoPlayAnimationDuration:
-                              Duration(milliseconds: 2000),
-                          pauseAutoPlayOnTouch: Duration(seconds: 10),
-                          scrollDirection: Axis.horizontal,
-                          onPageChanged: (index) {
-                            setState(() {
-                              _current = index;
-                            });
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: AppBar().preferredSize.height / 1.5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.keyboard_arrow_left,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            // al.removeLast();
+                            // print(al);
+                            print("Popping from CA page");
                           },
-                          items: nlist.map((i) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return InkWell(
-                                  onTap: () {
-                                    print('l');
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                WVP(url: i.url)));
-                                  },
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          color: Colors.black38,
-                                        ),
-                                        child: Column(
-                                          children: <Widget>[
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(20),
-                                                  topRight:
-                                                      Radius.circular(20)),
-                                              child: Image(
-                                                height: 300,
-                                                width: 300,
-                                                image: NetworkImage(i.imgurl),
-                                                fit: BoxFit.fill,
-                                                // fit: BoxFit.scaleDown,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                i.text,
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          }).toList(),
-                        ),
-                        Positioned(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: map<Widget>(nlist, (index, url) {
-                              return Container(
-                                width: 8.0,
-                                height: 8.0,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 10.0, horizontal: 2.0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == index
-                                      ? Colors.orange
-                                      : Colors.white,
-                                ),
-                              );
-                            }),
-                          ),
-                          bottom: 10,
-                          width: MediaQuery.of(context).size.width,
-                          // left: (MediaQuery.of(context).size.width / 2) - 5,
-                        ),
-                        Positioned(
-                          child: Text(
-                            'Crime Awareness Module',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
-                          ),
-                          width: MediaQuery.of(context).size.width,
-                          bottom: MediaQuery.of(context).size.height / 10,
-                        ),
-                        Positioned(
-                          child: Text(
-                            'Click on any card for full story',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                          width: MediaQuery.of(context).size.width,
-                          bottom: MediaQuery.of(context).size.height / 15,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => OurRoot()));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Text('Home',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black)),
-                            Icon(
-                              Icons.keyboard_arrow_right,
-                              size: 30,
-                              color: Colors.black,
-                            )
-                          ],
                         ),
                       ),
-                    )
-                  ]),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text('Crime Awareness  ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 30,
+                            )),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      'In general cybercrime may be defined as “Any unlawful act where computer or communication device or computer network is used to commit or facilitate the commission of crime”.\nBelow is a list to facitilate better reporting of complaints.',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 20),
+                    ),
+                  ),
+                  new Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: qtl.length,
+                      physics: BouncingScrollPhysics(),
+                      // reverse: true,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: OrPop(
+                            popcolor: Colors.white,
+                            child: ExpansionTile(
+                              title: Text(
+                                "${qtl[index].q}",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '${qtl[index].a}',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
       ),
     );
-  }
-
-  goToPrevious() {
-    carouselSlider.previousPage(
-        duration: Duration(milliseconds: 300), curve: Curves.ease);
-  }
-
-  goToNext() {
-    carouselSlider.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.decelerate);
   }
 }

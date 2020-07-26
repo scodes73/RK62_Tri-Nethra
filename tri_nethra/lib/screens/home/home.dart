@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/ChatInterface/ToC.dart';
+import 'package:tri_nethra/screens/CrimeAwareness/CAScreen.dart';
 import 'package:tri_nethra/screens/Helpline.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/profile_page/profileui.dart';
@@ -94,25 +95,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: _data.size.height / 55,
                     ),
-                    Container(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: OrPop(
-                          popcolor: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(30),
-                                child: Text(
-                                  'Crime Awareness',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CAScreen()));
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: OrPop(
+                            popcolor: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(30),
+                                  child: Text(
+                                    'Crime Awareness',
+                                    textAlign: TextAlign.start,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
-                              Icon(Icons.insert_chart),
-                            ],
+                                Icon(Icons.insert_chart),
+                              ],
+                            ),
                           ),
                         ),
                       ),
