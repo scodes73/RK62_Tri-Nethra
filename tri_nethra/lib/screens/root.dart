@@ -54,25 +54,3 @@ class _OurRootState extends State<OurRoot> {
     return retVal;
   }
 }
-
-// class LoggedIn extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     UserModel _userStream = Provider.of<UserModel>(context);
-//     Widget retVal;
-//     if (_userStream != null) {
-//       if (_userStream.groupId != null) {
-//         retVal = StreamProvider<GroupModel>.value(
-//           value: DBStream().getCurrentGroup(_userStream.groupId),
-//           child: InGroup(),
-//         );
-//       } else {
-//         retVal = NoGroup();
-//       }
-//     } else {
-//       retVal = SplashScreen();
-//     }
-
-//     return retVal;
-//   }
-// }

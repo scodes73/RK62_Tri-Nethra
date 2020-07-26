@@ -342,28 +342,3 @@ class _OurLoginState extends State<OurLogin> {
     );
   }
 }
-
-/*body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.all(20.0),
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(40.0),
-                  child: Image.asset("assets/t.png"),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                LoginForm(),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-*/

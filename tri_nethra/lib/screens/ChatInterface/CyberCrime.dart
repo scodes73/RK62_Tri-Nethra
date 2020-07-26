@@ -141,6 +141,7 @@ class _CCState extends State<CC> {
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.panorama_fish_eye;
                           i5 = Icons.panorama_fish_eye;
+                          sel = 'Phishing';
                         });
                       },
                       child: but('Phishing', i1)),

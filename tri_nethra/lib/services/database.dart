@@ -105,20 +105,4 @@ class OurDatabase {
 
     return retVal;
   }
-
-  // Future<String> checkIssue(String rid) async {
-  //   String retVal = "error";
-  //   try {
-  //     print(rid);
-  //     DocumentSnapshot _docSnapshot =
-  //         await _firestore.collection("issues").document(rid).get();
-
-  //     retVal = "success";
-  //   } on PlatformException catch (e) {
-  //     retVal = "Make sure you have the right group ID!";
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  //   return retVal;
-  // }
 }

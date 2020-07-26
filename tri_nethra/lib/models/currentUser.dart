@@ -87,22 +87,4 @@ class CurrentUser extends ChangeNotifier {
     }
     return retVal;
   }
-
-  // Future<String> validatePass(String email, String password) async {
-  //   String retVal = "error";
-  //   try {
-  //     FirebaseUser _f = await _auth.currentUser();
-  //     var a=EmailAuthProvider.getCredential(email: email,password: password)
-  //     _f.reauthenticateWithCredential(credential)
-  //     AuthResult _authResult = await _auth.signInWithEmailAndPassword(
-  //         email: email, password: password);
-  //     _currentUser.uid = _authResult.user.uid;
-  //     _currentUser.email = _authResult.user.email;
-  //     retVal = "success";
-  //   } catch (e) {
-  //     print(e);
-  //     retVal = e.message;
-  //   }
-  //   return retVal;
-  // }
 }
