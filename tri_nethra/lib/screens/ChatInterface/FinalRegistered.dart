@@ -2,15 +2,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/models/user.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/screens/login/login.dart';
 import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/services/database.dart';
 
 class IssueFinal extends StatefulWidget {
+  final bool anon;
+  final String rid;
+  IssueFinal({this.anon = false, this.rid});
   @override
-  _IssueFinalState createState() => _IssueFinalState();
+  _IssueFinalState createState() => _IssueFinalState(anon: anon, rid: rid);
 }
 
 class _IssueFinalState extends State<IssueFinal> {
+  bool anon;
+  String rid;
+  _IssueFinalState({this.anon, this.rid});
   OurUser a = OurUser();
   String ref;
   void refid() async {
@@ -30,7 +37,8 @@ class _IssueFinalState extends State<IssueFinal> {
 
   @mustCallSuper
   void initState() {
-    refid();
+    // refid();
+    ref = rid;
     super.initState();
   }
 
@@ -145,10 +153,12 @@ class _IssueFinalState extends State<IssueFinal> {
                         SizedBox(
                           height: 25,
                         ),
-                        Text(
-                          ' This data is also present in your \n Previous Searches page ',
-                          textAlign: TextAlign.center,
-                        )
+                        anon
+                            ? Text(
+                                ' This data is also present in your \n Previous Searches page ',
+                                textAlign: TextAlign.center,
+                              )
+                            : Container()
                       ],
                     )),
                     height: MediaQuery.of(context).size.height / 3,
@@ -159,8 +169,9 @@ class _IssueFinalState extends State<IssueFinal> {
               InkWell(
                 onTap: () {
                   Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => OurRoot()));
+
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => anon ? OurLogin() : OurRoot()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0),

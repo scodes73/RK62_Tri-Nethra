@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/CrimeAwareness/WVPage.dart';
+import 'package:tri_nethra/screens/home/home.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/screens/signup/signup.dart';
@@ -15,6 +16,29 @@ class OurLogin extends StatefulWidget {
 class _OurLoginState extends State<OurLogin> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  void _loginanon(BuildContext context) async {
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+    try {
+      String _returnString = await _currentUser.loginAnon();
+      if (_returnString == "success") {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(
+                    anon: true,
+                  )),
+          (route) => false,
+        );
+      } else {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_returnString),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {}
+  }
+
   void _loginUser(String email, String password, BuildContext context) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
@@ -196,6 +220,12 @@ class _OurLoginState extends State<OurLogin> {
                             SizedBox(
                               height: 20,
                             ),
+                            RaisedButton(
+                              onPressed: () {
+                                _loginanon(context);
+                              },
+                              child: Text('data'),
+                            ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                               child: //FadeAnimation(
@@ -285,49 +315,6 @@ class _OurLoginState extends State<OurLogin> {
                             SizedBox(
                               height: 30,
                             ),
-                            /*Row(
-                                                    children: <Widget>[
-                                                      Expanded(
-                                                        child: FadeAnimation(
-                                                            1.8,
-                                                            Container(
-                                                              height: 50,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius: BorderRadius.circular(50),
-                                                                  color: Colors.blue),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  "Facebook",
-                                                                  style: TextStyle(
-                                                                      color: Colors.white,
-                                                                      fontWeight: FontWeight.bold),
-                                                                ),
-                                                              ),
-                                                            )),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 30,
-                                                      ),
-                                                      /*Expanded(
-                                                        child: //FadeAnimation(
-                                                            //1.9,
-                                                            Container(
-                                                          height: 50,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.circular(50),
-                                                              color: Colors.black),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Github",
-                                                              style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontWeight: FontWeight.bold),
-                                                            ),
-                                                          ),
-                                                        ), //),
-                                                      )*/
-                                                    ],
-                                                  ) */
                           ],
                         ),
                       ),

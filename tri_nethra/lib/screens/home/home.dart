@@ -6,13 +6,25 @@ import 'package:tri_nethra/screens/profile_page/profileui.dart';
 import 'package:tri_nethra/services/modalTrigger.dart';
 
 class HomeScreen extends StatefulWidget {
+  final bool anon;
+  HomeScreen({this.anon = false});
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState(anon: anon);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> al = ['ToC'];
+  bool anon;
+  _HomeScreenState({this.anon = false});
+  List<String> al;
+  //List<String> al = (anon == true) ? ['Anonymous', 'TOC'] : ['ToC'];
+
   String val = 'Not yet Selected';
+  @override
+  void initState() {
+    // TODO: implement initState
+    al = (anon == true) ? ['Anonymous', 'TOC'] : ['ToC'];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -7,19 +7,25 @@ import 'package:tri_nethra/screens/splashscreen/splashscreen.dart';
 import 'package:tri_nethra/services/database.dart';
 
 class PrevRef extends StatefulWidget {
+  // final bool anon;
+  // PrevRef({this.anon});
   @override
-  _PrevRefState createState() => _PrevRefState();
+  _PrevRefState createState() => _PrevRefState(/*anon:anon*/);
 }
 
 class _PrevRefState extends State<PrevRef> {
   TextEditingController refController = TextEditingController();
+  // bool anon;
   OurUser a = OurUser();
+  // _PrevRefState({this.anon});
   List<String> ref;
   void refid() async {
     try {
       FirebaseUser _firebaseUser = await FirebaseAuth.instance.currentUser();
       if (_firebaseUser != null) {
-        a = await OurDatabase().getUserInfo(_firebaseUser.uid);
+        a = await OurDatabase().getUserInfo(
+          _firebaseUser.uid, //anon
+        );
         print(a.refId);
         setState(() {
           ref = a.refId;

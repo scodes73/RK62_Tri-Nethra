@@ -6,6 +6,7 @@ import 'package:tri_nethra/services/database.dart';
 
 class CurrentUser extends ChangeNotifier {
   OurUser _currentUser = OurUser();
+  bool anon = false;
   OurUser get getCurrentUser => _currentUser;
   FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -80,6 +81,22 @@ class CurrentUser extends ChangeNotifier {
           email: email, password: password);
       _currentUser.uid = _authResult.user.uid;
       _currentUser.email = _authResult.user.email;
+      retVal = "success";
+    } catch (e) {
+      print(e);
+      retVal = e.message;
+    }
+    return retVal;
+  }
+
+  Future<String> loginAnon() async {
+    String retVal = "error";
+    try {
+      AuthResult _authresult = await _auth.signInAnonymously();
+      _currentUser.uid = _authresult.user.uid;
+      // _currentUser.isAnon = true;
+      anon = true;
+      // if(_authresult.user.isAnonymous
       retVal = "success";
     } catch (e) {
       print(e);

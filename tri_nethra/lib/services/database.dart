@@ -18,7 +18,8 @@ class OurDatabase {
         'Doc Number': user.docNumber,
         'Doc type': user.docType,
         'Account created': Timestamp.now(),
-        'RefId': s
+        'RefId': s,
+        'Anonimity': false
       });
       retVal = "success";
     } catch (e) {
@@ -27,12 +28,15 @@ class OurDatabase {
     return retVal;
   }
 
-  Future<OurUser> getUserInfo(String uid) async {
+  Future<OurUser> getUserInfo(
+    String uid,
+  ) async {
     OurUser retVal = OurUser();
     try {
       DocumentSnapshot _docSnapshot =
           await _firestore.collection("users").document(uid).get();
       retVal.uid = uid;
+
       retVal.docNumber = _docSnapshot["Doc Number"];
       retVal.docType = _docSnapshot["Doc type"];
       retVal.accountCreated = _docSnapshot["Account created"];
@@ -41,6 +45,7 @@ class OurDatabase {
       retVal.password = _docSnapshot["password"];
       retVal.mobile = _docSnapshot["Mobile"];
       retVal.refId = List<String>.from(_docSnapshot["RefId"]);
+
       print(retVal.refId);
       // dlist.Cast<string>().ToList();
       // var strings = dlist.Select(item => item?.ToString()).ToList();
@@ -58,7 +63,6 @@ class OurDatabase {
     try {
       print(userUid);
       DocumentReference _docRef = await _firestore.collection("issues").add({
-        'done by': userUid,
         'content list': al,
         'attachment list': fl,
         'location coordinates': ll,
@@ -72,7 +76,31 @@ class OurDatabase {
         'RefId': FieldValue.arrayUnion(issuesList),
       });
 
-      retVal = "success";
+      retVal = _docRef.documentID;
+    } catch (e) {
+      print(e);
+    }
+
+    return retVal;
+  }
+
+  Future<String> createIssueAnon(
+      String userUid, List<String> al, List<String> fl, List<String> ll) async {
+    String retVal = "error";
+
+    try {
+      print(userUid);
+      DocumentReference _docRef = await _firestore.collection("issues").add({
+        'done by': 'Anonymous',
+        'content list': al,
+        'attachment list': fl,
+        'location coordinates': ll,
+        'issueCreate': Timestamp.now(),
+        'status': 'Pending',
+        'remarks': 'None'
+      });
+
+      retVal = _docRef.documentID;
     } catch (e) {
       print(e);
     }

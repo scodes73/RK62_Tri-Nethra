@@ -150,6 +150,7 @@ class _DescribeState extends State<Describe> {
               ),
               InkWell(
                   onTap: () {
+                    al.add(_desController.text);
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => MultiFilePick(
                               al: al,

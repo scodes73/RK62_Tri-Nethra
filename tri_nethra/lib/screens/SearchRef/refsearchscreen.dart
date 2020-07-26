@@ -6,19 +6,21 @@ import 'package:tri_nethra/screens/splashscreen/splashscreen.dart';
 import 'package:tri_nethra/services/database.dart';
 
 class RefSearch extends StatefulWidget {
+  final bool anon;
   final String a;
-  RefSearch({this.a});
+  RefSearch({this.a, this.anon});
 
   @override
-  _RefSearchState createState() => _RefSearchState(a: a);
+  _RefSearchState createState() => _RefSearchState(a: a, anon: anon);
 }
 
 class _RefSearchState extends State<RefSearch> {
   final String a;
+  bool anon;
   OurIssue i = OurIssue();
   String n;
 
-  _RefSearchState({this.a});
+  _RefSearchState({this.a, this.anon});
 
   getDetails() async {
     try {

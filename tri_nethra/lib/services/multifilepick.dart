@@ -12,17 +12,27 @@ import 'package:tri_nethra/services/database.dart';
 
 class MultiFilePick extends StatefulWidget {
   final List<String> ll, al;
-  MultiFilePick({this.al, this.ll});
+  // final bool anon;
+  MultiFilePick({
+    this.al,
+    this.ll,
+  });
 
   @override
-  _MultiFilePickState createState() => _MultiFilePickState(al: al, ll: ll);
+  _MultiFilePickState createState() => _MultiFilePickState(
+        al: al,
+        ll: ll,
+      );
 }
 
 class _MultiFilePickState extends State<MultiFilePick> {
   List<String> atl = ['/'];
   List<String> ll, al, fn = [];
 
-  _MultiFilePickState({this.al, this.ll});
+  _MultiFilePickState({
+    this.al,
+    this.ll,
+  });
   String _path;
   Map<String, String> _paths;
   String _extension;
@@ -218,16 +228,18 @@ class _MultiFilePickState extends State<MultiFilePick> {
                     print(_currentUser.getCurrentUser.refId);
                     print('this is');
                     print(atl);
-                    String _returnString = await OurDatabase().createIssue(
-                      _currentUser.getCurrentUser.uid,
-                      al,
-                      atl,
-                      ll,
-                    );
-                    if (_returnString == "success") {
+                    String _returnString = al[0] == 'Anonymous'
+                        ? await OurDatabase().createIssueAnon(
+                            _currentUser.getCurrentUser.uid, al, atl, ll)
+                        : await OurDatabase().createIssue(
+                            _currentUser.getCurrentUser.uid, al, atl, ll);
+                    if (_returnString != "error") {
                       print('suc');
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => (IssueFinal())));
+                          builder: (context) => (IssueFinal(
+                                anon: al[0] == 'Anonymous',
+                                rid: _returnString,
+                              ))));
                     } else {
                       print(_returnString);
                     }
