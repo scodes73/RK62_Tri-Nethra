@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
-class Auto extends StatefulWidget {
+class CSARO extends StatefulWidget {
   final List<String> al;
-  Auto({this.al});
+  CSARO({this.al});
   @override
-  _AutoState createState() => _AutoState(al: al);
+  _CSAROState createState() => _CSAROState(al: al);
 }
 
-class _AutoState extends State<Auto> {
-  TextEditingController mak = new TextEditingController();
-  TextEditingController mod = new TextEditingController();
-  TextEditingController reg = new TextEditingController();
+class _CSAROState extends State<CSARO> {
   List<String> al;
-  _AutoState({this.al});
+  String sel;
+  _CSAROState({this.al});
+  IconData i1 = Icons.panorama_fish_eye,
+      i2 = Icons.panorama_fish_eye,
+      i3 = Icons.panorama_fish_eye,
+      i4 = Icons.panorama_fish_eye;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -47,16 +50,14 @@ class _AutoState extends State<Auto> {
               width: double.infinity,
               height: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomRight,
-                  colors: [
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomRight,
+                      colors: [
                     Colors.orange[900],
                     Colors.orange[500],
                     Colors.orange[400]
-                  ],
-                ),
-              ),
+                  ])),
               child: ListView(
                 children: <Widget>[
                   SizedBox(
@@ -77,7 +78,7 @@ class _AutoState extends State<Auto> {
                             Navigator.pop(context);
                             al.removeLast();
                             print(al);
-                            print("Popping from Auto page");
+                            print("Popping from CSARO page");
                           },
                         ),
                       ),
@@ -93,107 +94,101 @@ class _AutoState extends State<Auto> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
                           Wrap(
                             children: [
                               Text(
-                                'Auto Theft'.toUpperCase(),
+                                'Content Related to online child sex Abuse/Rape/Obstacenity'
+                                    .toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.orange,
                                     fontFamily: 'Quicksand',
-                                    fontWeight: FontWeight.bold,
                                     fontSize: 20),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            child: SingleChildScrollView(
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
-                                child: Column(
-                                  children: <Widget>[
-                                    OrPop(
-                                      popcolor: Colors.white,
-                                      child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(),
-                                        child: TextFormField(
-                                          controller: mak,
-                                          decoration: InputDecoration(
-                                              hintText: "Make of the vehicle",
-                                              hintStyle: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey),
-                                              border: InputBorder.none),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    OrPop(
-                                      popcolor: Colors.white,
-                                      child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(),
-                                        child: TextFormField(
-                                          controller: mod,
-                                          decoration: InputDecoration(
-                                              hintText: "Model Name",
-                                              hintStyle: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey),
-                                              border: InputBorder.none),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    OrPop(
-                                      popcolor: Colors.white,
-                                      child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(),
-                                        child: TextFormField(
-                                          controller: reg,
-                                          decoration: InputDecoration(
-                                              hintText: "Registration No",
-                                              hintStyle: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey),
-                                              border: InputBorder.none),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            height: 10,
                           ),
                         ],
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 20,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 30, right: 20),
+                    child: Wrap(
+                      children: [
+                        Text(
+                          'Select one among the following cases in regard:',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Quicksand',
+                              fontSize: 30),
+                        ),
+                      ],
+                    ),
                   ),
                   InkWell(
                       onTap: () {
-                        if (mak.text == '' ||
-                            mod.text == '' ||
-                            reg.text == '') {
-                          print('ss');
+                        setState(() {
+                          sel = "Child Pornography";
+                          i1 = Icons.check_circle;
+                          i2 = Icons.panorama_fish_eye;
+                          i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.panorama_fish_eye;
+                        });
+                      },
+                      child: but('Child Pornography', i1)),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          sel = "Rape/Gang Rape";
+                          i1 = Icons.panorama_fish_eye;
+                          i2 = Icons.check_circle;
+                          i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.panorama_fish_eye;
+                        });
+                      },
+                      child: but('Rape/Gang Rape', i2)),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          sel = "Sexual Obscenity";
+                          i1 = Icons.panorama_fish_eye;
+                          i2 = Icons.panorama_fish_eye;
+                          i3 = Icons.check_circle;
+                          i4 = Icons.panorama_fish_eye;
+                        });
+                      },
+                      child: but('Sexual Obscenity', i3)),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          sel = "Sexually Explicit";
+                          i1 = Icons.panorama_fish_eye;
+                          i2 = Icons.panorama_fish_eye;
+                          i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.check_circle;
+                        });
+                      },
+                      child: but('Sexually Explicit', i4)),
+                  SizedBox(
+                    height: AppBar().preferredSize.height,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        if (sel == null) {
                           Scaffold.of(context).showSnackBar(SnackBar(
-                            content: Text('Please fill all the details:'),
-                            duration: Duration(seconds: 2),
-                          ));
+                              content:
+                                  Text('please select any of the option')));
                         } else {
-                          al.add(mak.text);
-                          al.add(mod.text);
-                          al.add(reg.text);
+                          al.add(sel);
                           print(al);
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
@@ -225,6 +220,38 @@ class _AutoState extends State<Auto> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget but(String t, IconData i) {
+    return Container(
+      padding: EdgeInsets.only(left: 30, right: 30, top: 20),
+      child: OrPop(
+        popcolor: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Wrap(
+                  children: [
+                    Text(
+                      t.toUpperCase(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.orange,
+                          fontFamily: 'Quicksand',
+                          fontSize: 20),
+                    ),
+                  ],
+                ),
+                Icon(
+                  i,
+                  color: Colors.orange,
+                )
+              ]),
         ),
       ),
     );

@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
-class WCC extends StatefulWidget {
+class EF extends StatefulWidget {
   final List<String> al;
-  WCC({this.al});
+  EF({this.al});
   @override
-  _WCCState createState() => _WCCState(al: al);
+  _EFState createState() => _EFState(al: al);
 }
 
-class _WCCState extends State<WCC> {
+class _EFState extends State<EF> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
-      i3 = Icons.panorama_fish_eye;
+      i3 = Icons.panorama_fish_eye,
+      i4 = Icons.panorama_fish_eye,
+      i5 = Icons.panorama_fish_eye,
+      i6 = Icons.panorama_fish_eye;
+
   List<String> al;
   String sel;
-  _WCCState({this.al});
+  _EFState({this.al});
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -76,7 +80,7 @@ class _WCCState extends State<WCC> {
                             Navigator.pop(context);
                             al.removeLast();
                             print(al);
-                            print("Popping from WCC page");
+                            print("Popping from EF page");
                           },
                         ),
                       ),
@@ -97,7 +101,7 @@ class _WCCState extends State<WCC> {
                           Wrap(
                             children: [
                               Text(
-                                'White Collar Crime'.toUpperCase(),
+                                'Cyber Crime'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.orange,
@@ -137,30 +141,79 @@ class _WCCState extends State<WCC> {
                           i1 = Icons.check_circle;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.panorama_fish_eye;
-                          sel = 'Bribing';
+                          i4 = Icons.panorama_fish_eye;
+                          i5 = Icons.panorama_fish_eye;
+                          i6 = Icons.panorama_fish_eye;
+
+                          sel = 'Banking/E-Wallet/Demat';
                         });
                       },
-                      child: but('Bribing', i1)),
+                      child: but('Banking/E-Wallet/Demat', i1)),
                   InkWell(
                       onTap: () {
                         setState(() {
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.check_circle;
                           i3 = Icons.panorama_fish_eye;
-                          sel = 'Price Fixing';
+                          i4 = Icons.panorama_fish_eye;
+                          i5 = Icons.panorama_fish_eye;
+                          i6 = Icons.panorama_fish_eye;
+                          sel = 'Job/Matrimonial';
                         });
                       },
-                      child: but('Price Fixing', i2)),
+                      child: but('Job/Matrimonial', i2)),
                   InkWell(
                       onTap: () {
                         setState(() {
+                          sel = 'E-commerce';
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.check_circle;
-                          sel = 'Other';
+                          i4 = Icons.panorama_fish_eye;
+                          i5 = Icons.panorama_fish_eye;
+                          i6 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Other', i3)),
+                      child: but('E-commerce', i3)),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          sel = 'Fradulent SMS/Media Content/call';
+                          i1 = Icons.panorama_fish_eye;
+                          i2 = Icons.panorama_fish_eye;
+                          i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.check_circle;
+                          i5 = Icons.panorama_fish_eye;
+                          i6 = Icons.panorama_fish_eye;
+                        });
+                      },
+                      child: but('Fradulent SMS/Media Content/call', i4)),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          sel = 'Email Fraud';
+                          i1 = Icons.panorama_fish_eye;
+                          i2 = Icons.panorama_fish_eye;
+                          i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.panorama_fish_eye;
+                          i5 = Icons.check_circle;
+                          i6 = Icons.panorama_fish_eye;
+                        });
+                      },
+                      child: but('Email Fraud', i5)),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          sel = 'Email Fraud';
+                          i1 = Icons.panorama_fish_eye;
+                          i2 = Icons.panorama_fish_eye;
+                          i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.panorama_fish_eye;
+                          i5 = Icons.panorama_fish_eye;
+                          i6 = Icons.check_circle;
+                        });
+                      },
+                      child: but('Email Fraud', i5)),
                   SizedBox(
                     height: AppBar().preferredSize.height,
                   ),
@@ -170,12 +223,17 @@ class _WCCState extends State<WCC> {
                           Scaffold.of(context).showSnackBar(SnackBar(
                               content:
                                   Text('please select any of the option')));
-                        } else {
+                        } else if (sel == "") {
                           al.add(sel);
                           print(al);
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return LocScreen(al: al);
+                            // if(sel=="Loss of Money"){
+                            //   return EF(al:al)
+                            // }
+                            return LocScreen(
+                              al: al,
+                            );
                           }));
                         }
                       },

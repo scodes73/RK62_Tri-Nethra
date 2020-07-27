@@ -1,0 +1,83 @@
+[
+    {
+        "Report a complaint": {
+            "Content Related to online child sex Abuse/Rape/Obstacenity": {
+                "Child Pornography": [
+                    "Report child pornography Anonymously",
+                    "Report Child Pornography and track"
+                ],
+                "Rape/Gang Rape": [
+                    "Report Rape/Gang Rape Anonymously",
+                    "Report Rape/Gang Rape and track"
+                ],
+                "Sexual Obscenity": [
+                    "Report Sexual Obscenity Anonymously",
+                    "Report Sexual Obscenity and track"
+                ],
+                "Sexually Explicit": [
+                    "Report Sexually Explicit Anonymously",
+                    "Report Sexually Explicit and track"
+                ]
+            },
+            "Other Cyber Crime": {
+                "Loss of Money": {
+                    "Banking/E-Wallet/Demat": [
+                        "Misuse of Credit/Debit Card/ATM Fraud",
+                        "Unauthorized Access Through Internet Banking",
+                        "Cryptocurrency/Bitcoin",
+                        "E-Wallet Fraud,Demat/Mutual Fund"
+                    ],
+                "Job/Matrimonial":[
+                    "online Job Fraud",
+                    "Online Matrimonial Fraud"
+                    ],
+                "E-commerce":[],
+                "Fradulent SMS/Media Content/call": [],
+                "Email Fraud": [
+                    "Spoof Email",
+                    "Business Email",
+                    "Compromise",
+                    "Email Hacking",
+                    "Threatening Email",
+                    "Phishing Email"
+                ]
+            },
+            "Online Harassment": [
+                "Receving Offensive Messages",
+                "Online Bulying/Stalking"
+            ],
+            "Hacking": {
+                "Profile Hacking": [
+                    "Identity Theft",
+                    "Fake Profile",
+                    "Cheating by Impersonation"
+                ],
+                "Modification/hacking of website": [],
+                "Computer Hacking": [
+                    "Damage to computer",
+                    "Data Breach",
+                    "Altered Computer program",
+                    "ransomware"
+                ]
+            },
+            "Other online crime": [
+                "Online Anti National/Communal Hatred/Terror Activity",
+                "online prostitution/Human Trafficking",
+                "online Gambling",
+                "other"
+            ]
+        }
+    },
+        "Any Other Help": {},
+        "Safety Tips": [
+            "What is Cyber Crime",
+            "Online Fraud/Scam",
+            "Social Media Safety",
+            "Online Bullying",
+            "Financial Fraud",
+            "Employment Fraud",
+            "Matrimonial Fraud",
+            "Mobile Hacking"
+        ]
+    }
+]

@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:tri_nethra/screens/ChatInterface/CyberCrime.dart';
-import 'package:tri_nethra/screens/ChatInterface/Death.dart';
-import 'package:tri_nethra/screens/ChatInterface/ReportAccident.dart';
-import 'package:tri_nethra/screens/ChatInterface/StreetCrime.dart';
-import 'package:tri_nethra/screens/ChatInterface/WhiteCollar.dart';
+import 'package:tri_nethra/screens/ChatInterface/BED.dart';
+import 'package:tri_nethra/screens/ChatInterface/EF.dart';
+import 'package:tri_nethra/screens/ChatInterface/JM.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
-import 'package:tri_nethra/screens/root.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
-class ToC extends StatefulWidget {
+class LOM extends StatefulWidget {
   final List<String> al;
-  ToC({this.al});
+  LOM({this.al});
   @override
-  _ToCState createState() => _ToCState(al: al);
+  _LOMState createState() => _LOMState(al: al);
 }
 
-class _ToCState extends State<ToC> {
-  String sel;
-  List<String> al;
-  _ToCState({this.al});
+class _LOMState extends State<LOM> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye,
       i4 = Icons.panorama_fish_eye,
-      i5 = Icons.panorama_fish_eye,
-      i6 = Icons.panorama_fish_eye;
+      i5 = Icons.panorama_fish_eye;
+
+  List<String> al;
+  String sel;
+  _LOMState({this.al});
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -33,7 +30,7 @@ class _ToCState extends State<ToC> {
             context: context,
             builder: (context) => AlertDialog(
                   title: Text(
-                      'Would you like to discard this issue?(Your Data will be held CONFIDENTIAL)'),
+                      'You sure about going back,(all the data from this screen is discarded)?'),
                   actions: <Widget>[
                     FlatButton(
                         onPressed: () {
@@ -42,6 +39,7 @@ class _ToCState extends State<ToC> {
                         child: Text('No')),
                     FlatButton(
                         onPressed: () {
+                          al.removeLast();
                           Navigator.pop(context, true);
                           print(al);
                         },
@@ -84,7 +82,7 @@ class _ToCState extends State<ToC> {
                             Navigator.pop(context);
                             al.removeLast();
                             print(al);
-                            print("Popping from ToC page");
+                            print("Popping from LOM page");
                           },
                         ),
                       ),
@@ -105,8 +103,7 @@ class _ToCState extends State<ToC> {
                           Wrap(
                             children: [
                               Text(
-                                'Note that Your Data will be held Confidential'
-                                    .toUpperCase(),
+                                'Cyber Crime'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.orange,
@@ -130,7 +127,7 @@ class _ToCState extends State<ToC> {
                     child: Wrap(
                       children: [
                         Text(
-                          'Select the Type of Issue, you want to report:',
+                          'Select one among the following cases in regard:',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               color: Colors.white,
@@ -148,11 +145,11 @@ class _ToCState extends State<ToC> {
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.panorama_fish_eye;
                           i5 = Icons.panorama_fish_eye;
-                          i6 = Icons.panorama_fish_eye;
-                          sel = "SC";
+
+                          sel = 'Banking/E-Wallet/Demat';
                         });
                       },
-                      child: but('Street Crime', i1)),
+                      child: but('Banking/E-Wallet/Demat', i1)),
                   InkWell(
                       onTap: () {
                         setState(() {
@@ -161,63 +158,46 @@ class _ToCState extends State<ToC> {
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.panorama_fish_eye;
                           i5 = Icons.panorama_fish_eye;
-                          i6 = Icons.panorama_fish_eye;
-                          sel = "Death";
+                          sel = 'Job/Matrimonial';
                         });
                       },
-                      child: but('Death', i2)),
+                      child: but('Job/Matrimonial', i2)),
                   InkWell(
                       onTap: () {
                         setState(() {
+                          sel = 'E-commerce';
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.check_circle;
                           i4 = Icons.panorama_fish_eye;
                           i5 = Icons.panorama_fish_eye;
-                          i6 = Icons.panorama_fish_eye;
-                          sel = "DC";
                         });
                       },
-                      child: but('Drug Crime', i3)),
+                      child: but('E-commerce', i3)),
                   InkWell(
                       onTap: () {
                         setState(() {
+                          sel = 'Fradulent SMS/Media Content/call';
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.check_circle;
                           i5 = Icons.panorama_fish_eye;
-                          i6 = Icons.panorama_fish_eye;
-                          sel = "CC";
                         });
                       },
-                      child: but('Cyber Crime', i4)),
+                      child: but('Fradulent SMS/Media Content/call', i4)),
                   InkWell(
                       onTap: () {
                         setState(() {
+                          sel = 'Email Fraud';
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.panorama_fish_eye;
                           i5 = Icons.check_circle;
-                          i6 = Icons.panorama_fish_eye;
-                          sel = "WCC";
                         });
                       },
-                      child: but('White-Collar Crime', i5)),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          i1 = Icons.panorama_fish_eye;
-                          i2 = Icons.panorama_fish_eye;
-                          i3 = Icons.panorama_fish_eye;
-                          i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.panorama_fish_eye;
-                          i6 = Icons.check_circle;
-                          sel = "RAA";
-                        });
-                      },
-                      child: but('Report an Accident', i6)),
+                      child: but('Email Fraud', i5)),
                   SizedBox(
                     height: AppBar().preferredSize.height,
                   ),
@@ -227,38 +207,21 @@ class _ToCState extends State<ToC> {
                           Scaffold.of(context).showSnackBar(SnackBar(
                               content:
                                   Text('please select any of the option')));
-                        } else {
+                        } else if (sel == "") {
                           al.add(sel);
                           print(al);
-
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            if (sel == 'SC') {
-                              return SC(
-                                al: al,
-                              );
-                            } else if (sel == 'Death') {
-                              return Death(
-                                al: al,
-                              );
-                            } else if (sel == 'WCC') {
-                              return WCC(
-                                al: al,
-                              );
-                            } else if (sel == 'RAA') {
-                              return RAA(
-                                al: al,
-                              );
-                            } else if (sel == 'CC') {
-                              return CC(
-                                al: al,
-                              );
-                            } else if (sel == 'DC') {
-                              return LocScreen(
-                                al: al,
-                              );
+                            if (sel == "Banking/E-Wallet/Demat") {
+                              return BED(al: al);
+                            } else if (sel == 'Job/Matrimonial') {
+                              return JM(al: al);
+                            } else if (sel == 'Email Fraud') {
+                              return EF(al: al);
                             }
-                            return OurRoot();
+                            return LocScreen(
+                              al: al,
+                            );
                           }));
                         }
                       },

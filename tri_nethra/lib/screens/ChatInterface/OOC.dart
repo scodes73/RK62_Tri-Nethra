@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
-class Death extends StatefulWidget {
+class OOC extends StatefulWidget {
   final List<String> al;
-  Death({this.al});
+  OOC({this.al});
   @override
-  _DeathState createState() => _DeathState(al: al);
+  _OOCState createState() => _OOCState(al: al);
 }
 
-class _DeathState extends State<Death> {
-  IconData i1 = Icons.panorama_fish_eye,
-      i2 = Icons.panorama_fish_eye,
-      i3 = Icons.panorama_fish_eye;
+class _OOCState extends State<OOC> {
   List<String> al;
   String sel;
-  _DeathState({this.al});
+  _OOCState({this.al});
+  IconData i1 = Icons.panorama_fish_eye,
+      i2 = Icons.panorama_fish_eye,
+      i3 = Icons.panorama_fish_eye,
+      i4 = Icons.panorama_fish_eye;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -76,7 +78,7 @@ class _DeathState extends State<Death> {
                             Navigator.pop(context);
                             al.removeLast();
                             print(al);
-                            print("Popping from Death page");
+                            print("Popping from OOC page");
                           },
                         ),
                       ),
@@ -97,7 +99,8 @@ class _DeathState extends State<Death> {
                           Wrap(
                             children: [
                               Text(
-                                'DEATH'.toUpperCase(),
+                                'Content Related to online child sex Abuse/Rape/Obstacenity'
+                                    .toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.orange,
@@ -134,33 +137,50 @@ class _DeathState extends State<Death> {
                   InkWell(
                       onTap: () {
                         setState(() {
-                          sel = 'Homicide';
+                          sel =
+                              "Online Anti National/Communal Hatred/Terror Activity";
                           i1 = Icons.check_circle;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Homicide', i1)),
+                      child: but(
+                          "Online Anti National/Communal Hatred/Terror Activity",
+                          i1)),
                   InkWell(
                       onTap: () {
                         setState(() {
-                          sel = 'Suicide';
+                          sel = "Online Prostitution/Human Trafficking";
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.check_circle;
                           i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Suicide', i2)),
+                      child: but("Online Prostitution/Human Trafficking", i2)),
                   InkWell(
                       onTap: () {
                         setState(() {
-                          sel = 'Not Sure';
+                          sel = "Online Gambling";
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.check_circle;
+                          i4 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Not Sure', i3)),
+                      child: but("Online Gambling", i3)),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          sel = "Other";
+                          i1 = Icons.panorama_fish_eye;
+                          i2 = Icons.panorama_fish_eye;
+                          i3 = Icons.panorama_fish_eye;
+                          i4 = Icons.check_circle;
+                        });
+                      },
+                      child: but("Other", i4)),
                   SizedBox(
                     height: AppBar().preferredSize.height,
                   ),
@@ -175,7 +195,9 @@ class _DeathState extends State<Death> {
                           print(al);
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return LocScreen(al: al);
+                            return LocScreen(
+                              al: al,
+                            );
                           }));
                         }
                       },

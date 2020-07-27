@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/models/currentUser.dart';
-import 'package:tri_nethra/screens/ChatInterface/ToC.dart';
+import 'package:tri_nethra/screens/ChatInterface/ToR.dart';
 import 'package:tri_nethra/screens/CrimeAwareness/CAScreen.dart';
 import 'package:tri_nethra/screens/Helpline.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
@@ -18,12 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
   bool anon;
   _HomeScreenState({this.anon = false});
   List<String> al;
-  //List<String> al = (anon == true) ? ['Anonymous', 'TOC'] : ['ToC'];
 
   String val = 'Not yet Selected';
   @override
   void initState() {
-    al = (anon == true) ? ['Anonymous', 'TOC'] : ['ToC'];
+    al = (anon == true) ? ['Anonymous', 'ToR'] : ['ToR'];
     super.initState();
   }
 
@@ -132,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => ToC(
+                            builder: (context) => ToR(
                               al: al,
                             ),
                           ),

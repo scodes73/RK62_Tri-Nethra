@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tri_nethra/screens/ChatInterface/AutoDetails.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
-class SC extends StatefulWidget {
+class OH extends StatefulWidget {
   final List<String> al;
-  SC({this.al});
+  OH({this.al});
   @override
-  _SCState createState() => _SCState(al: al);
+  _OHState createState() => _OHState(al: al);
 }
 
-class _SCState extends State<SC> {
+class _OHState extends State<OH> {
   List<String> al;
   String sel;
-  _SCState({this.al});
-  IconData i1 = Icons.panorama_fish_eye,
-      i2 = Icons.panorama_fish_eye,
-      i3 = Icons.panorama_fish_eye,
-      i4 = Icons.panorama_fish_eye,
-      i5 = Icons.panorama_fish_eye;
+  _OHState({this.al});
+  IconData i1 = Icons.panorama_fish_eye, i2 = Icons.panorama_fish_eye;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +75,7 @@ class _SCState extends State<SC> {
                             Navigator.pop(context);
                             al.removeLast();
                             print(al);
-                            print("Popping from SC page");
+                            print("Popping from OH page");
                           },
                         ),
                       ),
@@ -101,7 +96,7 @@ class _SCState extends State<SC> {
                           Wrap(
                             children: [
                               Text(
-                                'Street Crime'.toUpperCase(),
+                                'Online Harassment'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.orange,
@@ -138,63 +133,21 @@ class _SCState extends State<SC> {
                   InkWell(
                       onTap: () {
                         setState(() {
-                          sel = "Burglary";
+                          sel = "Online Bulying/Stalking";
                           i1 = Icons.check_circle;
                           i2 = Icons.panorama_fish_eye;
-                          i3 = Icons.panorama_fish_eye;
-                          i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Burglary', i1)),
+                      child: but("Online Bulying/Stalking", i1)),
                   InkWell(
                       onTap: () {
                         setState(() {
-                          sel = "Auto Theft";
+                          sel = "Receving Offensive Messagese";
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.check_circle;
-                          i3 = Icons.panorama_fish_eye;
-                          i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Auto Theft', i2)),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          sel = "Rape";
-                          i1 = Icons.panorama_fish_eye;
-                          i2 = Icons.panorama_fish_eye;
-                          i3 = Icons.check_circle;
-                          i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.panorama_fish_eye;
-                        });
-                      },
-                      child: but('Rape', i3)),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          sel = "Robbery";
-                          i1 = Icons.panorama_fish_eye;
-                          i2 = Icons.panorama_fish_eye;
-                          i3 = Icons.panorama_fish_eye;
-                          i4 = Icons.check_circle;
-                          i5 = Icons.panorama_fish_eye;
-                        });
-                      },
-                      child: but('Robbery', i4)),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          sel = "Other";
-                          i1 = Icons.panorama_fish_eye;
-                          i2 = Icons.panorama_fish_eye;
-                          i3 = Icons.panorama_fish_eye;
-                          i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.check_circle;
-                        });
-                      },
-                      child: but('Other', i5)),
+                      child: but("Receving Offensive Messages", i2)),
                   SizedBox(
                     height: AppBar().preferredSize.height,
                   ),
@@ -209,11 +162,6 @@ class _SCState extends State<SC> {
                           print(al);
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            if (sel == 'Auto Theft') {
-                              return Auto(
-                                al: al,
-                              );
-                            }
                             return LocScreen(
                               al: al,
                             );

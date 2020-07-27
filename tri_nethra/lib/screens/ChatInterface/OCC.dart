@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/screens/ChatInterface/HK.dart';
+import 'package:tri_nethra/screens/ChatInterface/LOM.dart';
+import 'package:tri_nethra/screens/ChatInterface/OH.dart';
+import 'package:tri_nethra/screens/ChatInterface/OOC.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
-class CC extends StatefulWidget {
+class OCC extends StatefulWidget {
   final List<String> al;
-  CC({this.al});
+  OCC({this.al});
   @override
-  _CCState createState() => _CCState(al: al);
+  _OCCState createState() => _OCCState(al: al);
 }
 
-class _CCState extends State<CC> {
+class _OCCState extends State<OCC> {
   IconData i1 = Icons.panorama_fish_eye,
       i2 = Icons.panorama_fish_eye,
       i3 = Icons.panorama_fish_eye,
-      i4 = Icons.panorama_fish_eye,
-      i5 = Icons.panorama_fish_eye;
+      i4 = Icons.panorama_fish_eye;
+
   List<String> al;
   String sel;
-  _CCState({this.al});
+  _OCCState({this.al});
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -78,7 +82,7 @@ class _CCState extends State<CC> {
                             Navigator.pop(context);
                             al.removeLast();
                             print(al);
-                            print("Popping from CC page");
+                            print("Popping from OCC page");
                           },
                         ),
                       ),
@@ -140,11 +144,11 @@ class _CCState extends State<CC> {
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.panorama_fish_eye;
-                          sel = 'Phishing';
+
+                          sel = 'Loss of Money';
                         });
                       },
-                      child: but('Phishing', i1)),
+                      child: but('Loss of Money', i1)),
                   InkWell(
                       onTap: () {
                         setState(() {
@@ -152,47 +156,33 @@ class _CCState extends State<CC> {
                           i2 = Icons.check_circle;
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.panorama_fish_eye;
-                          sel = 'Identity Theft';
+
+                          sel = 'Online Harassment';
                         });
                       },
-                      child: but('Identity Theft', i2)),
+                      child: but('Online Harassment', i2)),
                   InkWell(
                       onTap: () {
                         setState(() {
-                          sel = 'Spread of Wrong Context';
+                          sel = 'Hacking';
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.check_circle;
                           i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Spread of Wrong Context', i3)),
+                      child: but('Hacking', i3)),
                   InkWell(
                       onTap: () {
                         setState(() {
-                          sel = 'Pornography';
+                          sel = 'Other Online crime';
                           i1 = Icons.panorama_fish_eye;
                           i2 = Icons.panorama_fish_eye;
                           i3 = Icons.panorama_fish_eye;
                           i4 = Icons.check_circle;
-                          i5 = Icons.panorama_fish_eye;
                         });
                       },
-                      child: but('Pornography', i4)),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          sel = 'Other';
-                          i1 = Icons.panorama_fish_eye;
-                          i2 = Icons.panorama_fish_eye;
-                          i3 = Icons.panorama_fish_eye;
-                          i4 = Icons.panorama_fish_eye;
-                          i5 = Icons.check_circle;
-                        });
-                      },
-                      child: but('Other', i5)),
+                      child: but('Other Online crime', i4)),
                   SizedBox(
                     height: AppBar().preferredSize.height,
                   ),
@@ -202,11 +192,20 @@ class _CCState extends State<CC> {
                           Scaffold.of(context).showSnackBar(SnackBar(
                               content:
                                   Text('please select any of the option')));
-                        } else {
+                        } else if (sel == "") {
                           al.add(sel);
                           print(al);
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
+                            if (sel == "Loss of Money") {
+                              return LOM(al: al);
+                            } else if (sel == 'Online Harassment') {
+                              return OH(al: al);
+                            } else if (sel == 'Hacking') {
+                              return HK(al: al);
+                            } else if (sel == 'Other Online Crime') {
+                              return OOC(al: al);
+                            }
                             return LocScreen(
                               al: al,
                             );
