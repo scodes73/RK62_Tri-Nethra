@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class STD extends StatefulWidget {
   @override
@@ -6,12 +7,7 @@ class STD extends StatefulWidget {
 }
 
 class _STDState extends State<STD> {
-  List<DropdownMenuItem<String>> ddl = [
-    DropdownMenuItem<String>(
-      child: Text('a'),
-      value: 'a',
-    )
-  ];
+  List<DropdownMenuItem<String>> ddl;
   List<String> states = [
     'Andhra Pradesh',
     'Arunachal Pradesh',
@@ -865,45 +861,203 @@ class _STDState extends State<STD> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('data'),
-      ),
-      body: Container(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Text('data'),
-              DropdownButton(
-                underline: Text(''),
-                dropdownColor: Colors.white,
-                items: fillStates(),
-                hint: Text('Select A State'),
-                value: selState,
-                onChanged: (newValue) {
-                  setState(() {
-                    selState = newValue;
-                    selDiat = null;
-                  });
-                  ddl = fillDists();
-                  print(selState);
-                },
+    return WillPopScope(
+      onWillPop: () {
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(
+                      'Would you like to discard this issue?(Your Data will be held CONFIDENTIAL)'),
+                  actions: <Widget>[
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Text('No')),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                          // print(al);
+                        },
+                        child: Text('Yes')),
+                  ],
+                ));
+      },
+      child: Scaffold(
+        body: Builder(
+          builder: (context) {
+            return Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomRight,
+                      colors: [
+                    Colors.orange[900],
+                    Colors.orange[500],
+                    Colors.orange[400]
+                  ])),
+              child: Container(
+                child: ListView(
+                  children: <Widget>[
+                    SizedBox(height: AppBar().preferredSize.height),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.keyboard_arrow_left,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              // al.removeLast();
+                              // print(al);
+                              print("Popping from ST page");
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 30, right: 30),
+                      child: OrPop(
+                        popcolor: Colors.white,
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Wrap(
+                              children: [
+                                Text(
+                                  'Incident Location Details'.toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.orange,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 58.0, left: 28, right: 28),
+                      child: OrPop(
+                        popcolor: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 50, right: 50),
+                          child: DropdownButton(
+                            underline: Text(''),
+                            dropdownColor: Colors.white,
+                            items: fillStates(),
+                            hint: Text(
+                              'Select A State',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            value: selState,
+                            onChanged: (newValue) {
+                              setState(() {
+                                selState = newValue;
+                                selDiat = null;
+                              });
+                              ddl = fillDists();
+                              print(selState);
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 28.0, right: 28, left: 28),
+                      child: OrPop(
+                        popcolor: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 50, right: 50),
+                          child: DropdownButton(
+                            underline: Text(''),
+                            dropdownColor: Colors.white,
+                            items: ddl,
+                            hint: Text(
+                              'Select District*',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            value: selDiat,
+                            onChanged: (newValue) {
+                              setState(() {
+                                selDiat = newValue;
+                              });
+                              print(selDiat);
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 28.0, right: 28, top: 8, bottom: 28),
+                      child: OrPop(
+                        popcolor: Colors.white,
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(),
+                          child: TextFormField(
+                            // controller: _confirmPasswordController,
+                            decoration: InputDecoration(
+                                hintText: "Police Station Region",
+                                hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold),
+                                border: InputBorder.none),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 30.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Text('Next',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black)),
+                              Icon(
+                                Icons.keyboard_arrow_right,
+                                size: 30,
+                                color: Colors.black,
+                              )
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
               ),
-              DropdownButton(
-                underline: Text(''),
-                dropdownColor: Colors.white,
-                items: ddl,
-                hint: Text('Select District'),
-                value: selDiat,
-                onChanged: (newValue) {
-                  setState(() {
-                    selDiat = newValue;
-                  });
-                  print(selDiat);
-                },
-              )
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
