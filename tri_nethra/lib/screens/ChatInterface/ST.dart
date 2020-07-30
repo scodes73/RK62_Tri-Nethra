@@ -1046,7 +1046,7 @@ class _STDState extends State<STD> {
                                 content: Text(
                                     'please select both state and district')));
                           } else {
-                            al.add(selState + ";" + selDist);
+                            al.add(selState + "/" + selDist);
                             print(al);
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {

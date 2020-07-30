@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/screens/ChatInterface/ToR.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/services/location/locationScreen.dart';
 
@@ -222,11 +223,11 @@ class _DTPKState extends State<DTPK> {
                         onTap: () {
                           if (!t && !d) {
                             Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                    'please select both state and district')));
+                                content:
+                                    Text('please select both Date and Time')));
                           } else {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LocScreen(
+                                builder: (context) => ToR(
                                       al: al,
                                     )));
                           }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/models/currentUser.dart';
+import 'package:tri_nethra/screens/ChatInterface/ST.dart';
 import 'package:tri_nethra/screens/ChatInterface/ToR.dart';
 import 'package:tri_nethra/screens/CrimeAwareness/CAScreen.dart';
 import 'package:tri_nethra/screens/Helpline.dart';
@@ -131,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => ToR(
+                            builder: (context) => STD(
                               al: al,
                             ),
                           ),
