@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:tri_nethra/screens/ChatInterface/Datepkr.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 
 class STD extends StatefulWidget {
+  final List<String> al;
+  STD({this.al});
   @override
-  _STDState createState() => _STDState();
+  _STDState createState() => _STDState(al: al);
 }
 
 class _STDState extends State<STD> {
+  List<String> al;
+  _STDState({this.al});
   List<DropdownMenuItem<String>> ddl;
   List<String> states = [
     'Andhra Pradesh',
@@ -821,7 +826,7 @@ class _STDState extends State<STD> {
     ]
   };
 
-  var selState, selDiat;
+  var selState, selDist;
 
   List<DropdownMenuItem<String>> fillStates() {
     List<DropdownMenuItem<String>> aa = List<DropdownMenuItem<String>>();
@@ -877,7 +882,8 @@ class _STDState extends State<STD> {
                     FlatButton(
                         onPressed: () {
                           Navigator.pop(context, true);
-                          // print(al);
+
+                          print(al);
                         },
                         child: Text('Yes')),
                   ],
@@ -916,7 +922,7 @@ class _STDState extends State<STD> {
                             onPressed: () {
                               Navigator.pop(context);
                               // al.removeLast();
-                              // print(al);
+                              print(al);
                               print("Popping from ST page");
                             },
                           ),
@@ -974,7 +980,7 @@ class _STDState extends State<STD> {
                             onChanged: (newValue) {
                               setState(() {
                                 selState = newValue;
-                                selDiat = null;
+                                selDist = null;
                               });
                               ddl = fillDists();
                               print(selState);
@@ -999,12 +1005,12 @@ class _STDState extends State<STD> {
                               'Select District*',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            value: selDiat,
+                            value: selDist,
                             onChanged: (newValue) {
                               setState(() {
-                                selDiat = newValue;
+                                selDist = newValue;
                               });
-                              print(selDiat);
+                              print(selDist);
                             },
                           ),
                         ),
@@ -1034,7 +1040,22 @@ class _STDState extends State<STD> {
                       ),
                     ),
                     InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          if (selDist == null || selState == null) {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    'please select both state and district')));
+                          } else {
+                            al.add(selState + ";" + selDist);
+                            print(al);
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return DTPK(
+                                al: al,
+                              );
+                            }));
+                          }
+                        },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 30.0),
                           child: Row(

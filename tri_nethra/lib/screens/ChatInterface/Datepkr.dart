@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
+import 'package:tri_nethra/services/location/locationScreen.dart';
 
 class DTPK extends StatefulWidget {
+  final List<String> al;
+  DTPK({this.al});
   @override
-  _DTPKState createState() => _DTPKState();
+  _DTPKState createState() => _DTPKState(al: al);
 }
 
 class _DTPKState extends State<DTPK> {
+  final List<String> al;
+  _DTPKState({this.al});
   bool d = false, t = false;
   TextEditingController _desController = TextEditingController();
   DateTime dt = DateTime.now();
@@ -30,7 +35,7 @@ class _DTPKState extends State<DTPK> {
                     FlatButton(
                         onPressed: () {
                           Navigator.pop(context, true);
-                          // print(al);
+                          print(al);
                         },
                         child: Text('Yes')),
                   ],
@@ -68,8 +73,8 @@ class _DTPKState extends State<DTPK> {
                             ),
                             onPressed: () {
                               Navigator.pop(context);
-                              // al.removeLast();
-                              // print(al);
+                              al.removeLast();
+                              print(al);
                               print("Popping from DTPK page");
                             },
                           ),
@@ -214,7 +219,18 @@ class _DTPKState extends State<DTPK> {
                       ),
                     ),
                     InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          if (!t && !d) {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    'please select both state and district')));
+                          } else {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => LocScreen(
+                                      al: al,
+                                    )));
+                          }
+                        },
                         child: Padding(
                           padding: const EdgeInsets.only(top: 30, right: 30.0),
                           child: Row(
