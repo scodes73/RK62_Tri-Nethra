@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/models/currentUser.dart';
 import 'package:tri_nethra/screens/ChatInterface/ST.dart';
-import 'package:tri_nethra/screens/ChatInterface/ToR.dart';
 import 'package:tri_nethra/screens/CrimeAwareness/CAScreen.dart';
 import 'package:tri_nethra/screens/Helpline.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
@@ -84,6 +83,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+                anon
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            "Anonymous ",
+                            style: TextStyle(color: Colors.white, fontSize: 50),
+                          ),
+                        ],
+                      )
+                    : Container(),
                 SizedBox(
                   height: _data.size.height / 20,
                 ),

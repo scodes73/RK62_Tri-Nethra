@@ -97,7 +97,7 @@ class _OurLoginState extends State<OurLogin> {
                       SizedBox(
                         height: 10,
                       ),
-                      //FadeAnimation(
+
                       //1.3,
                       Text(
                         "Welcome Back",
@@ -125,7 +125,7 @@ class _OurLoginState extends State<OurLogin> {
                             SizedBox(
                               height: 60,
                             ),
-                            //FadeAnimation(
+
                             //  1.4,
                             OrPop(
                               popcolor: Colors.white,
@@ -168,7 +168,7 @@ class _OurLoginState extends State<OurLogin> {
                             SizedBox(
                               height: 40,
                             ),
-                            //FadeAnimation(
+
                             //1.5,
                             Text(
                               "Forgot Password?",
@@ -206,7 +206,7 @@ class _OurLoginState extends State<OurLogin> {
                             SizedBox(
                               height: 50,
                             ),
-                            //FadeAnimation(
+
                             //1.7,
                             Text(
                               "TRI-NETHRA",
@@ -220,17 +220,22 @@ class _OurLoginState extends State<OurLogin> {
                             SizedBox(
                               height: 20,
                             ),
-                            RaisedButton(
-                              onPressed: () {
+                            InkWell(
+                              onTap: () {
                                 _loginanon(context);
                               },
-                              child: Text('data'),
+                              child: Text(
+                                'Report Anonymously',
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.orange[900],
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
+
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                              child: //FadeAnimation(
-                                  //1.8,
-                                  RichText(
+                              padding: const EdgeInsets.fromLTRB(0, 20, 0, 30),
+                              child: RichText(
                                 text: TextSpan(
                                   style: TextStyle(fontSize: 15),
                                   children: <TextSpan>[
@@ -257,9 +262,6 @@ class _OurLoginState extends State<OurLogin> {
                                 ),
                               ),
                             ),
-                            //),
-                            //FadeAnimation(
-                            //  1.8,
                             RichText(
                               text: TextSpan(
                                 style: TextStyle(fontSize: 10),
@@ -303,15 +305,7 @@ class _OurLoginState extends State<OurLogin> {
                                         }),
                                 ],
                               ),
-                            )
-                            // RaisedButton(
-                            // key:
-                            //Text(
-                            //"Don't have an account? Sign Up",
-                            //style: TextStyle(color: Colors.grey),
-                            //),
-                            //),
-                            , //  ),
+                            ),
                             SizedBox(
                               height: 30,
                             ),

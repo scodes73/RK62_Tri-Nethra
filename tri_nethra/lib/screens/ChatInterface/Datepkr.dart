@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ToR.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
-import 'package:tri_nethra/services/location/locationScreen.dart';
 
 class DTPK extends StatefulWidget {
   final List<String> al;
