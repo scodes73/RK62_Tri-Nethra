@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tri_nethra/screens/ChatInterface/ROC.dart';
+import 'package:tri_nethra/screens/CrimeAwareness/safetyTips.dart';
 import 'package:tri_nethra/screens/login/localwidgets/orpop.dart';
 import 'package:tri_nethra/screens/root.dart';
 
@@ -188,9 +189,7 @@ class _ToRState extends State<ToR> {
                                 al: al,
                               );
                             } else if (sel == 'Safety Tips') {
-                              return ROC(
-                                al: al,
-                              );
+                              return STScreen();
                             }
                             return OurRoot();
                           }));
