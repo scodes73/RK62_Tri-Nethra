@@ -31,7 +31,7 @@ class CAScreenState extends State<CAScreen> {
         q: "4.CYBER GROOMING",
         a: "Cyber Grooming is when a person builds an online relationship with a young person and tricks or pressures him/ her into doing sexual act."),
     Qt(
-        q: "5.ONLINE JOB FRAU",
+        q: "5.ONLINE JOB FRAUD",
         a: "Online Job Fraud is an attempt to defraud people who are in need of employment by giving them a false hope/ promise of better employment with higher wages."),
     Qt(
         q: "6.ONLINE SEXTORTION",
