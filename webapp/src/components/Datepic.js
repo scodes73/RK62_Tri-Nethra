@@ -2,9 +2,26 @@ import React, { Component } from 'react';
 import DatePicker from 'react-date-picker';
  
 class Datepic extends Component {
-  state = {
-    date: new Date(),
-    disabled: false
+  constructor(props){
+    super(props);
+    this.state = {
+      btTxt:"",
+      date: new Date(),
+      disabled: false
+    }
+  }
+  
+
+  componentDidMount(){
+    if(this.props.steps.lang.value === ""){
+      this.setState({
+        btTxt: "Set Date"
+      })
+    }else{
+      this.setState({
+        btTxt:"तारीख सेट करें"
+      })
+    }
   }
  
   onChange = date => this.setState({ date })
@@ -25,8 +42,8 @@ class Datepic extends Component {
             disabled: true
           });
           console.log(this.props.steps);
-          this.props.triggerNextStep({ trigger: "incident_area", value: this.state.date });
-        }}>set date</button>
+          this.props.triggerNextStep({ trigger: this.props.steps.lang.value+"incident_area", value: this.state.date });
+        }}>{this.state.btTxt}</button>
       </div>
     );
   }
