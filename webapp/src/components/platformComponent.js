@@ -31,14 +31,14 @@ class Example extends Component {
                   disabled: true
               })
               this.props.triggerNextStep({
-                trigger: "Location",
+                trigger: this.props.steps.lang.value+"Location",
                 value: {
                   platform: this.state.selected,
                 },
               });
             }}
           >
-            Save
+            {this.props.steps.lang.value === ""?"Save":"सहेजें"}
           </button>
         </div>
       </div>

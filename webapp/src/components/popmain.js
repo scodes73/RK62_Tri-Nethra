@@ -77,7 +77,7 @@ class PopMain extends Component {
             disabled={this.state.disabled}
             onClick={this.togglePopup.bind(this)}
           >
-            Show Map
+            {this.props.steps.lang.value === ""?"Show map":"पता सेट करें"}
           </button>
           {this.state.showPopup ? (
             <Popup
@@ -86,7 +86,7 @@ class PopMain extends Component {
                 this.setState({
                   disabled: !this.state.disabled,
                 });
-                this.props.triggerNextStep({ trigger: "update", value: mdata });
+                this.props.triggerNextStep({ trigger: this.props.steps.lang.value+"update", value: mdata });
               }}
             />
           ) : null}
