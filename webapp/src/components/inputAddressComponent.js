@@ -36,13 +36,13 @@ class InputComp extends Component {
                   status: ""
                 });
                 this.props.triggerNextStep({
-                  trigger: "update",
+                  trigger: this.props.steps.lang.value+"update",
                   value: this.state.address,
                 });
               }
             }}
           >
-            Set address
+            {this.props.steps.lang.value === ""?"Set address":"पता सेट करें"}
           </button>
           {this.state.status !== "" ? (
             <span style={{ color: this.state.statusColor }}>
