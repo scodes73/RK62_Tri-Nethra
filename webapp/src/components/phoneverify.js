@@ -97,7 +97,7 @@ class PhoneVerify extends Component {
           statusColor: "green",
         })
         props.triggerNextStep({
-          trigger: "Name",
+          trigger: this.props.steps.lang.value+"Name",
           value: {
             phonenumber: user.phoneNumber,
             uid: user.uid,
