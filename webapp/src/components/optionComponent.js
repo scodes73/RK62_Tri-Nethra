@@ -756,6 +756,13 @@ const STEPS = [
   {
     id: "email",
     user: true,
+    validator: (value) => {
+      if(/^([0-9a-zA-Z])+([a-zA-Z0-9_.+-])+\@(([a-zA-Z])+\.+?(com|co|in|org|net|edu|info|gov|vekomy|ac))\.?(com|co|in|org|net|edu|info|gov)?$/i.test(String(value).toLowerCase())) return true;
+      else{
+        alert("You have entered an invalid email address!");
+        return 'value should be a Valid Email';
+      }
+    },
     trigger: "Official_doc",
   },
   {
@@ -791,6 +798,21 @@ const STEPS = [
   {
     id: "number_pof",
     user: true,
+    validator: (value) => {
+      function ValidateCard(inputText)
+      {
+          if((/^[2-9]{1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}$/i.test(String(inputText))) || (/^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/i.test(String(inputText)))) return true;
+          else if(/[A-Z]{5}[0-9]{4}[A-Z]{1}/i.test(inputText)) return true;
+          else if(/(\b)(\d{8})(\b)/i.test(String(inputText).toLowerCase())) return true;
+          else
+          {
+            alert("You have entered an invalid Number of the Card!");
+            return false;
+          }
+      }
+      if (!ValidateCard(value)) return 'value should be a Valid Number';
+      return true;
+      },
     trigger: "Date_module",
   },
 
