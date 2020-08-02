@@ -8,9 +8,10 @@ import { firebase } from "./firebase";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import TrackComp from "./searchStatus";
 import AddressInput from "./inputAddressComponent";
-import Cards from './cardComponent';
-import Safe from '../SafetyComponents/safeComponent';
+import Cards from "./cardComponent";
 import Example from "./platformComponent";
+import AIChat from "./AIChat";
+import Safe from "../SafetyComponents/safeComponent";
 
 class Review extends Component {
   constructor(props) {
@@ -29,77 +30,153 @@ class Review extends Component {
   componentWillMount() {
     const { steps } = this.props;
     console.log(steps);
-    if ("") console.log("Yes it is present");
-    this.state.cl.push("" + steps.Select_date.value + "");
-    this.state.cl.push(steps.Delay_exp.value);
-    this.state.cl.push(steps.desc.value);
-    var i;
-    for(i=0;i<steps.ch_plat.value.platform.length;i++){
-      this.state.cl.push(steps.ch_plat.value.platform[i].value);
-    }
-    this.state.stateDist.push(steps.incident_menu.value.state);
-    this.state.stateDist.push(steps.incident_menu.value.district);
-    this.state.stateDist.push(steps.incident_menu.value.psregion);
-    try {
-      for (i = 0; i < steps.Upload.value.length; i++)
-        this.state.attachments.push(steps.Upload.value[i]);
-    } catch (error) {}
-    try {
-      for (i = 0; i < steps.Loc_Details.value.length; i++)
-        this.state.location.push(
-          steps.Loc_Details.value[i].lat + "/" + steps.Loc_Details.value[i].lng
-        );
-    } catch {}
-    try {
-      this.state.location.push(steps.Loc_Input.value);
-    } catch {}
-    try {
-      this.state.doneBy.push(steps.Complaint_type.value);
-    } catch (error) {
-      this.state.doneBy.push("Personal");
-    }
-    if (this.state.doneBy[0] === "Personal") {
-      this.state.doneBy.push(steps.otp.value.phonenumber);
-      this.state.doneBy.push(steps.otp.value.uid);
-      this.state.doneBy.push(steps.name.value);
-      this.state.doneBy.push(steps.email.value);
-      this.state.doneBy.push(steps.POF.value);
-      this.state.doneBy.push(steps.number_pof.value);
-    }
-    this.state.cl.push(steps.Category.value);
-    if (
-      this.state.cl[this.state.cl.length - 1] ===
-      "Child Sex Abuse/Rape/Obstacenity"
-    )
-      this.state.cl.push(steps.Category_1.value);
-    else if (this.state.cl[this.state.cl.length - 1] === "Cyber Crime") {
-      this.state.cl.push(steps.Category_2.value);
-      if (steps.Category_2.value === "Loss of Money") {
-        if ("Banking" in steps) {
-          this.state.cl.push("Banking/E-Wallet/Demat");
-          this.state.cl.push(steps.Banking.value);
-        } else if ("Online" in steps) {
-          this.state.cl.push(
-            "Job/Matrimonial,E-commerce,Fradulent SMS/Media Content/call"
-          );
-          this.state.cl.push(steps.Online.value);
-        } else if ("Email_Fraud" in steps) {
-          this.state.cl.push("Email Fraud");
-          this.state.cl.push(steps.Email_Fraud.value);
-        }
-      } else if (steps.Category_2.value === "Online Harassment") {
-        this.state.cl.push(steps.Online_Harassment.value);
-      } else if (steps.Category_2.value === "Hacking") {
-        if ("Profile_Hacking" in steps) {
-          this.state.cl.push("Profile Hacking");
-          this.state.cl.push(steps.Profile_Hacking.value);
-        } else if ("Computer" in steps) {
-          this.state.cl.push("Computer Hacking");
-          this.state.cl.push(steps.Computer.value);
-        }
-      } else {
-        this.state.cl.push(steps.Other.value);
+    if (steps.Service.value !== "ChatAI") {
+      if ("") console.log("Yes it is present");
+      this.state.cl.push("" + steps.Select_date.value + "");
+      this.state.cl.push(steps.desc.value);
+      var i;
+      for (i = 0; i < steps.ch_plat.value.platform.length; i++) {
+        this.state.cl.push(steps.ch_plat.value.platform[i].value);
       }
+      this.state.stateDist.push(steps.incident_menu.value.state);
+      this.state.stateDist.push(steps.incident_menu.value.district);
+      this.state.stateDist.push(steps.incident_menu.value.psregion);
+      try {
+        for (i = 0; i < steps.Upload.value.length; i++)
+          this.state.attachments.push(steps.Upload.value[i]);
+      } catch (error) {}
+      try {
+        for (i = 0; i < steps.Loc_Details.value.length; i++)
+          this.state.location.push(
+            steps.Loc_Details.value[i].lat +
+              "/" +
+              steps.Loc_Details.value[i].lng
+          );
+      } catch {}
+      try {
+        this.state.location.push(steps.Loc_Input.value);
+      } catch {}
+      try {
+        this.state.doneBy.push(steps.Complaint_type.value);
+      } catch (error) {
+        this.state.doneBy.push("Personal");
+      }
+      if (this.state.doneBy[0] === "Personal") {
+        this.state.doneBy.push(steps.otp.value.phonenumber);
+        this.state.doneBy.push(steps.otp.value.uid);
+        this.state.doneBy.push(steps.name.value);
+        this.state.doneBy.push(steps.email.value);
+        this.state.doneBy.push(steps.POF.value);
+        this.state.doneBy.push(steps.number_pof.value);
+      }
+      this.state.cl.push(steps.Category.value);
+      if (
+        this.state.cl[this.state.cl.length - 1] ===
+        "Child Sex Abuse/Rape/Obstacenity"
+      )
+        this.state.cl.push(steps.Category_1.value);
+      else if (this.state.cl[this.state.cl.length - 1] === "Cyber Crime") {
+        this.state.cl.push(steps.Category_2.value);
+        if (steps.Category_2.value === "Loss of Money") {
+          if ("Banking" in steps) {
+            this.state.cl.push("Banking/E-Wallet/Demat");
+            this.state.cl.push(steps.Banking.value);
+          } else if ("Online" in steps) {
+            this.state.cl.push(
+              "Job/Matrimonial,E-commerce,Fradulent SMS/Media Content/call"
+            );
+            this.state.cl.push(steps.Online.value);
+          } else if ("Email_Fraud" in steps) {
+            this.state.cl.push("Email Fraud");
+            this.state.cl.push(steps.Email_Fraud.value);
+          }
+        } else if (steps.Category_2.value === "Online Harassment") {
+          this.state.cl.push(steps.Online_Harassment.value);
+        } else if (steps.Category_2.value === "Hacking") {
+          if ("Profile_Hacking" in steps) {
+            this.state.cl.push("Profile Hacking");
+            this.state.cl.push(steps.Profile_Hacking.value);
+          } else if ("Computer" in steps) {
+            this.state.cl.push("Computer Hacking");
+            this.state.cl.push(steps.Computer.value);
+          }
+        } else {
+          this.state.cl.push(steps.Other.value);
+        }
+      }
+    } else {
+      this.state.cl.push("" + steps.Select_date.value + "");
+      this.state.cl.push(steps.desc.value);
+      for (i = 0; i < steps.ch_plat.value.platform.length; i++) {
+        this.state.cl.push(steps.ch_plat.value.platform[i].value);
+      }
+      this.state.stateDist.push(steps.incident_menu.value.state);
+      this.state.stateDist.push(steps.incident_menu.value.district);
+      this.state.stateDist.push(steps.incident_menu.value.psregion);
+      try {
+        for (i = 0; i < steps.Upload.value.length; i++)
+          this.state.attachments.push(steps.Upload.value[i]);
+      } catch (error) {}
+      try {
+        for (i = 0; i < steps.Loc_Details.value.length; i++)
+          this.state.location.push(
+            steps.Loc_Details.value[i].lat +
+              "/" +
+              steps.Loc_Details.value[i].lng
+          );
+      } catch {}
+      try {
+        this.state.location.push(steps.Loc_Input.value);
+      } catch {}
+      try {
+        this.state.doneBy.push(steps.Complaint_type.value);
+      } catch (error) {
+        this.state.doneBy.push("Personal");
+      }
+      if (this.state.doneBy[0] === "Personal") {
+        this.state.doneBy.push(steps.otp.value.phonenumber);
+        this.state.doneBy.push(steps.otp.value.uid);
+        this.state.doneBy.push(steps.name.value);
+        this.state.doneBy.push(steps.email.value);
+        this.state.doneBy.push(steps.POF.value);
+        this.state.doneBy.push(steps.number_pof.value);
+      }
+      for (i = 0; i < steps.zero1.value.length; i++)
+          this.state.cl.push(steps.zero1.value[i]);
+      // if (
+      //   this.state.cl[this.state.cl.length - 1] ===
+      //   "Child Sex Abuse/Rape/Obstacenity"
+      // )
+      //   this.state.cl.push(steps.Category_1.value);
+      // else if (this.state.cl[this.state.cl.length - 1] === "Cyber Crime") {
+      //   this.state.cl.push(steps.Category_2.value);
+      //   if (steps.Category_2.value === "Loss of Money") {
+      //     if ("Banking" in steps) {
+      //       this.state.cl.push("Banking/E-Wallet/Demat");
+      //       this.state.cl.push(steps.Banking.value);
+      //     } else if ("Online" in steps) {
+      //       this.state.cl.push(
+      //         "Job/Matrimonial,E-commerce,Fradulent SMS/Media Content/call"
+      //       );
+      //       this.state.cl.push(steps.Online.value);
+      //     } else if ("Email_Fraud" in steps) {
+      //       this.state.cl.push("Email Fraud");
+      //       this.state.cl.push(steps.Email_Fraud.value);
+      //     }
+      //   } else if (steps.Category_2.value === "Online Harassment") {
+      //     this.state.cl.push(steps.Online_Harassment.value);
+      //   } else if (steps.Category_2.value === "Hacking") {
+      //     if ("Profile_Hacking" in steps) {
+      //       this.state.cl.push("Profile Hacking");
+      //       this.state.cl.push(steps.Profile_Hacking.value);
+      //     } else if ("Computer" in steps) {
+      //       this.state.cl.push("Computer Hacking");
+      //       this.state.cl.push(steps.Computer.value);
+      //     }
+      //   } else {
+      //     this.state.cl.push(steps.Other.value);
+      //   }
+      //
     }
     console.log({
       Attachments: this.state.attachments,
@@ -153,7 +230,7 @@ class Review extends Component {
             </strong>
           </div>
         </div>
-        <div style={{height: "10px"}}/>
+        <div style={{ height: "10px" }} />
         <div
           style={{ display: "flex", width: "100%", justifyContent: "center" }}
         >
@@ -162,7 +239,14 @@ class Review extends Component {
               text={this.state.docId}
               onCopy={() => this.setState({ status: "Copied!" })}
             >
-              <button className="button1">Copy id to clipboard</button>
+              <button
+                className="button1"
+                onClick={() => {
+                  this.props.triggerNextStep({ trigger: "end_greet" });
+                }}
+              >
+                Copy id to clipboard
+              </button>
             </CopyToClipboard>
           ) : null}
         </div>
@@ -203,17 +287,20 @@ const STEPS = [
   },
   {
     id: "3.1",
-    message: " 1 . Register a complaint by myself or redirect to the official portal as you wish. ",
+    message:
+      " 1 . Register a complaint by myself or redirect to the official portal as you wish. ",
     trigger: "3.2",
   },
   {
-    id: '3.2',
-    message: " 2 . Fetch you the current status of your complaint from our database",
+    id: "3.2",
+    message:
+      " 2 . Fetch you the current status of your complaint from our database",
     trigger: "3.3",
   },
   {
-    id: '3.3',
-    message: " 3 . Enlighten you with several safety tips that you might want to follow so that you would use me less in future :)",
+    id: "3.3",
+    message:
+      " 3 . Enlighten you with several safety tips that you might want to follow so that you would use me less in future :)",
     trigger: "serv",
   },
   {
@@ -236,8 +323,13 @@ const STEPS = [
       },
       {
         value: "Track",
-        label: "Track the Complaint",
+        label: "Track a Complaint",
         trigger: "TrackComplaint",
+      },
+      {
+        value: "ChatAI",
+        label: "Chat with AI Bot",
+        trigger: "AIChat",
       },
     ],
   },
@@ -303,12 +395,12 @@ const STEPS = [
     ],
   },
   {
-	id: "Register-Types",
-	message: 'Select the Services u want: ',
-	trigger: 'reg_op',
+    id: "Register-Types",
+    message: "Select the Services u want: ",
+    trigger: "reg_op",
   },
   {
-	id: 'reg_op',
+    id: "reg_op",
     options: [
       {
         value: "Here",
@@ -323,9 +415,9 @@ const STEPS = [
     ],
   },
   {
-	  id: 'comp',
-	  message: 'Select How u want to Register:',
-	  trigger: 'Complaint_type'
+    id: "comp",
+    message: "Select How u want to Register:",
+    trigger: "Complaint_type",
   },
   {
     id: "Complaint_type",
@@ -613,30 +705,27 @@ const STEPS = [
     ],
   },
   {
-	  id: 'reg_type',
-	  message: 'select the Service You want :',
-	  trigger: 'process',
+    id: "reg_type",
+    message: "select the Service You want :",
+    trigger: "process",
   },
   {
-	  id: 'process',
-	  options: [
-		  {
-			  label: 'On-Chat Register Complaint',
-			  value: 'oc',
-			  trigger: 'Authentication',
-		  },
-		  {
-			  label: 'Information',
-			  value:'in',
-			  trigger: 'Modal_1'
-		  },
-	  ],
+    id: "process",
+    options: [
+      {
+        label: "On-Chat Register Complaint",
+        value: "oc",
+        trigger: "comp",
+      },
+      {
+        label: "Information",
+        value: "in",
+        trigger: "Modal_1",
+      },
+    ],
   },
 
-
-
-/* Authentication Module */
-
+  /* Authentication Module */
 
   {
     id: "Authentication",
@@ -705,13 +794,9 @@ const STEPS = [
     trigger: "Date_module",
   },
 
+  /* Authentication Module Ends */
 
-/* Authentication Module Ends */
-
-
-
-
-/* Date Module Begins  */
+  /* Date Module Begins  */
   {
     id: "Date_module",
     message: "Select the Date of happened?:",
@@ -721,16 +806,6 @@ const STEPS = [
     id: "Select_date",
     component: <Datepic />,
     waitAction: true,
-  },
-  {
-    id: "Delay",
-    message: "Explain why there is Delay in register:",
-    trigger: "Delay_exp",
-  },
-  {
-    id: "Delay_exp",
-    user: true,
-    trigger: "incident_area",
   },
   {
     id: "incident_area",
@@ -753,14 +828,14 @@ const STEPS = [
     trigger: "plat",
   },
   {
-	id: 'plat',
-	message: 'Choose Platform if u say in Online:',
-	trigger: 'ch_plat',
+    id: "plat",
+    message: "Choose Platform if u say in Online:",
+    trigger: "ch_plat",
   },
   {
-	id: 'ch_plat',
-	component: <Example />,
-	waitAction: true,
+    id: "ch_plat",
+    component: <Example />,
+    waitAction: true,
   },
   {
     id: "Location",
@@ -840,31 +915,89 @@ const STEPS = [
   {
     id: "Reference",
     component: <Review />,
+    waitAction: true,
+  },
+  {
+    id: "end_greet",
+    message:
+      "Do not worry and have faith in our law enforcement system. You will never be deprived of justice. Do you want me to carry out any other functionality? ",
+    trigger: "loop",
+  },
+  {
+    id: "loop",
+    options: [
+      {
+        value: "y",
+        label: "Yes",
+        trigger: "Greetings",
+      },
+      {
+        value: "n",
+        label: "No",
+        trigger: "final_end",
+      },
+    ],
+  },
+  {
+    id: "final_end",
+    message:
+      "$Thank You for using me. I am always available just a click away for your service . Bye",
     end: true,
-},
-{
-  id: 'last',
-  message: 'Though I am not a human, I can understand the situation you are passing through right now and I am feel very sorry that. Kindly note that I take the responsibility for making you feel better by channeling your case with utmost priority through proper way to the right hands\
-  Thus, you can trust me as I keep serving relentlessly until your issue is solved.',
-  end: true
-},
-	/* Card Component */
-	{
-		id: 'Modal_1',
-		component: <Cards />,
-		end: true,
-	},
+  },
+  /* Card Component */
+  {
+    id: "Modal_1",
+    component: <Cards />,
+    waitAction: true,
+  },
 
-	/* Modal */
-	{
-		id: 'Safe',
-		component: <Safe />,
-		end: true,
-	},
-
+  /* Modal */
+  {
+    id: "Safe",
+    component: <Safe />,
+    waitAction: true,
+  },
+  {
+    id: "AIChat",
+    message: "Hello i am a AI Chat bot, you can talk with me :)",
+    trigger: "zero",
+  },
+  {
+    id: "zero",
+    user: true,
+    trigger: "zero1",
+  },
+  {
+    id: "zero1",
+    component: <AIChat />,
+    asMessage: true,
+    waitAction: true,
+  },
+  {
+    id: "shaw",
+    message: "Do you want to register complaint on this ?",
+    trigger: "shaw_options",
+  },
+  {
+    id: "shaw_options",
+    options: [
+      {
+        label: "Yes",
+        value: "Yes",
+        trigger: "comp",
+      },
+      {
+        label: "Continue with chat",
+        value: "continue with chat",
+        trigger: "shaw1",
+      },
+    ],
+  },
+  {
+    id: "shaw1",
+    message: "We can continue our chat",
+    trigger: "zero",
+  },
 ];
-
-
-
 
 export default STEPS;

@@ -56,6 +56,9 @@ class Safe extends Component{
             isModalOpen7: !this.state.isModalOpen7
         });
     }
+    componentWillMount(){
+        this.props.triggerNextStep({trigger: 'end_greet'})
+    }
     render(){
         return(
             <React.Fragment>

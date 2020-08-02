@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { CardBody, Card } from 'reactstrap';
+import { CardBody, Card, Button } from 'reactstrap';
 
 class Cards extends Component {
     constructor(props){
@@ -26,7 +26,7 @@ class Cards extends Component {
                     <Card body inverse color="info">
                         <CardBody>
                             <div>
-                                <img src="home.png" width='40px' height='40px' alt="logo"></img> Go to <a href="https://www.cybercrime.gov.in" target="_blank" rel="">www.cybercrime.gov.in</a> and click on "Report Anonymously" under {this.state.cat} related Crime<br></br>
+                                <img src="home.png" width='40px' height='40px' alt="logo"></img> Go to <a href="https://www.cybercrime.gov.in">www.cybercrime.gov.in</a> and click on "Report Anonymously" under {this.state.cat} related Crime<br></br>
                             </div>
                         </CardBody>
                     </Card>
@@ -49,6 +49,11 @@ class Cards extends Component {
                                 <i class="fa fa-hand-o-right" aria-hidden="true"></i>Such contents can also be reported at concerned social media platform(click)<br></br>
                                 <i class="fa fa-hand-o-right" aria-hidden="true"></i>Safety Tips on Sexual Obscenity Content(click)
                             </div>
+                            <Button style={{marginLeft: '40px'}} onClick={
+                                () => {
+                                    this.props.triggerNextStep({trigger: 'Greetings'})
+                                }
+                            }> Go to Services </Button>
                         </CardBody>
                     </Card>
                 </div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import "../App.css";
 import slst from "./StateDistrict";
+import PS_In from "./psComponent";
 
 class Sdrop extends Component {
   constructor() {
@@ -20,6 +21,7 @@ class Sdrop extends Component {
 
   render() {
     const opts = slst.map((l) => ({ label: l.state, value: l.state }));
+    const ps_in = PS_In.map((l) => ({ label: l.id, value: l.value }));
     return (
       <div style={{ width: "100%" }}>
         <div
@@ -87,18 +89,30 @@ class Sdrop extends Component {
         >
           <label>Enter PS Region</label>
         </div>
-        <div style={{ width: "100%" , display: "flex", justifyContent: "center"}}>
-          <input
-            id="new"
-            disabled={this.state.disabled}
-            onChange={(e) =>
-              this.setState({
-                PsRegion: e.target.value,
-              })
-            }
-            style={{ alignSelf: "center", width: "75%",padding: "10px 5px" }}
-          />
-        </div>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        ></div>
+        {/* <Select
+          isDisabled={this.state.disabled || this.state.distDisable}
+          onChange={(val) => {
+            this.setState({ PsRegion: val.value });
+          }}
+          options={ps_in}
+        /> */}
+        <input
+          id="new"
+          disabled={this.state.disabled}
+          onChange={(e) =>
+            this.setState({
+              PsRegion: e.target.value,
+            })
+          }
+          style={{ alignSelf: "center", width: "75%", padding: "10px 5px" }}
+        />
         <div
           style={{
             marginTop: "20px",
@@ -110,7 +124,11 @@ class Sdrop extends Component {
             disabled={this.state.disabled}
             className="button1"
             onClick={() => {
-              if (this.state.state === null || this.state.dist === null || this.state.PsRegion === "") {
+              if (
+                this.state.state === null ||
+                this.state.dist === null ||
+                this.state.PsRegion === ""
+              ) {
                 this.setState({
                   status: "Select a valid information!",
                   isStatus: true,
@@ -136,7 +154,7 @@ class Sdrop extends Component {
           </button>
         </div>
         {this.state.isStatus ? (
-          <div style={{ margin: "10px" }}>{this.state.status}</div>
+          <div style={{ margin: "10px" }}> {this.state.status}</div>
         ) : null}{" "}
       </div>
     );

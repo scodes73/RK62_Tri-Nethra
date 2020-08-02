@@ -25,7 +25,7 @@ const Upload = (props) => {
     if (files.length !== 0) {
       var uid = "Null";
       console.log(props.steps);
-      if (props.steps.Category.value === "Child Sex Abuse/Rape/Obstacenity" && props.steps.Complaint_type.value === "Anonymous") {
+      if (props.steps.Complaint_type.value === "Anonymous") {
         firebase
           .auth()
           .signInAnonymously()
