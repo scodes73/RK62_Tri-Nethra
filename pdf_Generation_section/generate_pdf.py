@@ -52,3 +52,19 @@ except ValueError as e:
     })
     firebase_admin.initialize_app(cred)
 
+db = firestore.client()
+issue_doc_ref = db.collection("Issues")
+issuedocs = issue_doc_ref.stream() #fetching data from firebase
+
+p=False
+att=False
+
+
+dl=dict()
+dl['attach']=list()
+dl['desc']=list()
+dl['done']=list()
+dl['loc']=list()
+dl['place']=list()
+dl['created']=list()
+rex=[]
