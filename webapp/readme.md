@@ -2,7 +2,7 @@
 The Bot will be able to handle multiple Languages, natively.
 Now supports Hindi and English
 
-<img src="RK62_Tri-Nethra/Screenshots/hin1.png" >
+<img src="Screenshots/hin1.png" >
 
 <img src="Screenshots/en1.png" >
 
@@ -16,11 +16,16 @@ Even the text can be given in Hindi format and the bot understands (it was even 
 
 The Bot is able to understand the intents of the user and is able to convey the same to the database seamlessly
 
-<img src="Screenshots/-----.png" >
+<img src="Screenshots/tob1.png" >
 
-<img src="Screenshots/-----.png" >
+<img src="Screenshots/tob21.png" >
 
-<img src="Screenshots/-----.png" >
+<img src="Screenshots/Tob2.png" >
+
+<img src="Screenshots/entities.png" >
+
+<img src="Screenshots/hinb.png" >
+
 
 It's been trained on two main intents as of now, as suggested by the Jury.
 
