@@ -22,7 +22,7 @@ _we had to push a single platform code through a single user only._
 (Hope you Understand)
 
 ### Delay in the commits
-The Code in commits was pushed well before 4pm, we're just adding readme and Config files, so that it would help you if you want to run locally
+__The Code in commits was pushed well before 4pm, we're just adding readme and Config files, so that it would help you if you want to run locally__
 
 We were not informed about the timely commits and pushes requirement at the initial stages of the hackathon, _We were collecting code from all our contributors/team members to merge into a  single big commit till then_,( All the commits were done from time to time since we were informed about this) 
 Thank you for understanding.
