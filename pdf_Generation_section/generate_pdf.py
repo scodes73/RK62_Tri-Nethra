@@ -60,11 +60,36 @@ p=False
 att=False
 
 
-dl=dict()
-dl['attach']=list()
-dl['desc']=list()
-dl['done']=list()
-dl['loc']=list()
-dl['place']=list()
-dl['created']=list()
-rex=[]
+for doc in issuedocs:
+    #print("{} => {}\n".format(doc.id, doc.to_dict()))
+    d = doc.to_dict()
+    ref_id = doc.id
+
+    #save sorted values list into a file
+    d["Ref_ID"] = ref_id
+    dictionary_items = d.items()
+    sorted_items = sorted(dictionary_items,key=lambda x: x[0].lower())
+    arr = [v for k,v in sorted_items]
+    sorted_keys = [k for k,v in sorted_items]
+    print(arr)
+
+    ''' Report Module '''
+    ref=arr[7]
+    date_repo=arr[1]
+    report_by=arr[4][0]
+
+    ''' Crime Details '''
+    crime_date=arr[2][0]
+    crime_type=arr[2][4]+'/'+arr[2][5]+'/'+arr[2][6]
+    crime_desc=arr[2][1]
+
+    ''' Incident Details '''
+    ip_add=arr[3][0]
+    state=arr[6][0]
+    dist=arr[6][1]
+    ps=arr[6][2]
+
+    ''' Additional '''
+
+    location=arr[5]
+    attachment=arr[0]
