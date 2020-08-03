@@ -32,11 +32,64 @@ import getpass
 from email.message import EmailMessage
 
 
-with open('/content/drive/My Drive/pdf_gen/already.txt','w') as f:
-    f.write('')
+#!/usr/bin/python3
+#Introduction
+
+
+def automate_email(send,recieve,path_pdf):
+    if path_pdf == '':
+        return "Nothing"
+    m=EmailMessage()
+    sender=send
+    reciever=recieve
+    m['From']=sender
+    m['To']=reciever
+    m['Subject']='Preview of the report registered by you.'
+    body = """ Report PDF After registration of a complaint."""
+    m.set_content(body)
+    #print(m)
+
+    #Attaching Files:
+
+    att_path=path_pdf
+    att_name=os.path.basename(att_path)
+    mime_type, mime_subtype = mimetypes.guess_type(att_path)
+    mime_type, mime_subtype = mime_type.split('/',1)
+    print(mime_type)
+    print(mime_subtype)
+
+
+    #Its only for sending attachment in the mail.
+    with open(att_path, 'rb') as ap:
+            m.add_attachment(ap.read(),
+                                maintype=mime_type,
+                                subtype=mime_subtype,
+                                filename=os.path.basename(att_path))
+
+    #print(m)
+
+    #Sending the Email Through an SMTP Server
+
+    mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
+
+    """ If you want to see the SMTP messages that are being sent back and forth by the smtplib module behind the scenes, you can set the debug level on the SMTP or SMTP_SSL object. The examples in this lesson won’t show the debug output, 
+    but you might find it interesting! """
+
+    mail_server.set_debuglevel(1)
+
+    mail_pass = 'Trinethra@73'
+
+    mail_server.login(sender,mail_pass)
+
+    mail_server.send_message(m)
+
+    mail_server.quit()
+
+    return 'Successfully Sent.'
+
 
 try:
-    app = firebase_admin.get_app()     #integration
+    app = firebase_admin.get_app()
 except ValueError as e:
     cred = credentials.Certificate({
       "type": "service_account",
@@ -54,11 +107,15 @@ except ValueError as e:
 
 db = firestore.client()
 issue_doc_ref = db.collection("Issues")
-issuedocs = issue_doc_ref.stream() #fetching data from firebase
+issuedocs = issue_doc_ref.stream()
 
 p=False
 att=False
 
+
+c=0
+
+#parsing
 
 for doc in issuedocs:
     #print("{} => {}\n".format(doc.id, doc.to_dict()))
@@ -93,37 +150,109 @@ for doc in issuedocs:
 
     location=arr[5]
     attachment=arr[0]
-    
- 
-     if report_by == 'Anonymous' or report_by == 'hin-Anonymous':      #html-template
-            with open("/content/drive/My Drive/pdf_gen/anonymous.txt") as f:
-                html_doc=""
-                for line in f.readlines():
-                    if 'Location' in line:
-                        p=True
-                    if 'Attachment' in line:
-                        att=True
-                    html_doc+=line.strip()
-                    if p:
-                        for x in range(len(location)):
-                            html_doc+='<p>'+str(location[x])+'</p>'+'\n'
-                        p=False
-                    if att:
-                        for x in range(len(attachment)):
-                            html_doc+='<a href='+str(attachment[x])+'+ target="_blank">Image '+str(x+1)+'</a>'+'<br><br>'+'\n'
-                        att=False
-                        
-            soup = BeautifulSoup(html_doc, 'html.parser')
-            x=list(soup.findAll('p'))
-            print(len(x))
-            x[0].append(ref)
-            x[1].append(date_repo)
-            x[2].append(report_by)
-            x[3].append(crime_date)
-            x[4].append(crime_type)
-            x[5].append(crime_desc)
-            x[6].append(ip_add)
-            x[7].append(state)
-            x[8].append(dist)
-            x[9].append(ps)
+
+#parsing
+
+    if report_by == 'Anonymous' or report_by == 'hin-Anonymous':      #html-template
+        with open("/content/drive/My Drive/pdf_gen/anonymous.txt") as f:
+            html_doc=""
+            for line in f.readlines():
+                if 'Location' in line:
+                    p=True
+                if 'Attachment' in line:
+                    att=True
+                html_doc+=line.strip()
+                if p:
+                    for x in range(len(location)):
+                        html_doc+='<p>'+str(location[x])+'</p>'+'\n'
+                    p=False
+                if att:
+                    for x in range(len(attachment)):
+                        html_doc+='<a href='+str(attachment[x])+'+ target="_blank">Image '+str(x+1)+'</a>'+'<br><br>'+'\n'
+                    att=False
+        #html parser
+        soup = BeautifulSoup(html_doc, 'html.parser')
+        x=list(soup.findAll('p'))
+        print(len(x))
+        x[0].append(ref)
+        x[1].append(date_repo)
+        x[2].append(report_by)
+        x[3].append(crime_date)
+        x[4].append(crime_type)
+        x[5].append(crime_desc)
+        x[6].append(ip_add)
+        x[7].append(state)
+        x[8].append(dist)
+        x[9].append(ps)
+        #done
+
+
+#automate email
+        s='/content/drive/My Drive/pdf_gen/new_html/{}'.format(ref)+'.html'
+        with open(s,'w') as f:
+            f.write(soup.prettify())
+        for f in os.listdir('/content/drive/My Drive/pdf_gen/new_html'):
+            pdf_name = f.replace('.html','')
+            pdf_path = '/content/drive/My Drive/pdf_gen/new_pdfs/{}.pdf'.format(pdf_name)
+            html_path = '/content/drive/My Drive/pdf_gen/new_html/'+f
+            HTML(html_path).write_pdf(pdf_path)
+            automate_email('trinethrachatbot@gmail.com','17211a05a1@bvrit.ac.in',pdf_path)
+#end
+
+    else:
+
+        name=arr[4][3]
+        email=arr[4][4]
+        pod=arr[4][5]
+        pod_value=arr[4][6]
+        phn=arr[4][1]
+
+        with open("/content/drive/My Drive/pdf_gen/personal.txt") as f: #personal block
+            html_doc=""
+            for line in f.readlines():
+                if 'Location' in line:
+                    p=True
+                if 'Attachment' in line:
+                    att=True
+                html_doc+=line.strip()
+                if p:
+                    for x in range(len(location)):
+                        html_doc+='<p>'+str(location[x])+'</p>'+'\n'
+                    p=False
+                if att:
+                    for x in range(len(attachment)):
+                        html_doc+='<a href='+str(attachment[x])+'+ target="_blank">Image '+str(x+1)+'</a>'+'<br><br>'+'\n'
+                    att=False
+        soup = BeautifulSoup(html_doc, 'html.parser')
+        x=list(soup.findAll('p'))
+        print(len(x))
+        x[0].append(ref)
+        x[1].append(date_repo)
+        x[2].append(report_by)
+        x[3].append(crime_date)
+        x[4].append(crime_type)
+        x[5].append(crime_desc)
+        x[6].append(ip_add)
+        x[7].append(state)
+        x[8].append(dist)
+        x[9].append(ps)
+        x[10].append(name)
+        x[11].append(phn)
+        x[12].append(email)
+        x[13].append(pod)
+        x[14].append(pod_value)
+
+        s='/content/drive/My Drive/pdf_gen/new_html/{}'.format(ref)+'.html'
+        with open(s,'w') as f:
+            f.write(soup.prettify())
+        for f in os.listdir('/content/drive/My Drive/pdf_gen/new_html'):
+            pdf_name = f.replace('.html','')
+            pdf_path = '/content/drive/My Drive/pdf_gen/new_pdfs/{}.pdf'.format(pdf_name)
+            html_path = '/content/drive/My Drive/pdf_gen/new_html/'+f
+            HTML(html_path).write_pdf(pdf_path)
+            automate_email('trinethrachatbot@gmail.com',email,pdf_path)
+
+
+
+
 
