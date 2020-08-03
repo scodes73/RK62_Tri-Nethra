@@ -4,7 +4,7 @@ We kindly *request* the evaluators to refer the documentation .
 
 __Note that You can visit the https://trinethra73.herokuapp.com/ to test the deployed version of the Whole Chat Bot__
 
-[AES-256 Encryption](https://trinethra73.herokuapp.com/ "Working Model")
+[Tri-Nethra Working Model](https://trinethra73.herokuapp.com/ "Working Model")
 
 _Each Individual folder has its own readme, please go through it, This page just gives an overview, please visit each page for further clarity_
 
