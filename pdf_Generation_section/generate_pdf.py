@@ -93,3 +93,22 @@ for doc in issuedocs:
 
     location=arr[5]
     attachment=arr[0]
+    
+ 
+ if report_by == 'Anonymous' or report_by == 'hin-Anonymous':      #html-template
+        with open("/content/drive/My Drive/pdf_gen/anonymous.txt") as f:
+            html_doc=""
+            for line in f.readlines():
+                if 'Location' in line:
+                    p=True
+                if 'Attachment' in line:
+                    att=True
+                html_doc+=line.strip()
+                if p:
+                    for x in range(len(location)):
+                        html_doc+='<p>'+str(location[x])+'</p>'+'\n'
+                    p=False
+                if att:
+                    for x in range(len(attachment)):
+                        html_doc+='<a href='+str(attachment[x])+'+ target="_blank">Image '+str(x+1)+'</a>'+'<br><br>'+'\n'
+                    att=False
