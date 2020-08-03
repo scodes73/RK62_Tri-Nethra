@@ -41,7 +41,7 @@ Mailing of PDF is also done automatically
 
 The User can __attach any kind of extension files __not just limited to jpg, or pdfs.
 
-<img src="Screenshots/-----.png" >
+<img src="Screenshots/Attach.png" >
 
 
 ## Unique Tracking ID
@@ -49,9 +49,9 @@ Whenever the user reports a complaint the system will provide them a Unique Mixe
 for all further enquires.
 
 
-<img src="Screenshots/-----.png" >
+<img src="Screenshots/search.png" >
 
-<img src="Screenshots/-----.png" >
+<img src="Screenshots/fetched data.png" >
 
 Each Issue is attached to this Tracking ID
 
