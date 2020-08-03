@@ -95,20 +95,35 @@ for doc in issuedocs:
     attachment=arr[0]
     
  
- if report_by == 'Anonymous' or report_by == 'hin-Anonymous':      #html-template
-        with open("/content/drive/My Drive/pdf_gen/anonymous.txt") as f:
-            html_doc=""
-            for line in f.readlines():
-                if 'Location' in line:
-                    p=True
-                if 'Attachment' in line:
-                    att=True
-                html_doc+=line.strip()
-                if p:
-                    for x in range(len(location)):
-                        html_doc+='<p>'+str(location[x])+'</p>'+'\n'
-                    p=False
-                if att:
-                    for x in range(len(attachment)):
-                        html_doc+='<a href='+str(attachment[x])+'+ target="_blank">Image '+str(x+1)+'</a>'+'<br><br>'+'\n'
-                    att=False
+     if report_by == 'Anonymous' or report_by == 'hin-Anonymous':      #html-template
+            with open("/content/drive/My Drive/pdf_gen/anonymous.txt") as f:
+                html_doc=""
+                for line in f.readlines():
+                    if 'Location' in line:
+                        p=True
+                    if 'Attachment' in line:
+                        att=True
+                    html_doc+=line.strip()
+                    if p:
+                        for x in range(len(location)):
+                            html_doc+='<p>'+str(location[x])+'</p>'+'\n'
+                        p=False
+                    if att:
+                        for x in range(len(attachment)):
+                            html_doc+='<a href='+str(attachment[x])+'+ target="_blank">Image '+str(x+1)+'</a>'+'<br><br>'+'\n'
+                        att=False
+                        
+            soup = BeautifulSoup(html_doc, 'html.parser')
+            x=list(soup.findAll('p'))
+            print(len(x))
+            x[0].append(ref)
+            x[1].append(date_repo)
+            x[2].append(report_by)
+            x[3].append(crime_date)
+            x[4].append(crime_type)
+            x[5].append(crime_desc)
+            x[6].append(ip_add)
+            x[7].append(state)
+            x[8].append(dist)
+            x[9].append(ps)
+
