@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { Modal, ModalHeader, Button, ModalBody, Card, CardBody, CardSubtitle, CardTitle } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Card, CardBody, CardSubtitle, CardTitle } from 'reactstrap';
 import jobF from "../components/jobFraud.pdf"
 import MatrimonialF  from "../components/matrimonialFraud.pdf"
 import securityA from "../components/securityAwareness.pdf"
 import socialAwareness from "../components/socialMedia.pdf"
-import Poppdf from "../components/popPdf.js"
+import fraud from "../components/fraud.pdf"
+import Poppdf from "../components/popPdf"
 
 class Safe extends Component{
     constructor(props){
@@ -62,21 +63,19 @@ class Safe extends Component{
         });
     }
     componentWillMount(){
-        this.props.triggerNextStep({trigger: 'end_greet'})
+        this.props.triggerNextStep({trigger: this.props.steps.lang.value+'end_greet'})
     }
     render(){
         return(
             <React.Fragment>
                 <Card body inverse color="white">
-                        <CardTitle style={{color: 'black'}}>Safety Tips</CardTitle>
+                        <CardTitle style={{color: 'black'}}>{this.props.steps.lang.value === ""?"Crime Awareness":"अपराध जागरूकता"}</CardTitle>
                         <CardBody style={{color: 'white'}}>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal1} style={{marginBottom: '20px'}}>  Online Fraud/Scam </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal2} style={{marginBottom: '20px'}}> Social Media Safety </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal3} style={{marginBottom: '20px'}}> Online Bullying </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal4} style={{marginBottom: '20px'}}> Financial Fraud </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal5} style={{marginBottom: '20px'}}> Employment Fraud </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal6} style={{marginBottom: '20px'}}> Matrimonial Fraud </Button>
-                            <Button className="bg-primary btn-block" onClick={this.toggleModal7} style={{marginBottom: '20px'}}> Mobile Hacking </Button>
+                            <Poppdf Pdfsrc={socialAwareness} Bntxt={this.props.steps.lang.value === ""?" Social Media Safety ":"सोशल मीडिया सुरक्षा"}/>
+                            <Poppdf Pdfsrc={securityA} Bntxt={this.props.steps.lang.value === ""?" Security awareness ":"सुरक्षा जागरूकता"}/>
+                            <Poppdf Pdfsrc={MatrimonialF} Bntxt={this.props.steps.lang.value === ""?" Matrimonial Fraud ":"वैवाहिक धोखाधड़ी"}/>
+                            <Poppdf Pdfsrc={fraud} Bntxt={this.props.steps.lang.value === ""?" Financial Fraud ":"वित्तीय धोखाधड़ी"}/>
+                            <Poppdf Pdfsrc={jobF} Bntxt={this.props.steps.lang.value === ""?" Employment Fraud ":"रोजगार धोखाधड़ी"}/>
                         </CardBody>
                     </Card>
                     <Modal isOpen={this.state.isModalOpen1} toggle={this.toggleModal1} className="modal-lg modal-content rounded-3" style={{borderRadius: '10px'}}>

@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import { Document, Page } from "react-pdf/dist/entry.webpack";
-import jobF from "../components/jobFraud.pdf"
-import MatrimonialF  from "./matrimonialFraud.pdf"
-import securityA from "../components/securityAwareness.pdf"
-import socialAwareness from "../components/socialMedia.pdf"
 
 const list = []
 class Pdf extends Component {
-
  SimpleList = () => (
    <div>
       {list.map(item => (
-        <Page pageNumber={item} width={450}>{item}</Page>
+        <Page pageNumber={item} key={item} width={450}>{item}</Page>
       ))}
       </div>
   );
@@ -27,21 +22,35 @@ class Pdf extends Component {
 
     return (
       <div>
-        <nav>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
-          </div>
-        </nav>
-
         <div>
-          <Document file={MatrimonialF} onLoadSuccess={this.onDocumentLoadSuccess}>
+        <Document file={this.props.Pdfsrc} onLoadSuccess={this.onDocumentLoadSuccess}>
             <this.SimpleList/>
           </Document>
+          {/* {
+            this.props.Pdfsrc === "t"?<Document file={MatrimonialF} onLoadSuccess={this.onDocumentLoadSuccess}>
+            <this.SimpleList/>
+          </Document>:null
+          }
+          {
+            this.props.Pdfsrc === ""?<Document file={MatrimonialF} onLoadSuccess={this.onDocumentLoadSuccess}>
+            <this.SimpleList/>
+          </Document>:null
+          }
+          {
+            this.props.Pdfsrc === ""?<Document file={MatrimonialF} onLoadSuccess={this.onDocumentLoadSuccess}>
+            <this.SimpleList/>
+          </Document>:null
+          }
+          {
+            this.props.Pdfsrc === ""?<Document file={MatrimonialF} onLoadSuccess={this.onDocumentLoadSuccess}>
+            <this.SimpleList/>
+          </Document>:null
+          }
+          {
+            this.props.Pdfsrc === ""?<Document file={MatrimonialF} onLoadSuccess={this.onDocumentLoadSuccess}>
+            <this.SimpleList/>
+          </Document>:null
+          } */}
         </div>
       </div>
     );
@@ -68,7 +77,7 @@ class Popup extends Component {
                 close
               </button>
 
-            <Pdf />
+            <Pdf Pdfsrc={this.props.Pdfsrc}/>
           </div>
         </div>
       </div>
@@ -93,14 +102,15 @@ class PopMain extends Component {
       <div>
         <div className="app">
           <button
+            style={{width:"100%", margin:"10px"}}
             className="button1"
             disabled={this.state.disabled}
             onClick={this.togglePopup.bind(this)}
           >
-            Show Map
+            {this.props.Bntxt}
           </button>
           {this.state.showPopup ? (
-            <Popup closePopup={this.togglePopup.bind(this)} />
+            <Popup Pdfsrc={this.props.Pdfsrc} closePopup={this.togglePopup.bind(this)} />
           ) : null}
         </div>
       </div>
