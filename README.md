@@ -1,51 +1,49 @@
 # Tri-Nethra
 
-TriNethra is a comprehensive and intelligent virtual assistant that helps to make users' cyber life more secure and safe.
+We kindly *request* the evaluators to refer the documentation .
 
-It is an interactive chatbot specifically designed for two use-cases pertaining to Cyber Crime:
+__Note that You can visit the https://trinethra73.herokuapp.com/ to test the deployed version of the Whole Chat Bot__
 
-* Crime Registration
-* Crime Awareness
+[Tri-Nethra Working Model](https://trinethra73.herokuapp.com/ "Working Model")
 
->An assistive tool which enables carrying
->out crime registration both as a stand-alone 
->as well as from the official crime portal of GOI.
+_Each Individual folder has its own readme, please go through it, This page just gives an overview, please visit each page for further clarity_
 
-## Working :
-- First, the chatbot, in a very intuitive way, understands the category of Cybercrime the user had to face and subsequently, as per the user's wish, it redirects to the official portal or the bot itself collects all the relevant information and generates an **investigation report** which then is forwarded to the concerned official.
+## Before the Overview of the Project:
 
-- The user is redirected to the official cyber portal for queries related to awareness and **in-chat suggestions** are also incorporated.
+### Jsons and API keys
 
-- For each complaint raised, a **token** is generated and provided to the victim which helps him/her refer the status of the complaint in the future.
+This project relies upon multiple configured Jsons and API keys which we have included in the APIs folder. For proper functioning of the application ,appropriate API key or config JSON shall be placed in respective fields in order to make calls to them. In case of errors, kindly recheck whether all the JSON/API keys are in-place.
 
-- The system is also providing a multi-platform and user-friendly application which carries out all the functionalities of the chatbot and which can be easily extended to future integrations.
+### Collaborator Perplexity
+We were facing multiple collaborating issues throughout the project because of certain previous version pushes and pull requests (_resulting in many conflicts which in turn needed much time to resolve), _so even though everyone equally made their contributions to the project,
+_we had to push a single platform code through a single user only._
+(Hope you Understand)
 
-
-## Key Differentiators
-
-1. Investigation Report Generation
-2. Token-Based Case Search
-3. User-Friendly Platform
-4. Elaborated Crime Awareness module
-5. Multiplatform Compatability
-6. Easy integration with current systems
-
-## Technology
-* [ReactJs] - A JavaScript library for building user interfaces
-* [Firebase] - A comprehensive app development platform with highly efficient backend accessibility
-* [Flutter] - UI toolkit for building natively compiled multiplatform applications from a single codebase.
-* [Python] - a programming language that lets you work quickly and integrate systems more effectively
-* [Dialogflow] - Dialogflow is a highly efficient AI based natural language understanding platform that makes it easy to design and integrate an interactive voice response system.
-* Several APIs including [Google Maps] and [Google Places]
+### Delay in the commits
+We were not informed about the timely commits and pushes requirement at the initial stages of the hackathon, _We were collecting code from all our contributors/team members to merge into a  single big commit till then_,( All the commits were done from time to time since we were informed about this) 
+Thank you for understanding.
+_We completely ensure that the entire project along with the changes have been done genuinely and no malpractices have occured._
 
 
+### Mobile App
+We even developed a native multi-platform mobile application with all the functionalities(and even more) of the chatbot that _we may intend to use for future purposes or to be integrated with any existing government system._ But this was out of context for the problem statement domain bucket, _we're not considering it to the final Master branch._
 
+You may check for ---- branch to find the final build of the app
 
-[ReactJs]:(https://reactjs.org/)
-[Firebase]:(https://firebase.google.com/)
-[Flutter]: (https://flutter.dev/)
-[Python]: (https://www.python.org/)
-[Google Maps]:(https://developers.google.com/maps/documentation/embed/get-started)
-[Google Places]:(https://developers.google.com/places/web-service/overview)
-[Dialogflow]: (https://cloud.google.com/dialogflow/docs)
+### Credentials 
+There is a file placed in the JSON and API folder named credentials, kindly go through that for any required credentials needed for the project.
 
+## There are 2 Main modules and other supporting folders:
+(there is also a mobile app folder which we did not place in final master branch but available at ----- branch)
+
+### Web App:
+This folder has all the files related to Web App done in React JS mostly, has all the configurations and The internal working of the Web App
+
+### PDF Generation Module:
+This folder has all the files related to Generation of the pdf written in python and using google libraries .
+
+### Contexts:
+This file has all the API keys, SDK Jsons, credentials
+all needed for the functioning of the app
+
+_Each Individual folder has its own readme, please go through it, This page just gives an overview, please visit each page for further clarity_

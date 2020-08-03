@@ -17,287 +17,98 @@ All the Import Required
 !pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 '''
 
-
-from email.message import EmailMessage
-import getpass
-import smtplib
-import mimetypes
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from datetime import datetime
+from bs4 import BeautifulSoup
+from google.colab import files
+import os
 from weasyprint import HTML
 import os
-from google.colab import files
-from bs4 import BeautifulSoup
-from datetime import datetime
-from firebase_admin import firestore
-from firebase_admin import credentials
-import firebase_admin
-from google.colab import drive
-drive.mount('/content/drive/', force_remount=True)
+import mimetypes
+import smtplib
+import getpass
+from email.message import EmailMessage
 
-with open('/content/drive/My Drive/pdf_gen/already.txt', 'w') as f:
+
+with open('/content/drive/My Drive/pdf_gen/already.txt','w') as f:
     f.write('')
 
-
-#!/usr/bin/python3
-# Introduction
-
-
-def automate_email(send, recieve, path_pdf):
-    if path_pdf == '':
-        return "Nothing"
-    m = EmailMessage()
-    sender = send
-    reciever = recieve
-    m['From'] = sender
-    m['To'] = reciever
-    m['Subject'] = 'Preview of the report registered by you.'
-    body = """ Report PDF After registration of a complaint."""
-    m.set_content(body)
-    # print(m)
-
-    # Attaching Files:
-
-    att_path = path_pdf
-    att_name = os.path.basename(att_path)
-    mime_type, mime_subtype = mimetypes.guess_type(att_path)
-    mime_type, mime_subtype = mime_type.split('/', 1)
-    print(mime_type)
-    print(mime_subtype)
-
-    # Its only for sending attachment in the mail.
-    with open(att_path, 'rb') as ap:
-        m.add_attachment(ap.read(),
-                         maintype=mime_type,
-                         subtype=mime_subtype,
-                         filename=os.path.basename(att_path))
-
-    # print(m)
-
-    # Sending the Email Through an SMTP Server
-
-    mail_server = smtplib.SMTP_SSL('smtp.gmail.com')
-
-    """ If you want to see the SMTP messages that are being sent back and forth by the smtplib module behind the scenes, you can set the debug level on the SMTP or SMTP_SSL object. The examples in this lesson won’t show the debug output, 
-    but you might find it interesting! """
-
-    mail_server.set_debuglevel(1)
-
-    mail_pass = 'Trinethra@73'
-
-    mail_server.login(sender, mail_pass)
-
-    mail_server.send_message(m)
-
-    mail_server.quit()
-
-    return 'Successfully Sent.'
-
-
 try:
-    app = firebase_admin.get_app()
+    app = firebase_admin.get_app()     #integration
 except ValueError as e:
     cred = credentials.Certificate({
-        "type": "service_account",
-        "project_id": "webappmedia-2aa4d",
-        "private_key_id": "72633435227c166edfd6bffd367fbfce4421393f",
-        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9oBsUrx52/BOB\nQeIDyJ0Kn3zsovW8SlTfrBbCNwShU6JAS0AeWJeMmyCxvIQIPJ/3qwEvEcpgKt3M\nWEseEEZ7ogkGNAfRnjdXt5J47nNufH9TWLcjiVXM/Bd4i6/o1LtDrCYIgUcc6bOv\n6pLGBphtVWGANekOVRhfYe2z+1nLtyvHU8UR4JtapqobPY0wiamXfzMGp7TF6kQU\nBYHUCPfowhtfOdrxZFKuKjBA0VW4h9jW1A/QEoqgfZ5tJvj2wWu/TfOp2/+KAAC9\nzcJCXj08PvQ4LqbjLoDZqNgrPORBWH7pg32WLFBlfDnfr0xBr9FsrPqlnHT3xjUi\nx0JH1fuhAgMBAAECggEAByBQduPy45AAb/veHCbKp2bMKXzL+ojE7PKjw1DmgA/r\nec+U0rR2c46z4+y8qIOWE8HDMGCSiAUsYzImlolli167neulfJOd1afSMxsWTvQS\nTpCiXKKcDRv533+eZi6ydUNaWuOi3MZine0/7qhk9jzpG7SgSXfaC+GbWYd2vdtX\n6NWKYO8lcAWSOovakgXbBA+3pEvy1taqt564SY/SNZoJr/GzY5cEC7XZ3mohZloj\nZkXd33V36bp3VG503ye/Y/IFkNd4Q9j5ZaeltzvLpk9ng/jJJ8H2rYdR4v4Bsvxb\nNezqUprkha+IoW2Bxpfu/OXajx/orNMv0ysP4xjlzQKBgQDgO7NviiJtzgAMXO5p\n3SXEEYoTCjKcvF4ONwJHGJGQxHjyolMXWyYHPFnOI4a4BJYKRSWoSY2M5p4VAO10\nZFpQR9cqUd02CupewuvoOwz1vkZFjkHDhMxybLIC/Z1dOwIneQhaSUr9ThBBLXAs\nFUExW5SOnPDDmfa0R2qLP0jbNQKBgQDYfUdjyBSMsNAh2ZFlvXQFVo2akRW0Wm5d\nWUXdobz7J3t2gWx3xAoi740OLgazYGfx/ODTtl3V8HAYsylDRHoxdM4oNqb4nk2E\n8xLFDapaKiU43gVV/qGxWLjFXSuYWWPBcHw4hz9B5fc0Ctnxcy+jANqHdZ0Z5iCU\nZ4Nx4wrAPQKBgQDDBinCUTowloKkPg9+M8GtDjQw6yWp/IsxgdaRT2ULrFYlcdki\n7zvb/zl8eJmrYxG8TPe7rn1Wlx3W1r+wA7gpKtKRFDJ51nSRhqb3jKRw99TWmivI\nia/ntXH99+buN2xgOHxzSlvWhBbPGV3+eV4CN8y1XPpqpXZUxeh8w8XyIQKBgGOL\nn6MDImfa+alG+LN2nP3DYdN7+SX4Gx1zakvSDirSadQBCRY9H4gW7J5jjZM3tjQw\nWlUfWyB/sZu57jRPLXzGP/F/x+E0MWL7vlq7wOQ60ujGNl/neQQqTrP59ozUNamC\nBqybi/vKOZRFlReQJoxmXRXCgB2jksGKo4dfpdblAoGBAKLeNLkRDMxjOfwgyPvy\nmzAbqyooryPIL78diT18iOt9g8I+4rgv4RGU9Ls/Sx3Mgvi0c9LFd99p3ssshk27\nfxnpRlO+utlkioLo/FxEN3LvPoY3BBmaZ5ds652+aYFx09pXNYCg/atrIOxUd9jE\nhldNqUBUHSuKcCQ7rAQ2mMUQ\n-----END PRIVATE KEY-----\n",
-        "client_email": "firebase-adminsdk-7jdc7@webappmedia-2aa4d.iam.gserviceaccount.com",
-        "client_id": "100834455112738239203",
-        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "token_uri": "https://oauth2.googleapis.com/token",
-        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-7jdc7%40webappmedia-2aa4d.iam.gserviceaccount.com"
+      "type": "service_account",
+      "project_id": "webappmedia-2aa4d",
+      "private_key_id": "72633435227c166edfd6bffd367fbfce4421393f",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9oBsUrx52/BOB\nQeIDyJ0Kn3zsovW8SlTfrBbCNwShU6JAS0AeWJeMmyCxvIQIPJ/3qwEvEcpgKt3M\nWEseEEZ7ogkGNAfRnjdXt5J47nNufH9TWLcjiVXM/Bd4i6/o1LtDrCYIgUcc6bOv\n6pLGBphtVWGANekOVRhfYe2z+1nLtyvHU8UR4JtapqobPY0wiamXfzMGp7TF6kQU\nBYHUCPfowhtfOdrxZFKuKjBA0VW4h9jW1A/QEoqgfZ5tJvj2wWu/TfOp2/+KAAC9\nzcJCXj08PvQ4LqbjLoDZqNgrPORBWH7pg32WLFBlfDnfr0xBr9FsrPqlnHT3xjUi\nx0JH1fuhAgMBAAECggEAByBQduPy45AAb/veHCbKp2bMKXzL+ojE7PKjw1DmgA/r\nec+U0rR2c46z4+y8qIOWE8HDMGCSiAUsYzImlolli167neulfJOd1afSMxsWTvQS\nTpCiXKKcDRv533+eZi6ydUNaWuOi3MZine0/7qhk9jzpG7SgSXfaC+GbWYd2vdtX\n6NWKYO8lcAWSOovakgXbBA+3pEvy1taqt564SY/SNZoJr/GzY5cEC7XZ3mohZloj\nZkXd33V36bp3VG503ye/Y/IFkNd4Q9j5ZaeltzvLpk9ng/jJJ8H2rYdR4v4Bsvxb\nNezqUprkha+IoW2Bxpfu/OXajx/orNMv0ysP4xjlzQKBgQDgO7NviiJtzgAMXO5p\n3SXEEYoTCjKcvF4ONwJHGJGQxHjyolMXWyYHPFnOI4a4BJYKRSWoSY2M5p4VAO10\nZFpQR9cqUd02CupewuvoOwz1vkZFjkHDhMxybLIC/Z1dOwIneQhaSUr9ThBBLXAs\nFUExW5SOnPDDmfa0R2qLP0jbNQKBgQDYfUdjyBSMsNAh2ZFlvXQFVo2akRW0Wm5d\nWUXdobz7J3t2gWx3xAoi740OLgazYGfx/ODTtl3V8HAYsylDRHoxdM4oNqb4nk2E\n8xLFDapaKiU43gVV/qGxWLjFXSuYWWPBcHw4hz9B5fc0Ctnxcy+jANqHdZ0Z5iCU\nZ4Nx4wrAPQKBgQDDBinCUTowloKkPg9+M8GtDjQw6yWp/IsxgdaRT2ULrFYlcdki\n7zvb/zl8eJmrYxG8TPe7rn1Wlx3W1r+wA7gpKtKRFDJ51nSRhqb3jKRw99TWmivI\nia/ntXH99+buN2xgOHxzSlvWhBbPGV3+eV4CN8y1XPpqpXZUxeh8w8XyIQKBgGOL\nn6MDImfa+alG+LN2nP3DYdN7+SX4Gx1zakvSDirSadQBCRY9H4gW7J5jjZM3tjQw\nWlUfWyB/sZu57jRPLXzGP/F/x+E0MWL7vlq7wOQ60ujGNl/neQQqTrP59ozUNamC\nBqybi/vKOZRFlReQJoxmXRXCgB2jksGKo4dfpdblAoGBAKLeNLkRDMxjOfwgyPvy\nmzAbqyooryPIL78diT18iOt9g8I+4rgv4RGU9Ls/Sx3Mgvi0c9LFd99p3ssshk27\nfxnpRlO+utlkioLo/FxEN3LvPoY3BBmaZ5ds652+aYFx09pXNYCg/atrIOxUd9jE\nhldNqUBUHSuKcCQ7rAQ2mMUQ\n-----END PRIVATE KEY-----\n",
+      "client_email": "firebase-adminsdk-7jdc7@webappmedia-2aa4d.iam.gserviceaccount.com",
+      "client_id": "100834455112738239203",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-7jdc7%40webappmedia-2aa4d.iam.gserviceaccount.com"
     })
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 issue_doc_ref = db.collection("Issues")
-issuedocs = issue_doc_ref.stream()
+issuedocs = issue_doc_ref.stream() #fetching data from firebase
 
-p = False
-att = False
+p=False
+att=False
 
-
-dl = dict()
-dl['attach'] = list()
-dl['desc'] = list()
-dl['done'] = list()
-dl['loc'] = list()
-dl['place'] = list()
-dl['created'] = list()
-rex = []
 
 for doc in issuedocs:
     #print("{} => {}\n".format(doc.id, doc.to_dict()))
     d = doc.to_dict()
     ref_id = doc.id
 
-    # save sorted values list into a file
+    #save sorted values list into a file
     d["Ref_ID"] = ref_id
     dictionary_items = d.items()
-    sorted_items = sorted(dictionary_items, key=lambda x: x[0].lower())
-    arr = [v for k, v in sorted_items]
-    sorted_keys = [k for k, v in sorted_items]
+    sorted_items = sorted(dictionary_items,key=lambda x: x[0].lower())
+    arr = [v for k,v in sorted_items]
+    sorted_keys = [k for k,v in sorted_items]
+    print(arr)
 
-    c = 0
-    k = 0
-    rex1 = list()
+    ''' Report Module '''
+    ref=arr[7]
+    date_repo=arr[1]
+    report_by=arr[4][0]
 
-    for i in arr:
-        if k == 0:
-            dl['attach'].append(i)
-            k += 1
-        elif k == 1:
-            dl['created'].append(i)
-            k += 1
-        elif k == 2:
-            dl['desc'].append(i)
-            k += 1
-        elif k == 3:
-            dl['done'].append(i)
-            k += 1
-        elif k == 4:
-            dl['loc'].append(i)
-            k += 1
-        elif k == 5:
-            dl['place'].append(i)
-            k += 1
-            c = 0
-        elif c < 2:
-            rex1.append(i)
-            c += 1
-        else:
-            rex1.append(i)
-            rex.append(rex1)
-            k = 0
+    ''' Crime Details '''
+    crime_date=arr[2][0]
+    crime_type=arr[2][4]+'/'+arr[2][5]+'/'+arr[2][6]
+    crime_desc=arr[2][1]
 
+    ''' Incident Details '''
+    ip_add=arr[3][0]
+    state=arr[6][0]
+    dist=arr[6][1]
+    ps=arr[6][2]
 
-# Already Data is present:
+    ''' Additional '''
 
-already = set()
-
-
-with open('/content/drive/My Drive/pdf_gen/already.txt', 'r') as f:
-    for i in f.readlines():
-        already.add(i.strip())
-
-print(already)
-
-n = len(dl['attach'])
-
-for i in range(n):
-    if rex[i][0] in already:
-        continue
-    else:
-        with open('/content/drive/My Drive/pdf_gen/already.txt', 'a') as f:
-            f.write(rex[i][0])
-            f.write('\n')
-
-    if dl['done'][i][0] == 'Anonymous':
+    location=arr[5]
+    attachment=arr[0]
+    
+ 
+ if report_by == 'Anonymous' or report_by == 'hin-Anonymous':      #html-template
         with open("/content/drive/My Drive/pdf_gen/anonymous.txt") as f:
-            html_doc = ""
+            html_doc=""
             for line in f.readlines():
                 if 'Location' in line:
-                    p = True
+                    p=True
                 if 'Attachment' in line:
-                    att = True
-                html_doc += line.strip()
+                    att=True
+                html_doc+=line.strip()
                 if p:
-                    for x in range(len(dl['loc'][i])):
-                        html_doc += '<p>'+str(dl['loc'][i][x])+'</p>'+'\n'
-                    p = False
+                    for x in range(len(location)):
+                        html_doc+='<p>'+str(location[x])+'</p>'+'\n'
+                    p=False
                 if att:
-                    for x in range(len(dl['attach'][i])):
-                        html_doc += '<a href=' + \
-                            str(dl['attach'][i][x])+'+ target="_blank">Image ' + \
-                            str(x+1)+'</a>'+'<br><br>'+'\n'
-                    att = False
-    else:
-        with open("/content/drive/My Drive/pdf_gen/personal.txt") as f:
-            html_doc = ""
-            for line in f.readlines():
-                if 'Location' in line:
-                    p = True
-                if 'Attachment' in line:
-                    att = True
-                html_doc += line.strip()
-                if p:
-                    for x in range(len(dl['loc'][i])):
-                        html_doc += '<p>'+str(dl['loc'][i][x])+'</p>'+'\n'
-                    p = False
-                if att:
-                    for x in range(len(dl['attach'][i])):
-                        html_doc += '<a href=' + \
-                            str(dl['attach'][i][x])+'+ target="_blank">Image ' + \
-                            str(x+1)+'</a>'+'<br><br>'+'\n'
-                    att = False
-
-        # COntents in Desc 0 -> Date of Happened , 1 -> Delay_of_date, 2 -> Description, 3 -> 'Platform', 4-> 'Category', 5 -> 'Sub_Category' optional 6 -> sub_1 7 -> sub_2
-
-        # Contents in Done 0 -> 'Anonymous'   |||||  0 -> Personal 1 -> phn 2 -> uid  3 -> Name 4 -> email 5 -> pod  6 -> pod_value
-
-        # Contents in loc -> list of list
-
-        # Content in place ->  0 -> state 1-> Dist 2 -> ps
-    soup = BeautifulSoup(html_doc, 'html.parser')
-    x = list(soup.findAll('p'))
-    x[0].append(rex[i][0])
-    x[1].append(dl['created'][i])
-    x[2].append(dl['done'][i][0])
-    if dl['done'][i][0] == 'Anonymous':
-        try:
-            x[-1].append(dl['desc'][i][2])
-            x[-2].append(dl['desc'][i][1])
-            x[-3].append(dl['desc'][i][5])
-            x[-4].append(dl['desc'][i][4])
-            x[-5].append(dl['desc'][i][0])
-            x[-6].append(dl['place'][i][2])
-            x[-7].append(dl['place'][i][1])
-            x[-8].append(dl['place'][i][0])
-        except:
-            with open('/content/drive/My Drive/pdf_gen/errors.txt', 'a') as f:
-                f.write(rex[i][0])
-                f.write('\n')
-    else:
-        try:
-            x[-1].append(dl['desc'][i][2])
-            x[-2].append(dl['done'][i][6])
-            x[-3].append(dl['done'][i][5])
-            x[-4].append(dl['done'][i][4])
-            x[-5].append(dl['done'][i][3])
-            x[-6].append(dl['done'][i][1])
-            x[-7].append(dl['desc'][i][1])
-            x[-8].append(dl['desc'][i][5])
-            x[-9].append(dl['desc'][i][4])
-            x[-10].append(dl['desc'][i][0])
-            x[-11].append(dl['place'][i][2])
-            x[-12].append(dl['place'][i][1])
-            x[-13].append(dl['place'][i][0])
-        except:
-            with open('/content/drive/My Drive/pdf_gen/errors.txt', 'a') as f:
-                f.write(rex[i][0])
-                f.write('\n')
-    s = '/content/drive/My Drive/pdf_gen/new_html/{}'.format(
-        rex[i][0])+str(i+1)+'.html'
-    with open(s, 'w') as f:
-        f.write(soup.prettify())
-
-
-# Sending Email to the User for reference.
-
-for f in os.listdir('/content/drive/My Drive/pdf_gen/new_html'):
-    pdf_name = f.replace('.html', '')
-    pdf_path = '/content/drive/My Drive/pdf_gen/new_pdfs/{}.pdf'.format(
-        pdf_name)
-    html_path = '/content/drive/My Drive/pdf_gen/new_html/'+f
-    HTML(html_path).write_pdf(pdf_path)
-    automate_email('trinethrachatbot@gmail.com',
-                   '17211a0582@bvrit.ac.in', pdf_path)
-
-# Clearing all The files.
-
-for f in os.listdir('/content/drive/My Drive/pdf_gen/new_html'):
-    if '.html' in f:
-        os.remove('/content/drive/My Drive/pdf_gen/new_html/'+f)
-for f in os.listdir('/content/drive/My Drive/pdf_gen/new_pdfs'):
-    if '.pdf' in f:
-        os.remove('/content/drive/My Drive/pdf_gen/new_pdfs/'+f)
+                    for x in range(len(attachment)):
+                        html_doc+='<a href='+str(attachment[x])+'+ target="_blank">Image '+str(x+1)+'</a>'+'<br><br>'+'\n'
+                    att=False
