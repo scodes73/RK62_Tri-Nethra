@@ -2,7 +2,7 @@
 The Bot will be able to handle multiple Languages, natively.
 Now supports Hindi and English
 
-<img src="https://github.com/scodes73/RK62_Tri-Nethra/tree/master/Screenshots/hin1.png" >
+<img src="RK62_Tri-Nethra/Screenshots/hin1.png" >
 
 <img src="Screenshots/en1.png" >
 
