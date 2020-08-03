@@ -1,10 +1,10 @@
-#Tri-Nethra
+# Tri-Nethra
 
 We kindly *request* the evaluators to refer the documentation .
 
 _Each Individual folder has its own readme, please go through it, This page just gives an overview, please visit each page for further clarity_
 
-##Before the Overview of the Project:
+## Before the Overview of the Project:
 
 ### Jsons and API keys
 
