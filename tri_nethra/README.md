@@ -1,6 +1,26 @@
-# tri_nethra
+# Tri-Nethra Mobile App
 
-A new Flutter project.
+#Please mind this is not a part of the project, just a mere extension which can added later.
+
+A multi-Platform mobile application, which we intend to use in future if needed.
+Not in current use because of the software domain Web App
+
+These are the screen shots of it
+<img src="1.jpg" >
+<img src="2.jpg" >
+<img src="3.jpg" >
+<img src="4.jpg" >
+<img src="5.jpg" >
+<img src="6.jpg" >
+<img src="7.jpg" >
+<img src="8.jpg" >
+<img src="9.jpg" >
+<img src="10.jpg" >
+<img src="11.jpg" >
+<img src="12.jpg" >
+<img src="13.jpg" >
+
+
 
 ## Getting Started
 
