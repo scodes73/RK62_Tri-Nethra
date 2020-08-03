@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
 import Main from "./components/MainComponent";
-//import Party from "./components/ParticlesReact";
+import Party from "./components/ParticlesReact";
 import HomePage from "./components/HomePage";
 
 class App extends Component {
+
   
 
   render() {
+    
     return (
       <div
         style={{
@@ -18,8 +20,8 @@ class App extends Component {
         }}
       >
         <Main />
-        {/*<Party />*/}
-        <div style={{ position: "absolute", top: "0", left: "0" }}>
+        <Party />
+        <div style={{ position: "absolute", top: "0", right: "50vw" }}>
           <HomePage />
         </div>
       </div>

@@ -200,7 +200,7 @@ class Review extends Component {
           Place: this.state.stateDist,
           Status: "Pending",
           Remarks: "None",
-          deviceDetails: ["219.91.183.108"]
+          deviceDetails: ["Blocked by browser"]
         })
         .then((data) => {
           console.log(data.id);
@@ -986,7 +986,7 @@ const STEPS = [
   },
   {
     id: "hin-AIChat",
-    message: "नमस्ते मैं एक एआई चैट बॉट हूं, आप मेरे साथ बात कर सकते हैं :)",
+    message: "कुछ शब्दों में अपनी स्थिति का वर्णन करें",
     trigger: "hin-zero",
   },
   {
@@ -1724,7 +1724,7 @@ const STEPS = [
   },
   {
     id: "AIChat",
-    message: "Describe your situation",
+    message: "Describe your situation in few words",
     trigger: "zero",
   },
   {

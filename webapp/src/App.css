@@ -20,14 +20,16 @@ html, body, .app {
   margin: auto;
   background-color: rgba(0,0,0, 0.5);
   z-index: 9;
+  overflow-y: scroll;
 }
 .popup_inner {
   position: absolute;
   left: 20px;
   right: 20px;
   top: 30px;
-  bottom: 100px;
+  bottom: 10px;
   margin: auto;
+  overflow-y: scroll;
 }
 
 

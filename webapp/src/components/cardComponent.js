@@ -49,7 +49,7 @@ class Cards extends Component {
                                 <i class="fa fa-hand-o-right" aria-hidden="true"></i>Such contents can also be reported at concerned social media platform(click)<br></br>
                                 <i class="fa fa-hand-o-right" aria-hidden="true"></i>Safety Tips on Sexual Obscenity Content(click)
                             </div>
-                            <Button style={{marginLeft: '40px' }} onClick={
+                            <Button style={{marginLeft: '40px'}} onClick={
                                 () => {
                                     this.props.triggerNextStep({trigger: this.props.steps.lang.value+'Greetings'})
                                 }
