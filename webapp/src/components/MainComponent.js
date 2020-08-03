@@ -31,6 +31,7 @@ class Main extends Component {
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
+          recognitionEnable={true}
           customStyle={{backgroundColor: "white", margin: "20px", borderRadius: "20px 20px 20px 0px",  border: "2px solid #EF6C00"}}
           botAvatar={avatar}
           bubbleStyle={{

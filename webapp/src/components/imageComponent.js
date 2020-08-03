@@ -21,11 +21,11 @@ const Upload = (props) => {
 
   const onUploadSubmission = (e) => {
     e.preventDefault();
-    setStatus((prev) => "uploading ..");
+    setStatus((prev) => props.steps.lang.value === ""?"uploading ..":"अपलोडिंग");
     if (files.length !== 0) {
       var uid = "Null";
       console.log(props.steps);
-      if (props.steps.Complaint_type.value === "Anonymous") {
+      if (props.steps[props.steps.lang.value+"Complaint_type"].value === props.steps.lang.value+"Anonymous") {
         firebase
           .auth()
           .signInAnonymously()
@@ -79,7 +79,7 @@ const Upload = (props) => {
                         setStatus((prev) => "uploaded!");
                         setDisbled((prev) => !prev);
                         props.triggerNextStep({
-                          trigger: "Reference",
+                          trigger: props.steps.lang.value+"Reference",
                           value: urls,
                         });
                       }
@@ -88,7 +88,7 @@ const Upload = (props) => {
               })
               .catch((err) => {
                 console.log(err.code);
-                setStatus((prev) => "Some problem occured!");
+                setStatus((prev) => props.steps.lang.value === ""?"Some problem occured!":"कुछ समस्या हुई!");
                 console.log("err2");
               });
           }
@@ -98,7 +98,7 @@ const Upload = (props) => {
         files.forEach((file, ind) => {
           const uploadTask = storage
             .ref()
-            .child(`${props.steps.otp.value.uid}/${file.name}`)
+            .child(`${props.steps[props.steps.lang.value+"otp"].value.uid}/${file.name}`)
             .put(file);
           promises.push(uploadTask);
           uploadTask.on(
@@ -127,7 +127,7 @@ const Upload = (props) => {
           .then(() => {
             files.forEach((file, i) => {
               storage
-                .ref(props.steps.otp.value.uid)
+                .ref(props.steps[props.steps.lang.value+"otp"].value.uid)
                 .child(file.name)
                 .getDownloadURL()
                 .then((fireBaseUrl) => {
@@ -136,7 +136,7 @@ const Upload = (props) => {
                     setStatus((prev) => "uploaded!");
                     setDisbled((prev) => !prev);
                     props.triggerNextStep({
-                      trigger: "Reference",
+                      trigger: props.steps.lang.value+"Reference",
                       value: urls,
                     });
                   }
@@ -145,12 +145,12 @@ const Upload = (props) => {
           })
           .catch((err) => {
             console.log(err.code);
-            setStatus((prev) => "Some problem occured!");
+            setStatus((prev) => props.steps.lang.value === ""?"Some problem occured!":"कुछ समस्या हुई!");
             console.log("err2");
           });
       }
     } else {
-      setStatus("No files selected!");
+      setStatus(props.steps.lang.value === ""?"No files selected!":"कोई फ़ाइल चयनित नहीं है");
     }
   };
 
@@ -180,7 +180,7 @@ const Upload = (props) => {
               }}
             >
               <span style={{ alignSelf: "center", fontWeight: "bold" }}>
-                Click to add attachments
+                {props.steps.lang.value === ""?"Click to add attachments":"लगाव जोड़ने के लिए क्लिक करें"}
               </span>
 
               <div
@@ -209,7 +209,7 @@ const Upload = (props) => {
             }}
           >
             <button className="button1" disabled={disabled}>
-              UPLOAD
+              {props.steps.lang.value === ""?"UPLOAD":"पता सेट करें"}
             </button>
           </div>
         </div>

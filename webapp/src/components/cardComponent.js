@@ -11,12 +11,12 @@ class Cards extends Component {
     }
     componentDidMount(){
         console.log(this.props.steps);
-        this.setState({cat: this.props.steps.Category.value});
+        this.setState({cat: this.props.steps[this.props.steps.lang.value+"Category"].value});
         try{
             if(this.props.steps.Category_2.value)
-            this.setState({name: this.props.steps.Category_2.value});
+            this.setState({name: this.props.steps[this.props.steps.lang.value+"Category_2"].value});
         }catch{
-            this.setState({name: this.props.steps.Category_1.value});
+            this.setState({name: this.props.steps[this.props.steps.lang.value+"Category_1"].value});
         }
     }
     render(){
@@ -49,9 +49,9 @@ class Cards extends Component {
                                 <i class="fa fa-hand-o-right" aria-hidden="true"></i>Such contents can also be reported at concerned social media platform(click)<br></br>
                                 <i class="fa fa-hand-o-right" aria-hidden="true"></i>Safety Tips on Sexual Obscenity Content(click)
                             </div>
-                            <Button style={{marginLeft: '100px', marginTop: '20px'}} className='btn btn-success' onClick={
+                            <Button style={{marginLeft: '40px' }} onClick={
                                 () => {
-                                    this.props.triggerNextStep({trigger: 'Greetings'})
+                                    this.props.triggerNextStep({trigger: this.props.steps.lang.value+'Greetings'})
                                 }
                             }> Go to Services </Button>
                         </CardBody>
