@@ -1,5 +1,7 @@
 # Tri-Nethra
 
+TriNethra is a comprehensive and intelligent virtual assistant that helps to make users' cyber life more secure and safe.
+
 We kindly *request* the evaluators to refer the documentation .
 
 __Note that You can visit the https://trinethra73.herokuapp.com/ to test the deployed version of the Whole Chat Bot__
@@ -26,9 +28,8 @@ _We completely ensure that the entire project along with the changes have been d
 
 
 ### Mobile App
-We even developed a native multi-platform mobile application with all the functionalities(and even more) of the chatbot that _we may intend to use for future purposes or to be integrated with any existing government system._ But this was out of context for the problem statement domain bucket, _we're not considering it to the final Master branch._
+We even developed a native multi-platform mobile application with all the functionalities(and even more) of the chatbot that _we may intend to use for future purposes or to be integrated with any existing government system._ But this was out of context for the problem statement domain bucket, _we're not considering it to the final build, we may use it as per the future requirements._
 
-You may check for ---- branch to find the final build of the app
 
 ### Credentials 
 There is a file placed in the JSON and API folder named credentials, kindly go through that for any required credentials needed for the project.
@@ -47,3 +48,29 @@ This file has all the API keys, SDK Jsons, credentials
 all needed for the functioning of the app
 
 _Each Individual folder has its own readme, please go through it, This page just gives an overview, please visit each page for further clarity_
+
+
+
+
+
+## Technology
+* [ReactJs] - A JavaScript library for building user interfaces
+* [Firebase] - A comprehensive app development platform with highly efficient backend accessibility
+* [Flutter] - UI toolkit for building natively compiled multiplatform applications from a single codebase.
+* [Python] - a programming language that lets you work quickly and integrate systems more effectively
+* [Dialogflow] - Dialogflow is a highly efficient AI based natural language understanding platform that makes it easy to design and integrate an interactive voice response system.
+* Several APIs including [Google Maps] and [Google Places]
+
+
+
+
+[ReactJs]:(https://reactjs.org/)
+[Firebase]:(https://firebase.google.com/)
+[Flutter]: (https://flutter.dev/)
+[Python]: (https://www.python.org/)
+[Google Maps]:(https://developers.google.com/maps/documentation/embed/get-started)
+[Google Places]:(https://developers.google.com/places/web-service/overview)
+[Dialogflow]: (https://cloud.google.com/dialogflow/docs)
+
+
+
